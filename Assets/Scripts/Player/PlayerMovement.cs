@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Update()
 	{
-		if(Input.GetMouseButtonDown(1))
+		if(Input.GetMouseButton(1))
 		{
 			_target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			_target.z = transform.position.z;
@@ -44,6 +44,10 @@ public class PlayerMovement : MonoBehaviour
 		Debug.Log($"{_target.x} / {_target.y} - {transform.position.x} / {transform.position.y}" );
 		Debug.Log($"{_xRunVt} / {_yRunVt}");
 
+	}
+	private void FixedUpdate()
+	{
+		transform.position = Vector3.MoveTowards(transform.position, _target, _speed * Time.fixedDeltaTime);
 	}
 
 
@@ -86,9 +90,6 @@ public class PlayerMovement : MonoBehaviour
 		_yIdleVt = _yRunVt;
 	}	
 
-	private void FixedUpdate()
-	{
-		transform.position = Vector3.MoveTowards(transform.position, _target, _speed * Time.fixedDeltaTime);
-	}
+
 
 }

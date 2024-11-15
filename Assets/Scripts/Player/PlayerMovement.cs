@@ -5,9 +5,13 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	[SerializeField] private float _speed;
-	[SerializeField] private Vector2 _velocity;
+	//private int i = 0;
+	private CameraController _camera;
+	private Rigidbody2D _rg;
 	private Animator _animator;
 	private Vector3 _target;
+	private Vector3 _targetRG;
+	private Vector2 _direction;
 	private float _xRunVt;
 	private float _yRunVt;
 	private float _xIdleVt;
@@ -17,37 +21,44 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Awake()
 	{
+		Debug.Log("Awake : " + name);
 		_animator = GetComponent<Animator>();
+		_camera = Camera.main.GetComponent<CameraController>();
+		_rg = GetComponent<Rigidbody2D>();
 	}
 
 	private void Start()
 	{
+		Debug.Log("Start : " + name);
+		_camera.SetFollower(transform);
 		_target = transform.position;
 	}
 
+	public void resetCam()
+	{
+		_camera.SetFollower(transform);
+		_target = transform.position;
+	}	
+
 	private void Update()
 	{
-		if(Input.GetMouseButton(1))
+		if (Input.GetMouseButton(1))
 		{
 			_target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			_target.z = transform.position.z;
 		}
 		setupDirection(_target);
 
-
 		_animator.SetBool("isRun", (Mathf.Abs(_xRunVt) > 0.01 || Mathf.Abs(_yRunVt) > 0.01));
 		_animator.SetFloat("RunHor", _xRunVt);
 		_animator.SetFloat("RunVer", _yRunVt);
 		_animator.SetFloat("IdleHor", _xIdleVt);
 		_animator.SetFloat("IdleVer", _yIdleVt);
-		//Debug.Log( new Vector2(_xVt, _yVt).magnitude);
-		Debug.Log($"{_target.x} / {_target.y} - {transform.position.x} / {transform.position.y}" );
-		Debug.Log($"{_xRunVt} / {_yRunVt}");
-
 	}
 	private void FixedUpdate()
 	{
-		transform.position = Vector3.MoveTowards(transform.position, _target, _speed * Time.fixedDeltaTime);
+		_targetRG = Vector3.MoveTowards(transform.position, _target, _speed * Time.fixedDeltaTime);
+		_rg.MovePosition(_targetRG);
 	}
 
 
@@ -89,7 +100,14 @@ public class PlayerMovement : MonoBehaviour
 		_xIdleVt = _xRunVt;
 		_yIdleVt = _yRunVt;
 	}	
-
+	private void checkInput()
+	{
+		if (Input.GetMouseButton(1))
+		{
+			_target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			_target.z = transform.position.z;
+		}
+	}	
 
 
 }

@@ -5,10 +5,13 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private GameController _gc;
-    private Transform _player;
+	[SerializeField] private Camera _cam;
+	private Transform _player;
 	private Rigidbody2D _rg;
 	private Vector2 _direction;
 	private float speed;
+	private Vector3 _camBL;
+	private Vector3 _camTR;
 
 	private void Awake()
 	{
@@ -20,6 +23,11 @@ public class EnemyMovement : MonoBehaviour
 	{
 		SetPlayer();
 	}
+	private void Update()
+	{
+		CamCalc();
+		CheckOutCam();
+	}
 
 	private void FixedUpdate()
 	{
@@ -30,8 +38,22 @@ public class EnemyMovement : MonoBehaviour
 	private void SetPlayer()
 	{
 		_player = _gc.CharActive().transform;
+	}
+
+	private void CamCalc()
+	{
+		_camBL = _cam.ViewportToWorldPoint(new Vector3(0, 0, _cam.nearClipPlane));
+		_camTR = _cam.ViewportToWorldPoint(new Vector3(1, 1, _cam.nearClipPlane));
+	}
+
+	private void CheckOutCam()
+	{
+		if((_camBL.x - 1 <= transform.position.x && transform.position.x <= _camTR.x + 1) && (_camBL.y - 1 <= transform.position.y && transform.position.y <= _camTR.y + 1))
+		{
+			//Debug.Log("Trong cam");
+			return;
+		}
+		gameObject.SetActive(false);
 	}	
-
-
 
 }

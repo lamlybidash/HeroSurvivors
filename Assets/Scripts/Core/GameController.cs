@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -8,6 +5,7 @@ public class GameController : MonoBehaviour
 	[SerializeField] private GameObject CharA;
 	[SerializeField] private GameObject CharB;
 	private GameObject CharacterActive;
+
 
 	private void Start()
 	{
@@ -32,10 +30,19 @@ public class GameController : MonoBehaviour
 			CharB.GetComponent<PlayerMovement>().resetCam();
 			CharacterActive = CharB;
 		}
+
+
+
 	}
 
 	public GameObject CharActive()
 	{
 		return CharacterActive;
 	}	
+
+
+
+
+
+
 }

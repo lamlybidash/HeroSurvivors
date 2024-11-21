@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wind : MonoBehaviour
+public class Wind : Weapons
 {
 	[SerializeField] private Transform _player;
 	private Animator _animator;
 	private BoxCollider2D _boxCollider;
-	public float radius = 1.5f;
-	public float speed = 2f;
+	private float radius = 1.5f;
 	[SerializeField] private float angle;
 	private float timeDeploy = 3f;
 	private float timeTemp = 0f;
@@ -21,6 +20,8 @@ public class Wind : MonoBehaviour
 	{
 		_animator = GetComponent<Animator>();
 		_boxCollider = GetComponent<BoxCollider2D>();
+		speed = 4f;
+		damage = 50;
 	}
 
 	private void Start()
@@ -70,4 +71,20 @@ public class Wind : MonoBehaviour
 	{
 		_boxCollider.enabled = false;
 	}
+
+
+	protected override void GiveDame(float dame, GameObject target)
+	{
+		Debug.Log("Tag: " + target.gameObject.tag);
+		target.gameObject.GetComponent<HealthEnemy>().TakeDame(dame);
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if(collision.gameObject.tag == "Enemy")
+		{
+			GiveDame(damage,collision.gameObject);
+		}	
+	}
+
 }

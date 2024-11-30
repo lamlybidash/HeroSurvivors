@@ -13,18 +13,16 @@ public class HealthEnemy : MonoBehaviour
 	}
 	public void setupEnemy()
 	{
-		Debug.Log("Set up Enemy");
+		_healthCurrent = _healthTotal;
 	}	
 	public void TakeDame(float dame)
 	{
 		_healthCurrent = Mathf.Clamp(_healthCurrent - dame, 0, _healthTotal);
+		PopupController.instance.PopupDame(transform, dame);
 		if (_healthCurrent == 0 )
 		{
-			Debug.Log("Enemy die");
 			gameObject.SetActive(false);
 		}	
 	}	
-
-
 
 }

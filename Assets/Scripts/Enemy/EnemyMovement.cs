@@ -33,6 +33,7 @@ public class EnemyMovement : MonoBehaviour
 	{
 		_direction = (_player.position - transform.position).normalized;
 		_rg.MovePosition((Vector2)transform.position + _direction * speed * Time.fixedDeltaTime);
+		FlipF();
 	}
 
 	private void SetPlayer()
@@ -56,4 +57,15 @@ public class EnemyMovement : MonoBehaviour
 		gameObject.SetActive(false);
 	}	
 
+	private void FlipF()
+	{
+		if(_direction.x <0)
+		{
+			transform.localScale = Vector3.one;
+		}
+		else
+		{
+			transform.localScale = new Vector3(-1,1,1);
+		}	
+	}	
 }

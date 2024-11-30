@@ -7,7 +7,16 @@ public class EnemyAttack : MonoBehaviour
 	private float _dame = 5;
 	private bool _canGiveDame = true;
 
-	private void OnCollisionEnter2D(Collision2D collision)
+	//private void OnCollisionEnter2D(Collision2D collision)
+	//{
+	//	if (collision.gameObject.tag == "Player" && _canGiveDame)
+	//	{
+	//		collision.gameObject.GetComponent<Health>().TakeDame(_dame);
+	//		StartCoroutine(CantGiveDame());
+	//	}
+	//}
+
+	private void OnCollisionStay2D(Collision2D collision)
 	{
 		if (collision.gameObject.tag == "Player" && _canGiveDame)
 		{

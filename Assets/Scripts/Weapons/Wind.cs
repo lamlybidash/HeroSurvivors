@@ -21,7 +21,7 @@ public class Wind : Weapons
 		_animator = GetComponent<Animator>();
 		_boxCollider = GetComponent<BoxCollider2D>();
 		speed = 4f;
-		damage = 50;
+		damage = 10f;
 	}
 
 	private void Start()
@@ -75,13 +75,12 @@ public class Wind : Weapons
 
 	protected override void GiveDame(float dame, GameObject target)
 	{
-		Debug.Log("Tag: " + target.gameObject.tag);
-		target.gameObject.GetComponent<HealthEnemy>().TakeDame(dame);
+		target.GetComponent<HealthEnemy>().TakeDame(dame);
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if(collision.gameObject.tag == "Enemy")
+		if(collision.tag == "Enemy")
 		{
 			GiveDame(damage,collision.gameObject);
 		}	

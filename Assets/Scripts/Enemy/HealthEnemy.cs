@@ -6,6 +6,7 @@ public class HealthEnemy : MonoBehaviour
 {
 	private float _healthTotal = 100f;
 	private float _healthCurrent;
+	private double _expDrop;
 
 	private void Start()
 	{
@@ -13,7 +14,10 @@ public class HealthEnemy : MonoBehaviour
 	}
 	public void setupEnemy()
 	{
-		_healthCurrent = _healthTotal;
+		if(_healthCurrent <= 0)
+		{
+			_healthCurrent = _healthTotal;
+		}
 	}	
 	public void TakeDame(float dame)
 	{
@@ -21,8 +25,15 @@ public class HealthEnemy : MonoBehaviour
 		PopupController.instance.PopupDame(transform, dame);
 		if (_healthCurrent == 0 )
 		{
+			//Debug.Log("hehe");
+			ExpController.instance.DropExp(transform,_expDrop);
 			gameObject.SetActive(false);
-		}	
+		}
+	}
+
+	public void SetExpDrop(double expAmount)
+	{
+		_expDrop = expAmount;
 	}	
 
 }

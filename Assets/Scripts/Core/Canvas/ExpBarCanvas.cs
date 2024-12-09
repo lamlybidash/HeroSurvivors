@@ -9,18 +9,17 @@ public class ExpBarCanvas : MonoBehaviour
     private float width;
     private float height;
 
-    void Start()
-    {
-        SetUpLocation();
+ //   void Start()
+ //   {
+ //       SetUpLocation();
+	//}
 
-	}
-
-    private void SetUpLocation()
-    {
-        width = Screen.width - 2;
-        height = width / 34;
-        expBarTotal.sizeDelta = new Vector2(width, height);
-        expBarCurrent.sizeDelta = new Vector2(width, height);
-    }    
+ //   private void SetUpLocation()
+ //   {
+ //       width = Screen.width - 2;
+ //       height = width / 34;
+ //       expBarTotal.sizeDelta = new Vector2(width, height);
+ //       expBarCurrent.sizeDelta = new Vector2(width, height);
+ //   }    
 
 }

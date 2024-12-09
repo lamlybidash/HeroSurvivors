@@ -16,6 +16,7 @@ public class Loot : MonoBehaviour
 	{
 		if(collision.tag == "Exp")
 		{
+			collision.gameObject.GetComponent<ExpMovement>().enabled = true;
 		}	
 	}
 }

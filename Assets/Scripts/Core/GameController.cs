@@ -1,15 +1,35 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
 	[SerializeField] private GameObject CharA;
 	[SerializeField] private GameObject CharB;
+	[SerializeField] private WeaponsData exampleData;
 	private GameObject CharacterActive;
+	private bool _isPause;
 
+	//A Nam
+	public static int PlayerBestScore {
+		get =>PlayerPrefs.GetInt("PlayerBestScore", 0);
+		set=> PlayerPrefs.SetInt("PlayerBestScore", value);
+	}
+
+	private void Awake()
+	{
+		CharacterActive = CharA;
+		Debug.Log(exampleData.countdown);
+	}
 
 	private void Start()
 	{
-		CharacterActive = CharA;
+		_isPause = false;
+	}
+
+	public GameObject CharActive()
+	{
+		return CharacterActive;
 	}
 
 	void Update()
@@ -30,19 +50,26 @@ public class GameController : MonoBehaviour
 			CharB.GetComponent<PlayerMovement>().resetCam();
 			CharacterActive = CharB;
 		}
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
 
-
-
+			PauseGame(!_isPause);
+		}
 	}
 
-	public GameObject CharActive()
+	public void PauseGame(bool status)
 	{
-		return CharacterActive;
-	}	
-
-
-
-
+		if (status == true)
+		{
+			_isPause = true;
+			Time.timeScale = 0;
+		}
+		else
+		{
+			_isPause = false;
+			Time.timeScale = 1;
+		}
+	}
 
 
 }

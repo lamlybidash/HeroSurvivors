@@ -193,14 +193,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ccaa4f3f556114ba4b52d429a02bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameW: 
-  damage: 0
-  projectile: 0
-  countdown: 0
-  area: 0
-  speed: 0
-  duration: 0
-  levelup: []
-  projectileWinds: []
-  _player: {fileID: 0}
-  angle: 0
+  data: {fileID: 11400000, guid: ea5e44c443e3b6e4c9a2fab96aa85a65, type: 2}

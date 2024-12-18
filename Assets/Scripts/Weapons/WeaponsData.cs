@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(menuName ="GameData/Create Weapon Data", fileName ="Create WeaponData")]
 public class WeaponsData : ScriptableObject
@@ -11,6 +12,8 @@ public class WeaponsData : ScriptableObject
 	public float area;
 	public float speed;
 	public float duration;
+	public Sprite imgSprite;
+	public GameObject projectilePf;
 	public List<WLevelUp> levelup;
 }
 

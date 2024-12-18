@@ -6,20 +6,20 @@ public class GameController : MonoBehaviour
 {
 	[SerializeField] private GameObject CharA;
 	[SerializeField] private GameObject CharB;
-	[SerializeField] private WeaponsData exampleData;
+	//[SerializeField] private WeaponsData exampleData;
 	private GameObject CharacterActive;
 	private bool _isPause;
 
 	//A Nam
-	public static int PlayerBestScore {
-		get =>PlayerPrefs.GetInt("PlayerBestScore", 0);
-		set=> PlayerPrefs.SetInt("PlayerBestScore", value);
-	}
+	//public static int PlayerBestScore {
+	//	get =>PlayerPrefs.GetInt("PlayerBestScore", 0);
+	//	set=> PlayerPrefs.SetInt("PlayerBestScore", value);
+	//}
 
 	private void Awake()
 	{
 		CharacterActive = CharA;
-		Debug.Log(exampleData.countdown);
+		//Debug.Log(exampleData.countdown);
 	}
 
 	private void Start()

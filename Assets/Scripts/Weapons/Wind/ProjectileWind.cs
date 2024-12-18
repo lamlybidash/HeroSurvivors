@@ -2,16 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileWind : Wind
+public class ProjectileWind : Weapons
 {
-	[SerializeField] private Transform _player;
 	private Animator _animator;
 	private BoxCollider2D _boxCollider;
-	private float radius = 3f;
-	[SerializeField] private float angle;
-	private float timeDeploy = 3f;
+	private float angle;
 	private float timeTemp = 0f;
-	private float CDs = 5f;
+	//private float percentCDs = 0f;
 	private float x;
 	private float y;
 	private bool isActive;
@@ -20,20 +17,19 @@ public class ProjectileWind : Wind
 	{
 		_animator = GetComponent<Animator>();
 		_boxCollider = GetComponent<BoxCollider2D>();
-		//speed = 4f;//TODO:
-		//damage = 30f; //TODO:
+		InitData();
 	}
 
 	private void Start()
 	{
-		timeTemp = 0;
+		timeTemp = countdown;
 		isActive = true;
 	}
 
 	private void FixedUpdate()
 	{
 		timeTemp += Time.fixedDeltaTime;
-		if (timeTemp >= CDs)
+		if (timeTemp >= countdown)
 		{
 			isActive = true;
 			timeTemp = 0;
@@ -52,10 +48,10 @@ public class ProjectileWind : Wind
 		{
 			angle -= Mathf.PI * 2f;
 		}
-		x = _player.position.x + Mathf.Cos(angle) * radius;
-		y = _player.position.y + Mathf.Sin(angle) * radius;
+		x = player.position.x + Mathf.Cos(angle) * area;
+		y = player.position.y + Mathf.Sin(angle) * area;
 		transform.position = new Vector3(x, y, transform.position.z);
-		//angle += speed * Time.fixedDeltaTime;//TODO:
+		angle += speed * Time.fixedDeltaTime;
 	}
 
 	private IEnumerator activeWeapon()
@@ -63,15 +59,52 @@ public class ProjectileWind : Wind
 		isActive = false;
 		_boxCollider.enabled = true;
 		_animator.SetBool("isActive", true);
-		yield return new WaitForSeconds(timeDeploy);
+		yield return new WaitForSeconds(duration);
 		_animator.SetBool("isActive", false);
 	}
 
-	public void SetUpData()
+	//public void UpDateLevel(int attributef, float amountf)
+	//{
+	//	switch(attributef)
+	//	{
+	//		case 1:
+	//			{
+	//				damage += amountf;
+	//				break;
+	//			}
+
+	//		case 3:
+	//			{
+	//				percentCDs += amountf/100;
+	//				break;
+	//			}
+
+	//		case 4:
+	//			{
+	//				area += amountf;
+	//				break;
+	//			}
+	//		case 5:
+	//			{
+	//				speed += amountf;
+	//				break;
+	//			}
+	//		case 6:
+	//			{
+	//				duration += amountf;
+	//				break;
+	//			}
+	//	}	
+	//}
+
+	public void SetUpAngle(float x)
 	{
-
-	}	
-
+		isActive = false;
+		_boxCollider.enabled = false;
+		_animator.SetBool("isActive", false);
+		timeTemp = countdown;
+		angle = x;
+	}
 	private void setInActiveCollider()
 	{
 		_boxCollider.enabled = false;

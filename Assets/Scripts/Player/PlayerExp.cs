@@ -34,7 +34,7 @@ public class PlayerExp : MonoBehaviour
 			//choose weapon
 			_wc.ChosseWeapons();
 
-			Debug.Log($"Level up : {_level} / Exp next: {_ExpNext} ");
+			//Debug.Log($"Level up : {_level} / Exp next: {_ExpNext} ");
 			GainExp(remainder);
 		}
 	}

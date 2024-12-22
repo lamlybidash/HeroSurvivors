@@ -64,6 +64,36 @@ public abstract class Weapons : MonoBehaviour
 	public virtual void LevelUp(int attributef, float amountf)
 	{
 		_level++;
+		switch (attributef)
+		{
+			case 1:
+				{
+					damage += amountf;
+					break;
+				}
+
+			case 3:
+				{
+					countdown = countdown * (1 - amountf / 100);
+					break;
+				}
+
+			case 4:
+				{
+					area += amountf;
+					break;
+				}
+			case 5:
+				{
+					speed += amountf;
+					break;
+				}
+			case 6:
+				{
+					duration += amountf;
+					break;
+				}
+		}
 	}
 
 	protected void InitData()

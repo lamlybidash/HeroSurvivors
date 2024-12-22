@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameW: mushroom
   damage: 20
-  projectile: 1
+  projectile: 0
   countdown: 3
   area: 5
   speed: 1

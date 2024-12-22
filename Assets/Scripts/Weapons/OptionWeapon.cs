@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,8 +10,8 @@ public class OptionWeapon : MonoBehaviour, IPointerClickHandler
 	[SerializeField] private GameController _gc;
 	[SerializeField] private WeaponsController _wc;
 	[SerializeField] private Image _img;
-	[SerializeField] private Text _title;
-	[SerializeField] private Text _describle;
+	[SerializeField] private TextMeshProUGUI _title;
+	[SerializeField] private TextMeshProUGUI _describle;
 	private Weapons _weapon;
 
 	private string[] _des = {" sát thương", " tia đạn", " giảm hồi chiêu", " phạm vi hiệu lực", "tốc độ thi triển", "thời gian duy trì" };
@@ -28,7 +29,6 @@ public class OptionWeapon : MonoBehaviour, IPointerClickHandler
 		}
 		else
 		{
-			
 			_title.text += (_weapon._level + 1).ToString();
 			_describle.text = " + " + _weapon.data.levelup[_weapon._level - 1].amount.ToString() + _des[_weapon.data.levelup[_weapon._level - 1].attribute - 1];
 			

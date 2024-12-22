@@ -6,12 +6,18 @@ public class EnemyController : MonoBehaviour
 {
 
 	[SerializeField] private Camera _cam;
+	[SerializeField] private GameObject _enemyPf;
 	private Vector3 _camBL;
 	private Vector3 _camTR;
-	[SerializeField] private GameObject[] enemies;
+	[SerializeField] private List<Enemy> enemies;
+	private bool _isPlay;
+	private int _enemyCountMax;
 
 	private void Start()
 	{
+		_enemyCountMax = 10;
+		_isPlay = false;
+		DestroyAllEnemy();
 		CamCalc();
 	}
 
@@ -21,7 +27,7 @@ public class EnemyController : MonoBehaviour
 		EnemyManager();
 	}
 
-	private void CreateEnemy()
+	private void CreateEnemy(int indexx)
 	{
 		int t = Random.Range(1, 5);
 		float x=0, y=0;
@@ -54,17 +60,48 @@ public class EnemyController : MonoBehaviour
 			default:
 				break;
 		}
-		enemies[FindEnemyInactive()].GetComponent<Enemy>().ActiveEnemy(new Vector3(x, y, 0));
-		
+
+		if(indexx != -1)
+		{
+			enemies[indexx].ActiveEnemy(new Vector3(x, y, 0));
+		}
+		else
+		{
+			// tam thoi co 1 loai quai
+			GameObject _enemyx = Instantiate(_enemyPf);
+			_enemyx.transform.SetParent(transform);
+			_enemyx.GetComponent<Enemy>().ActiveEnemy(new Vector3(x, y, 0));
+			enemies.Add(_enemyx.GetComponent<Enemy>());
+		}	
+
 	}
 
 	private void EnemyManager()
 	{
-		if (FindEnemyInactive() != -1)
+		int indexx;
+		indexx = FindEnemyInactive();
+
+		if(indexx == -1 && !(enemies.Count < _enemyCountMax))
 		{
-			CreateEnemy();
+			return;
 		}
-	}
+
+		CreateEnemy(indexx);
+
+		//if (indexx != -1)
+		//{
+		//	CreateEnemy(indexx);
+		//}
+  //      else
+  //      {
+		//	if (enemies.Count < _enemyCountMax)
+		//	{
+		//		// them quai vao list
+		//		CreateEnemy(indexx);
+		//	}
+		//}
+
+    }
 	private void CamCalc()
 	{
 		_camBL = _cam.ViewportToWorldPoint(new Vector3(0, 0, _cam.nearClipPlane));
@@ -73,13 +110,37 @@ public class EnemyController : MonoBehaviour
 	private int FindEnemyInactive()
 	{
 		int i;
-		for (i = 0; i < enemies.Length; i++)
+		for (i = 0; i < enemies.Count; i++)
 		{
-			if(!enemies[i].activeInHierarchy)
+			if(!enemies[i].gameObject.activeInHierarchy)
 			{
 				return i;
 			}	
 		}
 		return -1;
 	}	
+
+	public void PlayGameStatus(bool status)
+	{
+		_isPlay	= status;
+		if (_isPlay)
+		{
+			// Chua nghi ra :))
+		}
+		else
+		{
+			DestroyAllEnemy();
+		}
+		gameObject.SetActive(status);
+	}
+
+	private void DestroyAllEnemy()
+	{
+		int i;
+		for (i = 0; i < enemies.Count; i++)
+		{
+			Destroy(enemies[i].gameObject);
+		}
+		enemies.Clear();
+	}
 }

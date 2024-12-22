@@ -6,6 +6,10 @@ public class GameController : MonoBehaviour
 {
 	[SerializeField] private GameObject CharA;
 	[SerializeField] private GameObject CharB;
+	[SerializeField] private GameObject _menuGame;
+	[SerializeField] private EnemyController _ec;
+
+
 	//[SerializeField] private WeaponsData exampleData;
 	private GameObject CharacterActive;
 	private bool _isPause;
@@ -24,7 +28,8 @@ public class GameController : MonoBehaviour
 
 	private void Start()
 	{
-		_isPause = false;
+		_isPause = true;
+		PauseGame(true);
 	}
 
 	public GameObject CharActive()
@@ -53,10 +58,15 @@ public class GameController : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
 
-			PauseGame(!_isPause);
+			ToTitleGame();
 		}
 	}
 
+	private void ResetGame()
+	{
+		_ec.PlayGameStatus(false);
+		_ec.PlayGameStatus(true);
+	}
 	public void PauseGame(bool status)
 	{
 		if (status == true)
@@ -71,5 +81,18 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+	public void PlayGame()
+	{
+		_ec.PlayGameStatus(true);
+		_menuGame.gameObject.SetActive(false);
+		PauseGame(false);
+	}
+
+	public void ToTitleGame()
+	{
+		_ec.PlayGameStatus(false);
+		_menuGame.gameObject.SetActive(true);
+		PauseGame(true);
+	}
 
 }

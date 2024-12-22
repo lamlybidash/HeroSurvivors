@@ -56,4 +56,13 @@ public class ProjectileMushroom : Weapons
 
 	}
 
+	public void ActiveProjectileMushroom()
+	{
+		_cld = GetComponent<CircleCollider2D>();
+		_sprite = GetComponent<SpriteRenderer>();
+		_cld.enabled = true;
+		_sprite.enabled = true;
+		transform.position = new Vector3(player.position.x, player.position.y, transform.position.z);
+		gameObject.SetActive(true);
+	}
 }

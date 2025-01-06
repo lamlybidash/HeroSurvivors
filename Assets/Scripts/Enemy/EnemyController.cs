@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-
+	private bool _isPlay;
+	//-----------------------------CORE----------------------
 	[SerializeField] private Camera _cam;
-	[SerializeField] private GameObject _enemyPf;
 	private Vector3 _camBL;
 	private Vector3 _camTR;
-	[SerializeField] private List<Enemy> enemies;
-	private bool _isPlay;
+	//-----------------------------ENEMY-----------------------
+	[SerializeField] private GameObject _enemyPf;
+	[SerializeField] private List<Enemy> _enemies;
 	private int _enemyCountMax;
-
+	//-----------------------------BULLET----------------------
+	[SerializeField] private GameObject _ListBulletsObject;
+	[SerializeField] private GameObject _bulletPf;
+	private List<Bullet> _bullets = new List<Bullet>();
+	//-----------------------------PLAYER----------------------
+	private Transform _player;
 	private void Start()
 	{
 		_enemyCountMax = 10;
@@ -63,25 +69,45 @@ public class EnemyController : MonoBehaviour
 
 		if(indexx != -1)
 		{
-			enemies[indexx].ActiveEnemy(new Vector3(x, y, 0));
+			_enemies[indexx].SetupData(_cam, _player);
+			_enemies[indexx].ActiveEnemy(new Vector3(x, y, 0));
 		}
 		else
 		{
 			// tam thoi co 1 loai quai
 			GameObject _enemyx = Instantiate(_enemyPf);
 			_enemyx.transform.SetParent(transform);
+			_enemyx.GetComponent<Enemy>().SetupData(_cam, _player);
 			_enemyx.GetComponent<Enemy>().ActiveEnemy(new Vector3(x, y, 0));
-			enemies.Add(_enemyx.GetComponent<Enemy>());
+			_enemies.Add(_enemyx.GetComponent<Enemy>());
 		}	
 
 	}
+
+	public void CreateBullet(Transform startPoint, Transform target, float dame)
+	{
+		int indexx;
+		indexx = FindBulletInactive();
+
+		if (indexx != -1)
+		{
+			_bullets[indexx].ShootBullet(startPoint, target, dame);
+		}
+		else
+		{
+			GameObject bulletx = Instantiate(_bulletPf);
+			bulletx.transform.SetParent(_ListBulletsObject.transform);
+			bulletx.GetComponent<Bullet>().ShootBullet(startPoint, target, dame);
+			_bullets.Add(bulletx.GetComponent<Bullet>());
+		}
+	}	
 
 	private void EnemyManager()
 	{
 		int indexx;
 		indexx = FindEnemyInactive();
 
-		if(indexx == -1 && !(enemies.Count < _enemyCountMax))
+		if(indexx == -1 && !(_enemies.Count < _enemyCountMax))
 		{
 			return;
 		}
@@ -110,22 +136,43 @@ public class EnemyController : MonoBehaviour
 	private int FindEnemyInactive()
 	{
 		int i;
-		for (i = 0; i < enemies.Count; i++)
+		for (i = 0; i < _enemies.Count; i++)
 		{
-			if(!enemies[i].gameObject.activeInHierarchy)
+			if(!_enemies[i].gameObject.activeInHierarchy)
 			{
 				return i;
 			}	
 		}
 		return -1;
-	}	
+	}
+	private int FindBulletInactive()
+	{
+		int i;
+		for (i = 0; i < _bullets.Count; i++)
+		{
+			if (!_bullets[i].gameObject.activeInHierarchy)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+	private void DestroyAllEnemy()
+	{
+		int i;
+		for (i = 0; i < _enemies.Count; i++)
+		{
+			Destroy(_enemies[i].gameObject);
+		}
+		_enemies.Clear();
+	}
 
 	public void PlayGameStatus(bool status)
 	{
 		_isPlay	= status;
 		if (_isPlay)
 		{
-			// Chua nghi ra :))
+
 		}
 		else
 		{
@@ -134,13 +181,8 @@ public class EnemyController : MonoBehaviour
 		gameObject.SetActive(status);
 	}
 
-	private void DestroyAllEnemy()
+	public void SetPlayer(Transform playerx)
 	{
-		int i;
-		for (i = 0; i < enemies.Count; i++)
-		{
-			Destroy(enemies[i].gameObject);
-		}
-		enemies.Clear();
-	}
+		_player = playerx;
+	}	
 }

@@ -5,12 +5,25 @@ using UnityEngine;
 public class Wind : Weapons
 {
 	[SerializeField] private List<ProjectileWind> projectileWinds;
+
+
+	private AudioSource _audioSource;
+	private bool _soundPlaying;
+
+	private void Awake()
+	{
+		_audioSource = GetComponent<AudioSource>();
+	}
+
 	private void Start()
 	{
 		_level = 1;
 		InitData();
 		AddProjectile(projectile);
 		SetUpDataProjectile();
+		_soundPlaying = false;
+		_audioSource.clip = ac;
+		_audioSource.loop = true;
 	}
 
 	private void AddProjectile(int count)
@@ -35,7 +48,7 @@ public class Wind : Weapons
 			projectileWinds[j].SetUpData(this);
 			projectileWinds[j].SetPlayer(player);
 		}
-	}	
+	}
 	public override void LevelUp(int attributef, float amountf)
 	{
 		base.LevelUp(attributef, amountf); //level++
@@ -48,4 +61,21 @@ public class Wind : Weapons
 		SetUpDataProjectile();
 	}
 
+	public void PlaySound()
+	{
+		if(_soundPlaying == false)
+		{
+			_soundPlaying = true;
+			_audioSource.Play();
+		}
+	}
+
+	public void StopSound()
+	{
+		if(_soundPlaying)
+		{
+			_soundPlaying = false;
+			_audioSource.Stop();
+		}	
+	}	
 }

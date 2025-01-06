@@ -42,6 +42,7 @@ public abstract class Weapons : MonoBehaviour
 	protected float duration;
 	protected Sprite imgSprite;
 	protected GameObject projectilePf;
+	protected AudioClip ac;
 	protected Transform player;
 	public int _level { get; set; } = 0;
 	protected List<WLevelUp> levelup
@@ -107,6 +108,7 @@ public abstract class Weapons : MonoBehaviour
 		duration = data.duration;
 		imgSprite = data.imgSprite;
 		projectilePf = data.projectilePf;
+		ac = data.ac;
 	}
 
 	//private void Awake()
@@ -125,6 +127,7 @@ public abstract class Weapons : MonoBehaviour
 		duration = x.duration;
 		imgSprite = x.imgSprite;
 		projectilePf = x.projectilePf;
+		ac = x.ac;
 	}
 
 	public void SetPlayer(Transform pl)

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -7,12 +8,21 @@ public class GameController : MonoBehaviour
 	[SerializeField] private GameObject CharA;
 	[SerializeField] private GameObject CharB;
 	[SerializeField] private GameObject _menuGame;
+	[SerializeField] private GameObject _OverGamePanel;
 	[SerializeField] private EnemyController _ec;
+	[SerializeField] private TextMeshProUGUI _textCoin;
+	[SerializeField] private AudioClip _acBackgound;
+	[SerializeField] private AudioClip _acInGame;
+	[SerializeField] private AudioClip _acMoney;
+
+	private int _coinTotal = 0;
+	private int _coinInGame = 0;
 
 
 	//[SerializeField] private WeaponsData exampleData;
 	private GameObject CharacterActive;
 	private bool _isPause;
+	private bool _isOverGame;
 
 	//A Nam
 	//public static int PlayerBestScore {
@@ -28,8 +38,12 @@ public class GameController : MonoBehaviour
 
 	private void Start()
 	{
+		_coinInGame = 0;
+		TakeCoinInGame(-_coinInGame);
 		_isPause = true;
 		PauseGame(true);
+		SoundManager.instance.PlayMusic(_acBackgound);
+		_ec.SetPlayer(CharacterActive.transform);
 	}
 
 	public GameObject CharActive()
@@ -57,15 +71,17 @@ public class GameController : MonoBehaviour
 		}
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-
-			ToTitleGame();
+			PauseGame(!_isPause);
 		}
 	}
 
-	private void ResetGame()
+	private void ResetGame() // reset data
 	{
 		_ec.PlayGameStatus(false);
-		_ec.PlayGameStatus(true);
+		//_ec.PlayGameStatus(true);
+		_coinTotal += _coinInGame;
+		TakeCoinInGame(-_coinInGame);
+		//_coinInGame = 0;
 	}
 	public void PauseGame(bool status)
 	{
@@ -83,16 +99,39 @@ public class GameController : MonoBehaviour
 
 	public void PlayGame()
 	{
+		SoundManager.instance.PlayMusic(_acInGame);
+		_isOverGame = false;
 		_ec.PlayGameStatus(true);
 		_menuGame.gameObject.SetActive(false);
-		PauseGame(false);
+		CharacterActive.GetComponent<Health>().Revive();
+		IsOverGame(false);
 	}
 
 	public void ToTitleGame()
 	{
+		ResetGame();
 		_ec.PlayGameStatus(false);
 		_menuGame.gameObject.SetActive(true);
-		PauseGame(true);
+		_OverGamePanel.SetActive(false);
+		SoundManager.instance.PlayMusic(_acBackgound);
 	}
+
+	public void TakeCoinInGame(int x)
+	{
+		_coinInGame += x;
+		_textCoin.text = _coinInGame.ToString();
+		SoundManager.instance.PlayOneSound(_acMoney);
+	}
+	public void TakeCoin(int x)
+	{
+		_coinInGame += x;
+	}
+
+	public void IsOverGame(bool x)
+	{
+		_isOverGame = x;
+		PauseGame(x);
+		_OverGamePanel.SetActive(x);
+	}	
 
 }

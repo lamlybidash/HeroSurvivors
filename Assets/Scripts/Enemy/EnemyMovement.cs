@@ -1,44 +1,63 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] private GameController _gc;
 	[SerializeField] private Camera _cam;
 	private Transform _player;
 	private Rigidbody2D _rg;
+	private EnemyAttack _enemyAttack;
 	private Vector2 _direction;
-	private float speed;
+	private float _speed;
+	private float _BaseSpeed;
+	private float _areaAttack;
+	private float _distance = 0;
 	private Vector3 _camBL;
 	private Vector3 _camTR;
-
+	//private bool isMove = true;
+	private int i = 0; // test
 	private void Awake()
 	{
 		_rg = GetComponent<Rigidbody2D>();
-		speed = 2f;
+		_enemyAttack = GetComponent<EnemyAttack>();
 	}
 
 	private void Start()
 	{
-		SetPlayer();
 	}
 	private void Update()
 	{
 		CamCalc();
 		CheckOutCam();
+		MoveF();
 	}
 
 	private void FixedUpdate()
 	{
-		_direction = (_player.position - transform.position).normalized;
-		_rg.MovePosition((Vector2)transform.position + _direction * speed * Time.fixedDeltaTime);
-		FlipF();
+		//MoveF();
 	}
-
-	private void SetPlayer()
+	private void MoveF()
 	{
-		_player = _gc.CharActive().transform;
+		_distance = Mathf.Sqrt(Mathf.Pow(_player.position.x - transform.position.x, 2) + Mathf.Pow(_player.position.y - transform.position.y, 2));
+
+		i++;
+		if (_distance > _areaAttack)
+		{
+			//Debug.Log("di chuyen " + i);
+			_direction = (_player.position - transform.position).normalized;
+			//Vector2 newPosition = new Vector2(transform.position.x, transform.position.y) + _direction * _speed * Time.deltaTime;
+			//transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
+			transform.Translate(_direction * _speed * Time.deltaTime);
+			//_rg.MovePosition((Vector2)transform.position + _direction * _speed * Time.fixedDeltaTime);
+		}
+		else // trong pham vi -> tan cong player
+		{
+			//Debug.Log("tan cong " + i);
+			_enemyAttack.GiveDame(_player.gameObject, true);
+		}
+		FlipF();
 	}
 
 	private void CamCalc()
@@ -67,5 +86,40 @@ public class EnemyMovement : MonoBehaviour
 		{
 			transform.localScale = new Vector3(-1,1,1);
 		}	
+	}
+	private void OnCollisionStay2D(Collision2D collision)
+	{
+		if (collision.gameObject.tag == "Player")
+		{
+			_enemyAttack.GiveDame(collision.gameObject,false);
+		}
+	}
+
+
+	private IEnumerator DelayMove(float t)
+	{
+		yield return new WaitForSeconds(t);
+	}	
+
+	public void SetUpData(Transform player, Camera cam, float speedMove, float areaAttack)
+	{
+		_player = player;
+		_cam = cam;
+		_speed = speedMove;
+		_BaseSpeed = speedMove;
+		_areaAttack = areaAttack;
+	}
+	public void AddSpeed(float x)
+	{
+		_speed += x;
+	}
+
+	public void MultiSpeed(float x)
+	{
+		_speed *= x;
+	}
+	public void ResetSpeed()
+	{
+		_speed = _BaseSpeed;
 	}	
 }

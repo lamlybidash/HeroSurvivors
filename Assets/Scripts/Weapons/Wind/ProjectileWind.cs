@@ -58,6 +58,7 @@ public class ProjectileWind : Weapons
 	{
 		isActive = false;
 		_boxCollider.enabled = true;
+		transform.parent.GetComponent<Wind>().PlaySound();
 		_animator.SetBool("isActive", true);
 		yield return new WaitForSeconds(duration);
 		_animator.SetBool("isActive", false);
@@ -108,6 +109,7 @@ public class ProjectileWind : Weapons
 	private void setInActiveCollider()
 	{
 		_boxCollider.enabled = false;
+		transform.parent.GetComponent<Wind>().StopSound();
 	}
 
 

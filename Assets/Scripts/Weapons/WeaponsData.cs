@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(menuName ="GameData/Create Weapon Data", fileName ="Create WeaponData")]
+[CreateAssetMenu(menuName ="GameData/Create Weapon Data", fileName ="WeaponData")]
 public class WeaponsData : ScriptableObject
 {
 	public string nameW;
@@ -14,6 +14,7 @@ public class WeaponsData : ScriptableObject
 	public float duration;
 	public Sprite imgSprite;
 	public GameObject projectilePf;
+	public AudioClip ac;
 	public List<WLevelUp> levelup;
 }
 

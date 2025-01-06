@@ -5,8 +5,8 @@ using UnityEngine;
 public class ProjectileMushroom : Weapons
 {
 	[SerializeField] private GameObject areaDame;
-	private CircleCollider2D _cld;
-	private SpriteRenderer _sprite;
+	[SerializeField] private CircleCollider2D _cld;
+	[SerializeField] private SpriteRenderer _sprite;
 	private Collider2D[] enemies;
 
 	private void Awake()
@@ -19,6 +19,7 @@ public class ProjectileMushroom : Weapons
 	{
 		if (collision.tag == "Enemy")
 		{
+			SoundManager.instance.PlayOneSound(ac);
 			Explode();
 		}
 	}
@@ -27,39 +28,35 @@ public class ProjectileMushroom : Weapons
 	{
 		_cld.enabled = false;
 		_sprite.enabled = false;
-		LayerMask enemyLayer = LayerMask.GetMask("Enemy");
-		enemies = Physics2D.OverlapCircleAll(transform.position, area, enemyLayer);
+		//LayerMask enemyLayer = LayerMask.GetMask("Enemy");
+		//enemies = Physics2D.OverlapCircleAll(transform.position, area, enemyLayer);
 		StartCoroutine(ActiveArea());
 	}
 
 	private IEnumerator ActiveArea()
 	{
-		float scaleFactor = area / areaDame.transform.localScale.x;
-
-		//areaDame.transform.localScale *= area;
-		areaDame.transform.localScale = new Vector3(scaleFactor,scaleFactor,1);
-
+		//float scaleFactor = area / areaDame.transform.localScale.x;
+		areaDame.transform.localScale = new Vector3(1, 1, 1);
+		areaDame.transform.localScale *= area;
+		//areaDame.transform.localScale = new Vector3(scaleFactor,scaleFactor,1);
+		areaDame.GetComponent<MushroomDame>().SetUpData(damage,duration);
 		areaDame.gameObject.SetActive(true);
 		//dame enemy
-		foreach (Collider2D enemy in enemies)
-		{
-			BurnEffect burn = new BurnEffect(damage, duration,0.5f);
-			enemy.GetComponent<EffectManager>().ExcuteEffect(burn);
-		}
+		//foreach (Collider2D enemy in enemies)
+		//{
+		//	BurnEffect burn = new BurnEffect(damage, duration,0.5f);
+		//	enemy.GetComponent<EffectManager>().ExcuteEffect(burn);
+		//}
 
 		yield return new WaitForSecondsRealtime(0.3f);
 		//areaDame.transform.localScale *= (1 / area);
-		areaDame.transform.localScale = new Vector3(1, 1, 1);
 		areaDame.gameObject.SetActive(false);
-
 		gameObject.SetActive(false);
-
 	}
 
 	public void ActiveProjectileMushroom()
 	{
-		_cld = GetComponent<CircleCollider2D>();
-		_sprite = GetComponent<SpriteRenderer>();
+		areaDame.transform.localScale = new Vector3(1, 1, 1);
 		_cld.enabled = true;
 		_sprite.enabled = true;
 		transform.position = new Vector3(player.position.x, player.position.y, transform.position.z);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthEnemy : MonoBehaviour
 {
-	private float _healthTotal = 100f;
+	private float _healthTotal;
 	private float _healthCurrent;
 	private double _expDrop;
 	private bool _isDie;
@@ -33,8 +33,9 @@ public class HealthEnemy : MonoBehaviour
 		}
 	}
 
-	public void SetExpDrop(double expAmount)
+	public void SetUpData(float health, double expAmount)
 	{
+		_healthTotal = health;
 		_expDrop = expAmount;
 	}	
 

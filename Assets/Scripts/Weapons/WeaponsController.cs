@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class WeaponsController : MonoBehaviour
 {
@@ -28,35 +29,58 @@ public class WeaponsController : MonoBehaviour
 	public void ChosseWeapons()
 	{
 		_gc.PauseGame(true);
-		//List<int> rdl; // randomlist
-		//rdl = new List<int>(ChooseRandomNumber(0, _listWeaponTemp.Count, 3));
+		int OptionWeaponCount = 1;
+		UIChooseW.SetActive(true);
 
+		// test money
+		//optionWeapons[0].SetUpMoneyAndHeal(1);
+		//optionWeapons[2].SetUpMoneyAndHeal(2);
+		//return;
+		//
 
-		//if(_weapons.Count < WeaponCountMax)
-		//{
-		//	rdl = new List<int>(ChooseRandomNumber(0, _listWeaponTemp.Count, 3));
-		//}
-		//else
-		//{
-		//	rdl = new List<int>(ChooseRandomNumber(0, WeaponCountMax, 3));
-		//}
+		if (_listWeaponTemp.Count == 0)
+		{
+			optionWeapons[0].SetUpMoneyAndHeal(1);
+			optionWeapons[2].SetUpMoneyAndHeal(2);
+			return;
+		}
+
+		if (_listWeaponTemp.Count >= 3)
+		{
+			OptionWeaponCount = 3;
+		}
+		else
+		{
+			OptionWeaponCount = _listWeaponTemp.Count;
+		}
+
+		List<int> rdl; // randomlist
+		rdl = new List<int>(ChooseRandomNumber(0, _listWeaponTemp.Count, OptionWeaponCount));
 
 
 		int i = 0;
-		foreach (Weapons item in _listWeaponTemp)
+		for (i = 0; i < OptionWeaponCount; i++)
 		{
-			if (i < optionWeapons.Count)
-			{
-				optionWeapons[i].SetUpData(item);
-				i++;
-			}
+			optionWeapons[i].SetUpData(_listWeaponTemp[rdl[i]]);
 		}
-		UIChooseW.SetActive(true);
 	}
 
 	public void LevelUpW(Weapons w)
 	{
+		if(w._level == 0)
+		{
+			w.gameObject.SetActive(true);
+			w._level = 1;
+			return;
+		}
+
 		w.LevelUp(w.data.levelup[w._level - 1].attribute, w.data.levelup[w._level - 1].amount);
+
+		if (w._level >= w.data.levelup.Count + 1)
+		{
+			_listWeaponTemp.Remove(w);
+			return;
+		}
 	}
 
 	public void SetPlayer()
@@ -67,16 +91,18 @@ public class WeaponsController : MonoBehaviour
 		}
 	}
 
-	private List<int> ChooseRandomNumber(int min, int max, int count)
+	private List<int> ChooseRandomNumber(int min, int max, int count) // 0 3 3
 	{
 		List<int> listInt = new List<int>();
 		int i = 0, x;
 		bool check;
-		while (i < count)
+		// i: 0 1
+		// add: 0
+		while (i < count) 
 		{
-			check = true;
 			do
 			{
+				check = true;
 				x = Random.Range(min, max);
 				foreach (int k in listInt)
 				{
@@ -94,6 +120,7 @@ public class WeaponsController : MonoBehaviour
 
 			i++;
 		}
+
 		return listInt;
 	}
 }

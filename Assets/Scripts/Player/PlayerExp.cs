@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ public class PlayerExp : MonoBehaviour
 {
 	[SerializeField] private WeaponsController _wc;
 	[SerializeField] private Image expBar;
-	[SerializeField] private Text _levelText;
+	[SerializeField] private TextMeshProUGUI _levelText;
 	private int _level;
 	private double _ExpNext;
 	private double _ExpCurrent;

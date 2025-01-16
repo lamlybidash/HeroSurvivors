@@ -166,7 +166,15 @@ public class EnemyController : MonoBehaviour
 		}
 		_enemies.Clear();
 	}
-
+	private void DestroyAllBullet()
+	{
+		int i;
+		for (i = 0; i < _bullets.Count; i++)
+		{
+			Destroy(_bullets[i].gameObject);
+		}
+		_bullets.Clear();
+	}	
 	public void PlayGameStatus(bool status)
 	{
 		_isPlay	= status;
@@ -177,6 +185,7 @@ public class EnemyController : MonoBehaviour
 		else
 		{
 			DestroyAllEnemy();
+			DestroyAllBullet();
 		}
 		gameObject.SetActive(status);
 	}

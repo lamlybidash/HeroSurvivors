@@ -72,13 +72,11 @@ public abstract class Weapons : MonoBehaviour
 					damage += amountf;
 					break;
 				}
-
 			case 3:
 				{
 					countdown = countdown * (1 - amountf / 100);
 					break;
 				}
-
 			case 4:
 				{
 					area += amountf;

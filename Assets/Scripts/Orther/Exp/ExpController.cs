@@ -88,7 +88,12 @@ public class ExpController : MonoBehaviour
 			return;
 		}
 	}
-
+	public void DestroyAllExp()
+	{
+		expsB.Clear();
+		expsG.Clear();
+		expsR.Clear();
+	}
 	private int FindExpIA(int x) // 1: Green , 2:Blue , 3:Red
 	{
 		int i = 0;

@@ -53072,7 +53072,9 @@ MonoBehaviour:
   CharB: {fileID: 1103518921}
   _menuGame: {fileID: 700995218}
   _OverGamePanel: {fileID: 1600518834}
-  _ec: {fileID: 596733868}
+  _enc: {fileID: 596733868}
+  _wec: {fileID: 1039231064}
+  _exc: {fileID: 314730545}
   _textCoin: {fileID: 967624181}
   _acBackgound: {fileID: 8300000, guid: e7064c4d3c30eb74880c141b050ff3ce, type: 3}
   _acInGame: {fileID: 8300000, guid: da761a65c35324e43bae620f1ac9a7fc, type: 3}

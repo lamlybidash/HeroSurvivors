@@ -71,6 +71,7 @@ public class WeaponsController : MonoBehaviour
 		{
 			w.gameObject.SetActive(true);
 			w._level = 1;
+			_weapons.Add(w);
 			return;
 		}
 
@@ -90,6 +91,15 @@ public class WeaponsController : MonoBehaviour
 			item.SetPlayer(_gc.CharActive().transform);
 		}
 	}
+
+	public void ResetWeapon()
+	{
+		foreach(Weapons w in _weapons)
+		{
+
+		}	
+	}	
+
 
 	private List<int> ChooseRandomNumber(int min, int max, int count) // 0 3 3
 	{

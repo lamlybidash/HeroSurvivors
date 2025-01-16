@@ -9,7 +9,8 @@ public class GameController : MonoBehaviour
 	[SerializeField] private GameObject CharB;
 	[SerializeField] private GameObject _menuGame;
 	[SerializeField] private GameObject _OverGamePanel;
-	[SerializeField] private EnemyController _ec;
+	[SerializeField] private EnemyController _enc;
+	[SerializeField] private WeaponsController _wec;
 	[SerializeField] private TextMeshProUGUI _textCoin;
 	[SerializeField] private AudioClip _acBackgound;
 	[SerializeField] private AudioClip _acInGame;
@@ -17,8 +18,6 @@ public class GameController : MonoBehaviour
 
 	private int _coinTotal = 0;
 	private int _coinInGame = 0;
-
-
 	//[SerializeField] private WeaponsData exampleData;
 	private GameObject CharacterActive;
 	private bool _isPause;
@@ -43,7 +42,7 @@ public class GameController : MonoBehaviour
 		_isPause = true;
 		PauseGame(true);
 		SoundManager.instance.PlayMusic(_acBackgound);
-		_ec.SetPlayer(CharacterActive.transform);
+		_enc.SetPlayer(CharacterActive.transform);
 	}
 
 	public GameObject CharActive()
@@ -77,7 +76,7 @@ public class GameController : MonoBehaviour
 
 	private void ResetGame() // reset data
 	{
-		_ec.PlayGameStatus(false);
+		_enc.PlayGameStatus(false);
 		//_ec.PlayGameStatus(true);
 		_coinTotal += _coinInGame;
 		TakeCoinInGame(-_coinInGame);
@@ -101,7 +100,7 @@ public class GameController : MonoBehaviour
 	{
 		SoundManager.instance.PlayMusic(_acInGame);
 		_isOverGame = false;
-		_ec.PlayGameStatus(true);
+
 		_menuGame.gameObject.SetActive(false);
 		CharacterActive.GetComponent<Health>().Revive();
 		IsOverGame(false);
@@ -110,7 +109,7 @@ public class GameController : MonoBehaviour
 	public void ToTitleGame()
 	{
 		ResetGame();
-		_ec.PlayGameStatus(false);
+		_enc.PlayGameStatus(false);
 		_menuGame.gameObject.SetActive(true);
 		_OverGamePanel.SetActive(false);
 		SoundManager.instance.PlayMusic(_acBackgound);
@@ -130,6 +129,13 @@ public class GameController : MonoBehaviour
 	public void IsOverGame(bool x)
 	{
 		_isOverGame = x;
+		//Clear Enemy
+		_enc.PlayGameStatus(true);
+		//Clear Exp
+		ExpController.instance.DestroyAllExp();
+		//Reset Weapon
+
+
 		PauseGame(x);
 		_OverGamePanel.SetActive(x);
 	}	

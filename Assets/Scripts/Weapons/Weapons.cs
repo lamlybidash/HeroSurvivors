@@ -14,26 +14,7 @@ public class WLevelUp
 //abstract
 public abstract class Weapons : MonoBehaviour
 {
-	//protected string nameW => data.nameW;
-	//private float? _currentDamage;
-	//protected float damage
-	//{
-	//	get
-	//	{
-	//           if (_currentDamage==null)
-	//           {
-	//			_currentDamage = data.damage;
-	//           }
-	//		return _currentDamage.Value;
-	//	}
-	//	set
-	//	{
-	//		_currentDamage = value;
-	//	}
-	//}
-	//protected float BaseDamage => data.damage;
-
-	protected string nameW;
+	public string nameW;
 	protected float damage;
 	protected int projectile;
 	protected float countdown;
@@ -72,6 +53,11 @@ public abstract class Weapons : MonoBehaviour
 					damage += amountf;
 					break;
 				}
+			case 2:
+				{
+					projectile += (int)amountf;
+					break;
+				}
 			case 3:
 				{
 					countdown = countdown * (1 - amountf / 100);
@@ -95,7 +81,7 @@ public abstract class Weapons : MonoBehaviour
 		}
 	}
 
-	protected void InitData()
+	public void InitData()
 	{
 		nameW = data.nameW;
 		damage = data.damage;
@@ -109,11 +95,6 @@ public abstract class Weapons : MonoBehaviour
 		ac = data.ac;
 	}
 
-	//private void Awake()
-	//{
-	//	InitData();
-	//}
-
 	public virtual void SetUpData(Weapons x)
 	{
 		nameW = x.nameW;
@@ -126,13 +107,20 @@ public abstract class Weapons : MonoBehaviour
 		imgSprite = x.imgSprite;
 		projectilePf = x.projectilePf;
 		ac = x.ac;
+		player = x.player;
 	}
 
+	public virtual void ResetWeapon()
+	{
+		InitData();
+		_level = 0;
+		gameObject.SetActive(false);
+	}	
 	public void SetPlayer(Transform pl)
 	{
 		player = pl;
-	}	
-
+	}
+	public virtual void SetUpStartGame() { }
 }
 
 

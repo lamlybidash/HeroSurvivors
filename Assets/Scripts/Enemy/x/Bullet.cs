@@ -47,5 +47,11 @@ public class Bullet : MonoBehaviour
 		{
 			gameObject.SetActive(false);
 		}
+
+		if (collision.gameObject.tag == "Enemy")
+		{
+			return;
+		}
+		Debug.Log(" Đạn va vào : " + collision.gameObject.tag);
 	}
 }

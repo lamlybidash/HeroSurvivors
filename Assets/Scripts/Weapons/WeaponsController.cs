@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEditor.Progress;
 
 public class WeaponsController : MonoBehaviour
@@ -12,6 +13,7 @@ public class WeaponsController : MonoBehaviour
 	private List<Weapons> _listWeaponTemp; // list de chon nang cap
 	private List<Weapons> _weapons; // list wp hien tai
 	private int WeaponCountMax;
+	private Transform _player;
 	private void Awake()
 	{
 		_readerW = GetComponent<WeaponsReadData>();
@@ -22,8 +24,8 @@ public class WeaponsController : MonoBehaviour
 	{
 		WeaponCountMax = 6;
 		_listWeaponTemp = new List<Weapons>(_listWeaponFull); // sao chep != (list a = list b)
-		SetPlayer();
-
+		//SetPlayer(_player);
+		InitDataAllWeapons();
 	}
 
 	public void ChosseWeapons()
@@ -72,6 +74,7 @@ public class WeaponsController : MonoBehaviour
 			w.gameObject.SetActive(true);
 			w._level = 1;
 			_weapons.Add(w);
+			w.SetUpStartGame();
 			return;
 		}
 
@@ -84,23 +87,52 @@ public class WeaponsController : MonoBehaviour
 		}
 	}
 
-	public void SetPlayer()
+	public void SetPlayer(Transform playerx)
 	{
+		_player = playerx;
 		foreach (Weapons item in _listWeaponFull)
 		{
-			item.SetPlayer(_gc.CharActive().transform);
+			item.SetPlayer(_player);
 		}
 	}
 
 	public void ResetWeapon()
 	{
-		foreach(Weapons w in _weapons)
+		foreach (Weapons w in _weapons)
 		{
+			w.ResetWeapon();
+		}
+		_weapons.Clear();
+		_listWeaponTemp = new List<Weapons>(_listWeaponFull);
+	}
 
-		}	
+	public void SetUpStartGame()
+	{
+		foreach (Weapons item in _listWeaponFull)
+		{
+			item.SetUpStartGame();
+		}
 	}	
+	public void SetUpStartingWeapon(string x)
+	{
+		_listWeaponTemp = new List<Weapons>(_listWeaponFull);
+		foreach (Weapons w in _listWeaponFull)
+		{
+			if (w.nameW == x)
+			{
+				LevelUpW(w);
+				break;
+			}
+		}	
+	}
 
-
+	private void InitDataAllWeapons()
+	{
+		foreach (Weapons w in _listWeaponFull)
+		{
+			w.InitData();
+		}
+	}
 	private List<int> ChooseRandomNumber(int min, int max, int count) // 0 3 3
 	{
 		List<int> listInt = new List<int>();

@@ -19,7 +19,7 @@ public class EffectManager : MonoBehaviour
 		while (effectx.isActive)
 		{
 			effectx.UpdateEffect();
-			yield return new WaitForSecondsRealtime(effectx.stepTime);
+			yield return new WaitForSeconds(effectx.stepTime);
 		}
 		listEffectAcive.Remove(effectx); // tam thoi chua co tac dung
 	}	

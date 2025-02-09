@@ -88,8 +88,24 @@ public class ExpController : MonoBehaviour
 			return;
 		}
 	}
-	public void DestroyAllExp()
+	public void DestroyAllExp(bool x)
 	{
+		if (x == false)
+		{
+			return;
+		}	
+		foreach (Exp exp in expsB)
+		{
+			Destroy(exp.gameObject);
+		}
+		foreach (Exp exp in expsG)
+		{
+			Destroy(exp.gameObject);
+		}
+		foreach (Exp exp in expsR)
+		{
+			Destroy(exp.gameObject);
+		}
 		expsB.Clear();
 		expsG.Clear();
 		expsR.Clear();

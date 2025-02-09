@@ -5,13 +5,12 @@ using UnityEngine;
 public class Mushroom : Weapons
 {
 	[SerializeField] private List<ProjectileMushroom> projectileMushrooms;
+	private Coroutine _pushMushRoomC = null;
 	private void Start()
 	{
-		_level = 0;
-		_level = 1;
 		InitData();
 		SetUpDataProjectile();
-		StartCoroutine(PutMushroom());
+		//_pushMushRoomC = StartCoroutine(PutMushroom());
 	}
 	private void AddProjectile(int count)
 	{
@@ -27,13 +26,13 @@ public class Mushroom : Weapons
 	private void SetUpDataProjectile()
 	{
 		int j;
-		Debug.Log(player);
 		for (j = 0; j < projectileMushrooms.Count; j++)
 		{
 			projectileMushrooms[j].SetUpData(this);
 			projectileMushrooms[j].SetPlayer(player);
 		}
 	}
+
 	private IEnumerator PutMushroom()
 	{
 		while(true)
@@ -41,7 +40,8 @@ public class Mushroom : Weapons
 			PutOne();
 			yield return new WaitForSeconds(countdown);
 		}	
-	}	
+	}
+
 	private int FindMushRoomIA()
 	{
 		int i;
@@ -71,7 +71,7 @@ public class Mushroom : Weapons
 			projectileMushrooms[projectileMushrooms.Count - 1].SetUpData(this);
 			projectileMushrooms[projectileMushrooms.Count - 1].SetPlayer(player);
 			projectileMushrooms[projectileMushrooms.Count - 1].ActiveProjectileMushroom();
-		}	
+		}
 	}
 	public override void LevelUp(int attributef, float amountf)
 	{
@@ -82,5 +82,23 @@ public class Mushroom : Weapons
 			AddProjectile((int)amountf);
 		}
 		SetUpDataProjectile();
+
+	}
+	public override void ResetWeapon()
+	{
+		base.ResetWeapon();
+		foreach (Weapons x in projectileMushrooms)
+		{
+			Destroy(x.gameObject);
+		}
+		projectileMushrooms.Clear();
+		_pushMushRoomC = null;
+	}
+	public override void SetUpStartGame()
+	{
+		if (_pushMushRoomC == null && gameObject.activeInHierarchy == true)
+		{
+			_pushMushRoomC = StartCoroutine(PutMushroom());
+		}	
 	}
 }

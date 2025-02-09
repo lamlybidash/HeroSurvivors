@@ -19,16 +19,10 @@ public abstract class Enemy : MonoBehaviour
 	[SerializeField] protected EnemyMovement movementComponent;
 	[SerializeField] protected EnemyAttack attackComponent;
 
-
 	private void Awake()
 	{
 		//_health = GetComponent<HealthEnemy>();
 	}
-	private void Start()
-	{
-
-	}
-
 
 	public void ActiveEnemy(Vector3 pos)
 	{

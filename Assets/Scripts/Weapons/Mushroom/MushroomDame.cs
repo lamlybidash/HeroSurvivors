@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +12,7 @@ public class MushroomDame : MonoBehaviour
 	{
 		damage = damagex;
 		duration = durationx;
-	}	
+	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
@@ -21,5 +21,6 @@ public class MushroomDame : MonoBehaviour
 			BurnEffect burn = new BurnEffect(damage, duration, 0.5f);
 			collision.GetComponent<EffectManager>().ExcuteEffect(burn);
 		}
+		Debug.Log(" Nấm area va vào : " + collision.gameObject.tag);
 	}
 }

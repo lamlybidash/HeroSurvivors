@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d7f8f5e5f4755144a2f58c3b4ac0201, type: 3}
   m_Name: MushroomInfo
   m_EditorClassIdentifier: 
-  nameW: mushroom
+  nameW: Mushroom
   damage: 20
   projectile: 0
   countdown: 3

@@ -109,5 +109,8 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}	
 
-
+	public void SetUpSpeed(float x)
+	{
+		_speed = x;
+	}	
 }

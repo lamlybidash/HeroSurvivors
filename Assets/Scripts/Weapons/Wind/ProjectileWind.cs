@@ -17,7 +17,7 @@ public class ProjectileWind : Weapons
 	{
 		_animator = GetComponent<Animator>();
 		_boxCollider = GetComponent<BoxCollider2D>();
-		InitData();
+		//InitData();
 	}
 
 	private void Start()
@@ -64,45 +64,11 @@ public class ProjectileWind : Weapons
 		_animator.SetBool("isActive", false);
 	}
 
-	//public void UpDateLevel(int attributef, float amountf)
-	//{
-	//	switch(attributef)
-	//	{
-	//		case 1:
-	//			{
-	//				damage += amountf;
-	//				break;
-	//			}
-
-	//		case 3:
-	//			{
-	//				percentCDs += amountf/100;
-	//				break;
-	//			}
-
-	//		case 4:
-	//			{
-	//				area += amountf;
-	//				break;
-	//			}
-	//		case 5:
-	//			{
-	//				speed += amountf;
-	//				break;
-	//			}
-	//		case 6:
-	//			{
-	//				duration += amountf;
-	//				break;
-	//			}
-	//	}	
-	//}
-
 	public void SetUpAngle(float x)
 	{
 		isActive = false;
-		_boxCollider.enabled = false;
-		_animator.SetBool("isActive", false);
+		//_boxCollider.enabled = false;
+		//_animator.SetBool("isActive", false);
 		timeTemp = countdown;
 		angle = x;
 	}
@@ -111,7 +77,6 @@ public class ProjectileWind : Weapons
 		_boxCollider.enabled = false;
 		transform.parent.GetComponent<Wind>().StopSound();
 	}
-
 
 	private void GiveDame(float dame, GameObject target)
 	{

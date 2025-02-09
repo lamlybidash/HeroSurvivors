@@ -26,5 +26,11 @@ public class Health : MonoBehaviour
 	public void Revive()
 	{
 		TakeDame(-_HPTotal);
+	}
+
+	public void SetUpTotalHealth(float x)
+	{
+		_HPTotal = x;
+		_HPCurrent = _HPTotal;
 	}	
 }

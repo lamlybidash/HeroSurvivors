@@ -35,21 +35,11 @@ public class ProjectileMushroom : Weapons
 
 	private IEnumerator ActiveArea()
 	{
-		//float scaleFactor = area / areaDame.transform.localScale.x;
 		areaDame.transform.localScale = new Vector3(1, 1, 1);
 		areaDame.transform.localScale *= area;
-		//areaDame.transform.localScale = new Vector3(scaleFactor,scaleFactor,1);
 		areaDame.GetComponent<MushroomDame>().SetUpData(damage,duration);
 		areaDame.gameObject.SetActive(true);
-		//dame enemy
-		//foreach (Collider2D enemy in enemies)
-		//{
-		//	BurnEffect burn = new BurnEffect(damage, duration,0.5f);
-		//	enemy.GetComponent<EffectManager>().ExcuteEffect(burn);
-		//}
-
-		yield return new WaitForSecondsRealtime(0.3f);
-		//areaDame.transform.localScale *= (1 / area);
+		yield return new WaitForSeconds(0.3f);
 		areaDame.gameObject.SetActive(false);
 		gameObject.SetActive(false);
 	}

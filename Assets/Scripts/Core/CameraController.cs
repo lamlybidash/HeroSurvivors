@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
 	public void SetFollower(Transform trans)
 	{
 		i++;
-		Debug.Log(trans.name + i);
+		//Debug.Log(trans.name + i);
 		_player = trans;
 	}
 

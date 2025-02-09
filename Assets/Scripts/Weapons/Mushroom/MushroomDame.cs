@@ -21,6 +21,6 @@ public class MushroomDame : MonoBehaviour
 			BurnEffect burn = new BurnEffect(damage, duration, 0.5f);
 			collision.GetComponent<EffectManager>().ExcuteEffect(burn);
 		}
-		Debug.Log(" Nấm area va vào : " + collision.gameObject.tag);
+		//Debug.Log(" Nấm area va vào : " + collision.gameObject.tag);
 	}
 }

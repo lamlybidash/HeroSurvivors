@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Awake()
 	{
-		Debug.Log("Awake : " + name);
+		//Debug.Log("Awake : " + name);
 		_animator = GetComponent<Animator>();
 		_camera = Camera.main.GetComponent<CameraController>();
 		_rg = GetComponent<Rigidbody2D>();
@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Start()
 	{
-		Debug.Log("Start : " + name);
+		//Debug.Log("Start : " + name);
 		_camera.SetFollower(transform);
 		_target = transform.position;
 	}

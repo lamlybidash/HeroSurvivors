@@ -64,7 +64,7 @@ public class GameController : MonoBehaviour
     {
 		if (Input.GetKey(KeyCode.A))
 		{
-			Debug.Log("Nhan A");
+			//Debug.Log("Nhan A");
 			CharB.gameObject.SetActive(false);
 			CharA.gameObject.SetActive(true);
 			CharA.GetComponent<PlayerMovement>().resetCam();
@@ -72,7 +72,7 @@ public class GameController : MonoBehaviour
 		}
 		if (Input.GetKey(KeyCode.B))
 		{
-			Debug.Log("Nhan B");
+			//Debug.Log("Nhan B");
 			CharA.gameObject.SetActive(false);
 			CharB.gameObject.SetActive(true);
 			CharB.GetComponent<PlayerMovement>().resetCam();
@@ -233,4 +233,9 @@ public class GameController : MonoBehaviour
 		}
 		_textTime.text = "0:0";
 	}
+
+	public void QuitGame()
+	{
+		Application.Quit();
+	}	
 }

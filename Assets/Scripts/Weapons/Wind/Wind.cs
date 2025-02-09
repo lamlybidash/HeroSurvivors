@@ -39,7 +39,7 @@ public class Wind : Weapons
 	private void SetUpDataProjectile()
 	{
 		int j;
-		Debug.Log("Char Active hiện tại: " + player.name);
+		//Debug.Log("Char Active hiện tại: " + player.name);
 		for (j = 0; j < projectileWinds.Count; j++)
 		{
 			//Set goc cho 1 projectile

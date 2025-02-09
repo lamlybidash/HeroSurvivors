@@ -52,6 +52,6 @@ public class Bullet : MonoBehaviour
 		{
 			return;
 		}
-		Debug.Log(" Đạn va vào : " + collision.gameObject.tag);
+		//Debug.Log(" Đạn va vào : " + collision.gameObject.tag);
 	}
 }

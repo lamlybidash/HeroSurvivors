@@ -13,21 +13,26 @@ public class GameController : MonoBehaviour
 	[SerializeField] private GameObject _menuGame;
 	[SerializeField] private GameObject _OverGamePanel;
 	[SerializeField] private GameObject _SelectCharPanel;
-	[SerializeField] private EnemyController _enc;
-	[SerializeField] private WeaponsController _wec;
+	[SerializeField] private GameObject _PausePanel;
 	[SerializeField] private TextMeshProUGUI _textCoin;
 	[SerializeField] private TextMeshProUGUI _textTime;
+	[SerializeField] private TextMeshProUGUI _textScore;
+	[SerializeField] private TextMeshProUGUI _textHighScore;
 	[SerializeField] private AudioClip _acBackgound;
 	[SerializeField] private AudioClip _acInGame;
 	[SerializeField] private AudioClip _acMoney;
-	[SerializeField] private List<GameObject> _listChar;
-	[SerializeField] private List<Button> _listButtonSelectChar;
+	[SerializeField] private Button _resumeBt;
+	[SerializeField] private Button _titleBt;
 
+	[SerializeField] private EnemyController _enc;
+	[SerializeField] private CharacterController _cc;
+	[SerializeField] private WeaponsController _wec;
 
 	private int _coinTotal = 0;
 	private int _coinInGame = 0;
+	private int _highScore = 0;
+	private int _score = 0;
 	//[SerializeField] private WeaponsData exampleData;
-	private GameObject CharacterActive;
 	private bool _isPause;
 	private bool _isOverGame;
 	private Coroutine _CountTimeC;
@@ -50,37 +55,24 @@ public class GameController : MonoBehaviour
 		TakeCoinInGame(-_coinInGame);
 		_isPause = true;
 		PauseGame(true);
+		SetUpButton();
 		SoundManager.instance.PlayMusic(_acBackgound);
 		//_enc.SetPlayer(CharacterActive.transform);
-		_textTime.text = "0:0";
+		_textTime.text = "00:00";
+		_score = 0;
+		_highScore = PlayerPrefs.GetInt("HighScore", 0);
+		_textScore.text = $"Score: {_score}";
+		_textHighScore.text = $"High Score:  {_highScore}";
 	}
 
-	public GameObject CharActive()
-	{
-		return CharacterActive;
-	}
+
 
 	void Update()
     {
-		if (Input.GetKey(KeyCode.A))
-		{
-			//Debug.Log("Nhan A");
-			CharB.gameObject.SetActive(false);
-			CharA.gameObject.SetActive(true);
-			CharA.GetComponent<PlayerMovement>().resetCam();
-			CharacterActive = CharA;
-		}
-		if (Input.GetKey(KeyCode.B))
-		{
-			//Debug.Log("Nhan B");
-			CharA.gameObject.SetActive(false);
-			CharB.gameObject.SetActive(true);
-			CharB.GetComponent<PlayerMovement>().resetCam();
-			CharacterActive = CharB;
-		}
-		if (Input.GetKeyDown(KeyCode.Escape))
+		if (Input.GetKeyDown(KeyCode.Escape) && _menuGame.activeInHierarchy == false && _OverGamePanel.activeInHierarchy == false)
 		{
 			PauseGame(!_isPause);
+			_PausePanel.SetActive(_isPause);
 		}
 	}
 
@@ -91,6 +83,7 @@ public class GameController : MonoBehaviour
 		_coinTotal += _coinInGame;
 		TakeCoinInGame(-_coinInGame);
 		//_coinInGame = 0;
+		IsOverGame(true);
 	}
 
 	public void PauseGame(bool status)
@@ -99,6 +92,11 @@ public class GameController : MonoBehaviour
 		{
 			_isPause = true;
 			Time.timeScale = 0;
+			if (_highScore >= PlayerPrefs.GetInt("HighScore", 0))
+			{
+				PlayerPrefs.SetInt("HighScore", _highScore);
+				PlayerPrefs.Save();
+			}
 		}
 		else
 		{
@@ -110,7 +108,7 @@ public class GameController : MonoBehaviour
 	public void PlayGame()
 	{
 		_SelectCharPanel.SetActive(true);
-		SetUpSelectCharPanel();
+		_cc.SetUpSelectCharPanel();
 	}
 
 	public void GoGame()
@@ -121,6 +119,7 @@ public class GameController : MonoBehaviour
 		_menuGame.SetActive(false);
 		IsOverGame(false);
 		SetUpCharacter();
+		ItemDropManager.instance.StartCoroutineDropF();
 		_CountTimeC = StartCoroutine(CountTime());
 	}
 	public void ToTitleGame()
@@ -129,6 +128,7 @@ public class GameController : MonoBehaviour
 		_enc.PlayGameStatus(false);
 		_menuGame.gameObject.SetActive(true);
 		_OverGamePanel.SetActive(false);
+		_PausePanel.SetActive(false);
 		SoundManager.instance.PlayMusic(_acBackgound);
 	}
 
@@ -153,51 +153,50 @@ public class GameController : MonoBehaviour
 		//Reset Weapon
 		_wec.ResetWeapon();
 		// InActive Character Current
-		CharacterActive.GetComponent<Health>().Revive();
-		CharacterActive.gameObject.SetActive(!x);
+		//CharacterActive.GetComponent<Health>().Revive();
+		//CharacterActive.gameObject.SetActive(!x);
+		_cc.CharActive().GetComponent<Health>().Revive();
+		_cc.CharActive().gameObject.SetActive(!x);
 		//Stop Count Time
 		if (_CountTimeC != null && x == true)
 		{
 			StopCoroutine(_CountTimeC);
 			_CountTimeC = null;
 		}
+		if(x == true)
+		{
+			ItemDropManager.instance.StopCoroutieDropF();
+			ItemDropManager.instance.ClearAllItemInMap();
+
+		}	
+
+		// Lưu điểm cao nhất
+		if(x)
+		{
+			if (_highScore >= PlayerPrefs.GetInt("HighScore", 0))
+			{
+				PlayerPrefs.SetInt("HighScore", _highScore);
+				PlayerPrefs.Save();
+			}	
+			IncreaseScore(-_score);
+		}
 
 		PauseGame(x);
 		_OverGamePanel.SetActive(x);
-	}	
-
-	private void SetUpSelectCharPanel()
-	{
-		int i = 0;
-		for (i = 0; i < _listChar.Count; i++)
-		{
-			int k = i;
-			_listButtonSelectChar[k].onClick.AddListener(() => SelectCharX(_listChar[k]));
-			_listButtonSelectChar[k].gameObject.SetActive(true);
-		}
 	}
-
-	public void SelectCharX(GameObject x)
-	{
-		CharacterActive = x;
-	}	
-
-	public void ChooseCharacter(int i)
-	{
-		CharacterActive = _listChar[i];
-	}
-
 	private void SetUpCharacter()
 	{
-		if(CharacterActive.activeInHierarchy == false)
+		if(_cc.CharActive().activeInHierarchy == false)
 		{
-			CharacterActive.SetActive(true);
+			_cc.CharActive().SetActive(true);
 		}
-		_enc.SetPlayer(CharacterActive.transform);
-		_wec.SetPlayer(CharacterActive.transform);
+		_cc.ResetAllCharacter();
+		_cc.SetFollowerForCamera();
+		_enc.SetPlayer(_cc.CharActive().transform);
+		_wec.SetPlayer(_cc.CharActive().transform);
 		_wec.ResetWeapon();
 		//_wec.SetUpStartGame(); // đã gọi ở nâng cấp vũ khí từ 0 -> 1
-		_wec.SetUpStartingWeapon(CharacterActive.GetComponent<Character>().GetStartingWeapon());
+		_wec.SetUpStartingWeapon(_cc.CharActive().GetComponent<Character>().GetStartingWeapon());
 	}
 
 	// đếm thời gian
@@ -234,8 +233,38 @@ public class GameController : MonoBehaviour
 		_textTime.text = "0:0";
 	}
 
+	// Check game mất focus
+	private void OnApplicationFocus(bool focus)
+	{
+		if (focus == false && _isPause == false)
+		{
+			PauseGame(!focus);
+			_PausePanel.SetActive(true);
+		}
+	}
 	public void QuitGame()
 	{
 		Application.Quit();
+	}
+
+	public void IncreaseScore(int x)
+	{
+		_score += x;
+		_textScore.text = $"Score: {_score}";
+		if (_score > _highScore)
+		{
+			_highScore = _score;
+			_textHighScore.text = $"High Score:  {_highScore}";
+		}
+	}
+
+	public void SetUpButton()
+	{
+		_resumeBt.onClick.AddListener(() => 
+			{
+				PauseGame(false);
+				_PausePanel.SetActive(false); 
+			});
+		_titleBt.onClick.AddListener(() => ToTitleGame());
 	}	
 }

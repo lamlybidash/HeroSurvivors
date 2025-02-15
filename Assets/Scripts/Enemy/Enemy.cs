@@ -14,6 +14,7 @@ public abstract class Enemy : MonoBehaviour
 	protected double expDrop;
 	public EnemyData data;
 	protected Transform player;
+	protected EnemyController ec;
 	protected Camera cam;
 	[SerializeField] protected HealthEnemy healthComponent;
 	[SerializeField] protected EnemyMovement movementComponent;
@@ -44,6 +45,7 @@ public abstract class Enemy : MonoBehaviour
 		healthComponent.SetUpData(HP, expDrop);
 		movementComponent.SetUpData(player, cam, speedMove,areaActtack);
 		attackComponent.SetUpData(dame, speedAttack);
+		ec = transform.parent.GetComponent<EnemyController>();
 	}
 
 	public virtual void BalanceParameter()		// Cân bằng thông số quái
@@ -57,4 +59,9 @@ public abstract class Enemy : MonoBehaviour
 		player = playerx;
 		attackComponent.ResetCanGiveDame(); // Sử lý bug khi quái chết CanGiveDame chưa kịp trở lại thành true
 	}
+
+	public void IncreaseScore(int x)
+	{
+		ec.IncreaseScore(x);
+	}	
 }

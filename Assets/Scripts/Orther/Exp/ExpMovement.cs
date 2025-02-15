@@ -4,31 +4,27 @@ using UnityEngine;
 
 public class ExpMovement : MonoBehaviour
 {
-	[SerializeField] GameController _gc;
 	private float _speed;
 	private Transform _player;
 	private Vector2 _direction;
 	private Rigidbody2D _rg;
 	private Exp _exp;
-	
 
 	private void Awake()
 	{
 		_rg = GetComponent<Rigidbody2D>();
 		_exp = GetComponent<Exp>();
-
 	}
 
 	private void Start()
 	{
-		SetPlayer();
 		_speed = 10f;
 	}
 	
 	
-	private void SetPlayer()
+	public void SetPlayer(Transform player)
 	{
-		_player = _gc.CharActive().transform;
+		_player = player;
 	}
 
 	private void FixedUpdate()

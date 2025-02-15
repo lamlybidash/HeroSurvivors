@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
 	private bool _isPlay;
 	//-----------------------------CORE----------------------
 	[SerializeField] private Camera _cam;
+	[SerializeField] private GameController _gc;
 	private Vector3 _camBL;
 	private Vector3 _camTR;
 	//-----------------------------ENEMY-----------------------
@@ -189,9 +190,13 @@ public class EnemyController : MonoBehaviour
 		}
 		gameObject.SetActive(status);
 	}
-
 	public void SetPlayer(Transform playerx)
 	{
 		_player = playerx;
+	}	
+
+	public void IncreaseScore(int x)
+	{
+		_gc.IncreaseScore(x);
 	}	
 }

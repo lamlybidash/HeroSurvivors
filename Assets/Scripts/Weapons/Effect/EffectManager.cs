@@ -21,6 +21,7 @@ public class EffectManager : MonoBehaviour
 			effectx.UpdateEffect();
 			yield return new WaitForSeconds(effectx.stepTime);
 		}
+		effectx.RemoveEffect();
 		listEffectAcive.Remove(effectx); // tam thoi chua co tac dung
 	}	
 }

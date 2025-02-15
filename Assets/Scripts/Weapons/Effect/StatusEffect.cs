@@ -17,7 +17,14 @@ public abstract class StatusEffect
 
 	public abstract void ApplyEffect(EffectManager manager);
 
-	public abstract void UpdateEffect();
+	public virtual void UpdateEffect()
+	{
+		duration -= stepTime;
+		if(duration <= 0)
+		{
+			isActive = false;
+		}	
+	}
 
 	public abstract void RemoveEffect();
 

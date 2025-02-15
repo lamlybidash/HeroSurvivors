@@ -30,7 +30,6 @@ public class BurnEffect : StatusEffect
 
 	public override void UpdateEffect()
 	{
-		duration -= stepTime;
 		if (isActive == true)
 		{
 			if (healthEnemy.isDieF() == false)
@@ -43,5 +42,6 @@ public class BurnEffect : StatusEffect
 				RemoveEffect();
 			}
 		}
+		base.UpdateEffect();
 	}
 }

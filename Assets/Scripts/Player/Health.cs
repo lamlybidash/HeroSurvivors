@@ -23,6 +23,14 @@ public class Health : MonoBehaviour
 		}
 	}
 
+	public void Healling(float valueHeal)
+	{
+		_HPCurrent = Mathf.Clamp(_HPCurrent + valueHeal, 0, _HPTotal);
+		_imgHealthBar.fillAmount = _HPCurrent / _HPTotal;
+		// sound healing
+		
+	}
+
 	public void Revive()
 	{
 		TakeDame(-_HPTotal);

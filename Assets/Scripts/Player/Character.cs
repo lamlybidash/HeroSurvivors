@@ -47,5 +47,10 @@ public class Character : MonoBehaviour
 	public string GetStartingWeapon()
 	{
 		return _startingWeapon;
+	}
+	public void ResetData()
+	{
+		GetComponent<PlayerExp>().ResetLevelChar();
+		GetComponentInChildren<Loot>().ResetArea();
 	}	
 }

@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class OptionWeapon : MonoBehaviour, IPointerClickHandler
 {
 	[SerializeField] private GameController _gc;
+	[SerializeField] private CharacterController _cc;
 	[SerializeField] private WeaponsController _wc;
 	[SerializeField] private Image _img;
 	[SerializeField] private TextMeshProUGUI _title;
@@ -104,7 +105,7 @@ public class OptionWeapon : MonoBehaviour, IPointerClickHandler
 					}
 				case 1:
 					{
-						_gc.CharActive().GetComponent<Health>().TakeDame(-20);
+						_cc.CharActive().GetComponent<Health>().Healling(20);
 						break;
 					}
 				case 2:

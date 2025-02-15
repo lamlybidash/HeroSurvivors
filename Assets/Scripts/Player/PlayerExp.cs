@@ -14,10 +14,7 @@ public class PlayerExp : MonoBehaviour
 	private double _ExpCurrent;
 	private void Start()
 	{
-		expBar.fillAmount = 0;
-		_level = 1;
-		_ExpCurrent = 0;
-		_ExpNext = 5;
+		ResetLevelChar();
 	}
 
 	public void GainExp(double expAmount)
@@ -55,5 +52,14 @@ public class PlayerExp : MonoBehaviour
 			return 12;
 		}
 		return 14;
-	}	
+	}
+
+	public void ResetLevelChar()
+	{
+		expBar.fillAmount = 0;
+		_level = 1;
+		_ExpCurrent = 0;
+		_ExpNext = 5;
+		_levelText.text = "Level : " + _level.ToString();
+	}
 }

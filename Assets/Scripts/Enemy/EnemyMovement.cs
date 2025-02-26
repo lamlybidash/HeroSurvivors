@@ -122,4 +122,9 @@ public class EnemyMovement : MonoBehaviour
 	{
 		_speed = _BaseSpeed;
 	}	
+
+	public void AddForce(float fx, Vector2 directionx)
+	{
+		_rg.AddForce(directionx * fx, ForceMode2D.Impulse);
+	}	
 }

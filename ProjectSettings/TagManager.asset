@@ -17,9 +17,9 @@ TagManager:
   - UI
   - Enemy
   - Ground
-  - 
-  - 
-  - 
+  - NonImpactPlayer
+  - ImpactPlayer
+  - Player
   - 
   - 
   - 

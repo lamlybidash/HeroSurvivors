@@ -234,14 +234,14 @@ public class GameController : MonoBehaviour
 	}
 
 	// Check game mất focus
-	private void OnApplicationFocus(bool focus)
-	{
-		if (focus == false && _isPause == false)
-		{
-			PauseGame(!focus);
-			_PausePanel.SetActive(true);
-		}
-	}
+	//private void OnApplicationFocus(bool focus)
+	//{
+	//	if (focus == false && _isPause == false)
+	//	{
+	//		PauseGame(!focus);
+	//		_PausePanel.SetActive(true);
+	//	}
+	//}
 	public void QuitGame()
 	{
 		Application.Quit();

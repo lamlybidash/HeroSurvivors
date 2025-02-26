@@ -52,7 +52,7 @@ public class Mushroom : Weapons
 			{
 				return i;
 			}	
-		}	
+		}
 		return -1;
 	}	
 	private void PutOne()

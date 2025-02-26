@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
 	private float _yRunVt;
 	private float _xIdleVt;
 	private float _yIdleVt;
+
+	private Vector2 _dir;
 
 
 
@@ -46,22 +48,31 @@ public class PlayerMovement : MonoBehaviour
 		{
 			_target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			_target.z = transform.position.z;
+			_animator.SetBool("isRun", (Mathf.Abs(_xRunVt) > 0.01 || Mathf.Abs(_yRunVt) > 0.01));
+			_animator.SetFloat("RunHor", _xRunVt);
+			_animator.SetFloat("RunVer", _yRunVt);
+			_animator.SetFloat("IdleHor", _xIdleVt);
+			_animator.SetFloat("IdleVer", _yIdleVt);
 		}
 		setupDirection(_target);
 
-		_animator.SetBool("isRun", (Mathf.Abs(_xRunVt) > 0.01 || Mathf.Abs(_yRunVt) > 0.01));
-		_animator.SetFloat("RunHor", _xRunVt);
-		_animator.SetFloat("RunVer", _yRunVt);
-		_animator.SetFloat("IdleHor", _xIdleVt);
-		_animator.SetFloat("IdleVer", _yIdleVt);
+
 	}
 	private void FixedUpdate()
 	{
 		_targetRG = Vector3.MoveTowards(transform.position, _target, _speed * Time.fixedDeltaTime);
 		_rg.MovePosition(_targetRG);
+		if(Mathf.Abs(transform.position.x - _target.x) < 0.01 && Mathf.Abs(transform.position.y - _target.y) < 0.01) // Người chơi chạy tới vị trí chuột click
+		{
+			_animator.SetBool("isRun", (Mathf.Abs(_xRunVt) > 0.01 || Mathf.Abs(_yRunVt) > 0.01));
+			_animator.SetFloat("RunHor", _xRunVt);
+			_animator.SetFloat("RunVer", _yRunVt);
+			_animator.SetFloat("IdleHor", _xIdleVt);
+			_animator.SetFloat("IdleVer", _yIdleVt);
+		}	
 	}
 
-
+	// Xưa code ngu vcl =))
 	private void setupDirection(Vector3 target)
 	{
 		_xRunVt = target.x - transform.position.x;
@@ -112,5 +123,21 @@ public class PlayerMovement : MonoBehaviour
 	public void SetUpSpeed(float x)
 	{
 		_speed = x;
+	}
+
+	public void DontMove()
+	{
+		_target = transform.position;
+	}
+	
+	public Vector3 GetDirectionPlayer()
+	{
+		_dir = new Vector2(0, 0);
+		if (_animator!= null)
+		{
+			_dir = new Vector2(_animator.GetFloat("IdleHor"), _animator.GetFloat("IdleVer"));
+		}
+
+		return _dir;
 	}	
 }

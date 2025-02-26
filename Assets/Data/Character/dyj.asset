@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: dyj
   m_EditorClassIdentifier: 
   nameChar: dyj
-  HP: 100
+  HP: 99999
   def: 7
   dame: 1.5
   speedMove: 5

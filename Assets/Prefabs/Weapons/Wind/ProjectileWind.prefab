@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 24727140226201210}
   - component: {fileID: 3833490623045421258}
   - component: {fileID: 980086123713195148}
-  - component: {fileID: 3058374332253484380}
   - component: {fileID: 1317004462193519836}
   m_Layer: 0
   m_Name: ProjectileWind
@@ -75,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 191150341
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -154,33 +153,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6003258, y: 1.009808}
   m_EdgeRadius: 0
---- !u!50 &3058374332253484380
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4197306792380567468}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 0.0001
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
 --- !u!114 &1317004462193519836
 MonoBehaviour:
   m_ObjectHideFlags: 0

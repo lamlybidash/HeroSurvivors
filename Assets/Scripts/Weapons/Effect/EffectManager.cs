@@ -10,7 +10,10 @@ public class EffectManager : MonoBehaviour
 		listEffectAcive.Add(effectx);
 		effectx.ApplyEffect(this);
 		Coroutine coroutine;
-		coroutine = StartCoroutine(UpdateEffect(effectx));
+		if (gameObject.activeInHierarchy == true)
+		{
+			coroutine = StartCoroutine(UpdateEffect(effectx));
+		}
 		//effectx.SetCoroutine(coroutine);
 	}
 

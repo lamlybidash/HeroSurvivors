@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2666980079941468180}
   - component: {fileID: 316872212391673194}
   - component: {fileID: 1715903855672757113}
+  - component: {fileID: 5095970492991742384}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -143,3 +144,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.67723686, y: 0.50906014}
   m_EdgeRadius: 0
+--- !u!50 &5095970492991742384
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2200553877414266361}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

@@ -17,9 +17,7 @@ public class PopupController : MonoBehaviour
 			Destroy(gameObject);
 			return;
 		}
-
 		instance = this;
-		DontDestroyOnLoad(gameObject);
 	}
 
 	public void PopupDame(Transform location, float dame)

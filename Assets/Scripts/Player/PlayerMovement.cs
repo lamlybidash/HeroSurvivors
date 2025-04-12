@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
 	private float _xIdleVt;
 	private float _yIdleVt;
 
-	private Vector2 _dir;
 
 
 
@@ -44,73 +43,27 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetMouseButton(1))
+		if (Input.GetMouseButton(1) && Time.timeScale != 0)
 		{
 			_target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			_target.z = transform.position.z;
-			_animator.SetBool("isRun", (Mathf.Abs(_xRunVt) > 0.01 || Mathf.Abs(_yRunVt) > 0.01));
-			_animator.SetFloat("RunHor", _xRunVt);
-			_animator.SetFloat("RunVer", _yRunVt);
-			_animator.SetFloat("IdleHor", _xIdleVt);
-			_animator.SetFloat("IdleVer", _yIdleVt);
+			_direction = new Vector2(_target.x - transform.position.x, _target.y - transform.position.y).normalized;
+			_animator.SetBool("isRun", true);
+			_animator.SetFloat("directX", _direction.x);
+			_animator.SetFloat("directY", _direction.y);
 		}
-		setupDirection(_target);
-
-
 	}
 	private void FixedUpdate()
 	{
 		_targetRG = Vector3.MoveTowards(transform.position, _target, _speed * Time.fixedDeltaTime);
 		_rg.MovePosition(_targetRG);
-		if(Mathf.Abs(transform.position.x - _target.x) < 0.01 && Mathf.Abs(transform.position.y - _target.y) < 0.01) // Người chơi chạy tới vị trí chuột click
+
+		if (Mathf.Abs(transform.position.x - _target.x) < 0.01 && Mathf.Abs(transform.position.y - _target.y) < 0.01) // Người chơi chạy tới vị trí chuột click
 		{
-			_animator.SetBool("isRun", (Mathf.Abs(_xRunVt) > 0.01 || Mathf.Abs(_yRunVt) > 0.01));
-			_animator.SetFloat("RunHor", _xRunVt);
-			_animator.SetFloat("RunVer", _yRunVt);
-			_animator.SetFloat("IdleHor", _xIdleVt);
-			_animator.SetFloat("IdleVer", _yIdleVt);
-		}	
+			_animator.SetBool("isRun", false);
+		}
 	}
 
-	// Xưa code ngu vcl =))
-	private void setupDirection(Vector3 target)
-	{
-		_xRunVt = target.x - transform.position.x;
-		_yRunVt = target.y - transform.position.y;
-		if (Mathf.Abs(_xRunVt) < 0.001 && Mathf.Abs(_yRunVt) < 0.01)
-		{
-			return;
-		}
-
-		if (_xRunVt == 0)
-		{
-			_yRunVt = Mathf.Sign(_yRunVt);
-			_xIdleVt = _xRunVt;
-			_yIdleVt = _yRunVt;
-			return;
-		}
-
-		if (_yRunVt == 0)
-		{
-			_xRunVt = Mathf.Sign(_xRunVt);
-			_xIdleVt = _xRunVt;
-			_yIdleVt = _yRunVt;
-			return;
-		}
-
-		if (Mathf.Abs(_xRunVt) > Mathf.Abs(_yRunVt))
-		{
-			_yRunVt = _yRunVt / Mathf.Abs(_xRunVt);
-			_xRunVt = _xRunVt / Mathf.Abs(_xRunVt);
-		}
-		else
-		{
-			_xRunVt = _xRunVt / Mathf.Abs(_yRunVt);
-			_yRunVt = _yRunVt / Mathf.Abs(_yRunVt);
-		}
-		_xIdleVt = _xRunVt;
-		_yIdleVt = _yRunVt;
-	}	
 	private void checkInput()
 	{
 		if (Input.GetMouseButton(1))
@@ -130,14 +83,8 @@ public class PlayerMovement : MonoBehaviour
 		_target = transform.position;
 	}
 	
-	public Vector3 GetDirectionPlayer()
+	public Vector2 GetDirectionPlayer()
 	{
-		_dir = new Vector2(0, 0);
-		if (_animator!= null)
-		{
-			_dir = new Vector2(_animator.GetFloat("IdleHor"), _animator.GetFloat("IdleVer"));
-		}
-
-		return _dir;
+		return _direction;
 	}	
 }

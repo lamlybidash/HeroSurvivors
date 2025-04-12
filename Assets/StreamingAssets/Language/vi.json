@@ -1,0 +1,21 @@
+{
+    "menu":
+    {
+        "start": "BẮT ĐẦU",
+        "settings": "CÀI ĐẶT",
+        "exit_game": "THOÁT GAME",
+        "music": "Âm nhạc",
+        "sfx": "Âm thanh",
+        "language": "Ngôn ngữ",
+        "apply": "Áp dụng",
+        "back": "Thoát"
+    },
+    "item":
+    {
+        "gun": "Súng",
+        "sword": "Kiếm",
+        "high_range": "Tầm xa",
+        "medium_range": "Tầm trung bình",
+        "low_range": "Tầm gần"
+    }
+}

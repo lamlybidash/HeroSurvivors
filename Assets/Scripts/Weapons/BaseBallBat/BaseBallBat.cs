@@ -8,10 +8,8 @@ public class BaseBallBat : Weapons
 
 	void Start()
     {
-        //InitData();
-		//SetUpDataProjectile();
-		countdown = 2;
-		StartCoroutine(AttackBonk());
+        InitData();
+		//StartCoroutine(AttackBonk());
 	}
 
 	private void SetUpDataProjectile()
@@ -29,6 +27,7 @@ public class BaseBallBat : Weapons
 		int j;
 		while (true)
 		{
+			SoundManager.instance.PlayOneSound(ac);
 			for (j = 0; j < _projectileBaseBallBats.Count; j++)
 			{
 				_projectileBaseBallBats[j].gameObject.SetActive(true);
@@ -37,6 +36,18 @@ public class BaseBallBat : Weapons
 			yield return new WaitForSeconds(countdown);
 		}
 	}
+
+	private void AddProjectile(int x)
+	{
+		int i;
+		for (i = 0; i < x; i++)
+		{
+			GameObject projectilex = Instantiate(projectilePf);
+			projectilex.transform.parent = transform;
+			_projectileBaseBallBats.Add(projectilex.GetComponent<ProjectileBaseBallBat>());
+		}	
+	}	
+
 
 	public override void LevelUp(int attributef, float amountf)
 	{
@@ -52,6 +63,8 @@ public class BaseBallBat : Weapons
 	public override void SetUpStartGame()
 	{
 		base.SetUpStartGame();
+		AddProjectile(projectile);
+		SetUpDataProjectile();
 		StartCoroutine(AttackBonk());
 	}
 }

@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
 {
 	[SerializeField] private Image _imgHealthBar;
 	[SerializeField] private GameController _gc;
+	[SerializeField] private AudioClip _acHealing;
 	private float _HPTotal = 100;
 	private float _HPCurrent = 100;
 	private void Start()
@@ -28,7 +29,7 @@ public class Health : MonoBehaviour
 		_HPCurrent = Mathf.Clamp(_HPCurrent + valueHeal, 0, _HPTotal);
 		_imgHealthBar.fillAmount = _HPCurrent / _HPTotal;
 		// sound healing
-		
+		SoundManager.instance.PlayOneSound(_acHealing);
 	}
 
 	public void Revive()

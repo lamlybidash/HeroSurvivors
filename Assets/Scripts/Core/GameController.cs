@@ -13,12 +13,14 @@ public class GameController : MonoBehaviour
 	[SerializeField] private GameObject _menuGame;
 	[SerializeField] private GameObject _OverGamePanel;
 	[SerializeField] private GameObject _SelectCharPanel;
+	[SerializeField] private GameObject _SettingPanel;
 	[SerializeField] private GameObject _PausePanel;
 	[SerializeField] private TextMeshProUGUI _textCoin;
 	[SerializeField] private TextMeshProUGUI _textTime;
 	[SerializeField] private TextMeshProUGUI _textScore;
 	[SerializeField] private TextMeshProUGUI _textHighScore;
 	[SerializeField] private AudioClip _acBackgound;
+	[SerializeField] private AudioClip _acSelectChar;
 	[SerializeField] private AudioClip _acInGame;
 	[SerializeField] private AudioClip _acMoney;
 	[SerializeField] private Button _resumeBt;
@@ -51,12 +53,12 @@ public class GameController : MonoBehaviour
 
 	private void Start()
 	{
-		_coinInGame = 0;
-		TakeCoinInGame(-_coinInGame);
+		//_coinInGame = 0;
+		//TakeCoinInGame(-_coinInGame);
 		_isPause = true;
 		PauseGame(true);
-		SetUpButton();
 		SoundManager.instance.PlayMusic(_acBackgound);
+		SetUpButton();
 		//_enc.SetPlayer(CharacterActive.transform);
 		_textTime.text = "00:00";
 		_score = 0;
@@ -90,7 +92,6 @@ public class GameController : MonoBehaviour
 	{
 		if (status == true)
 		{
-			_isPause = true;
 			Time.timeScale = 0;
 			if (_highScore >= PlayerPrefs.GetInt("HighScore", 0))
 			{
@@ -100,15 +101,10 @@ public class GameController : MonoBehaviour
 		}
 		else
 		{
-			_isPause = false;
 			Time.timeScale = 1;
 		}
-	}
-
-	public void PlayGame()
-	{
-		_SelectCharPanel.SetActive(true);
-		_cc.SetUpSelectCharPanel();
+		_isPause = status;
+		SoundManager.instance.PauseSound(status);
 	}
 
 	public void GoGame()
@@ -242,10 +238,7 @@ public class GameController : MonoBehaviour
 	//		_PausePanel.SetActive(true);
 	//	}
 	//}
-	public void QuitGame()
-	{
-		Application.Quit();
-	}
+
 
 	public void IncreaseScore(int x)
 	{

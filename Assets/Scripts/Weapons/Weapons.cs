@@ -39,6 +39,8 @@ public abstract class Weapons : MonoBehaviour
 	}
 	[SerializeField] public WeaponsData data;
 
+
+	private float _CDCount;
 	//public int bonusDame;
 	//public int bonusDameMultiple;
 	//public float Damage => data.damage * bonusDameMultiple + bonusDame;
@@ -60,7 +62,9 @@ public abstract class Weapons : MonoBehaviour
 				}
 			case 3:
 				{
-					countdown = countdown * (1 - amountf / 100);
+					countdown = data.countdown;
+					_CDCount += amountf;
+					countdown = countdown * (1 - _CDCount / 100);
 					break;
 				}
 			case 4:
@@ -114,6 +118,7 @@ public abstract class Weapons : MonoBehaviour
 	{
 		InitData();
 		_level = 0;
+		_CDCount = 0;
 		gameObject.SetActive(false);
 	}	
 	public void SetPlayer(Transform pl)

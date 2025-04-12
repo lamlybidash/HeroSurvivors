@@ -1,0 +1,17 @@
+{
+    "en":
+    {
+        "name": "English",
+        "font": "Unifontexmono-2vrqo"
+    },
+    "vi":
+    {
+        "name": "Tiếng Việt",
+        "font": "Unifontexmono-2vrqo"
+    },
+    "cn":
+    {
+        "name": "中国人",
+        "font": "zpix"
+    }
+}

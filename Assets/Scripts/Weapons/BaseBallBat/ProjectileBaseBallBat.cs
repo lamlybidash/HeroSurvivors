@@ -8,14 +8,11 @@ public class ProjectileBaseBallBat : Weapons
 	private Coroutine _coroutine;
 	private float _angelTemp;
 	private float _timeTemp;
-	private float _timeDuration = 0.25f;
-	public Transform playertest;
 	float angel;
-	Vector3 _dirPlayer;
+	Vector2 _dirPlayer;
 	private void Start()
 	{
-		StartAttack();
-		countdown = 2;
+		//StartAttack();
 	}
 
 	private IEnumerator MoveBonk() // chuyển động của gậy
@@ -24,7 +21,7 @@ public class ProjectileBaseBallBat : Weapons
 		float angelTemp;
 		_timeTemp = 0;
 		angelTemp = 0;
-		_dirPlayer = playertest.GetComponent<PlayerMovement>().GetDirectionPlayer();
+		_dirPlayer = player.GetComponent<PlayerMovement>().GetDirectionPlayer();
 		if (_dirPlayer.x < 0)
 		{
 			angel = 180;
@@ -34,12 +31,12 @@ public class ProjectileBaseBallBat : Weapons
 			angel = -180;
 		}
 		transform.rotation = Quaternion.Euler(0, 0, 0);
-		while (_timeTemp < _timeDuration)
+		while (_timeTemp < duration)
 		{
 			//Cần bám theo player
-			transform.position = playertest.position;
+			transform.position = player.position;
 			_timeTemp += Time.deltaTime;
-			angelTemp += (angel) * (Time.deltaTime / _timeDuration);
+			angelTemp += (angel) * (Time.deltaTime / duration);
 			transform.rotation = Quaternion.Euler(0, 0, angelTemp);
 			yield return null;
 		}
@@ -57,6 +54,25 @@ public class ProjectileBaseBallBat : Weapons
 		if (_coroutine != null)
 		{
 			StopCoroutine(_coroutine);
+		}
+	}
+
+	public override void SetUpData(Weapons x)
+	{
+		base.SetUpData(x);
+		transform.localScale = new Vector3(area, area, 1);
+	}
+
+	private void GiveDame(float dame, GameObject target)
+	{
+		target.GetComponent<HealthEnemy>().TakeDame(dame);
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.tag == "Enemy")
+		{
+			GiveDame(damage, collision.gameObject);
 		}
 	}
 }

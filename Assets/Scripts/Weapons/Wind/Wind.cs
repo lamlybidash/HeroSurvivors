@@ -7,13 +7,9 @@ public class Wind : Weapons
 	[SerializeField] private List<ProjectileWind> projectileWinds;
 
 
-	private AudioSource _audioSource;
 	private bool _soundPlaying;
 
-	private void Awake()
-	{
-		_audioSource = GetComponent<AudioSource>();
-	}
+
 
 	private void Start()
 	{
@@ -21,8 +17,6 @@ public class Wind : Weapons
 		AddProjectile(projectile);
 		SetUpDataProjectile();
 		_soundPlaying = false;
-		_audioSource.clip = ac;
-		_audioSource.loop = true;
 	}
 
 	private void AddProjectile(int count)
@@ -66,7 +60,7 @@ public class Wind : Weapons
 		if(_soundPlaying == false)
 		{
 			_soundPlaying = true;
-			_audioSource.Play();
+			SoundManager.instance.PlaySoundLoop(ac, duration);
 		}
 	}
 
@@ -75,7 +69,6 @@ public class Wind : Weapons
 		if(_soundPlaying)
 		{
 			_soundPlaying = false;
-			_audioSource.Stop();
 		}	
 	}
 

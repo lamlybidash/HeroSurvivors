@@ -1,0 +1,22 @@
+{
+    "en": {
+        "start": "START GAME",
+        "settings": "SETTINGS",
+        "exit_game": "QUIT GAME",
+        "music": "Music",
+        "sfx": "SFX",
+        "language": "Language",
+        "apply": "Apply",
+        "back": "Back"
+    },
+    "vi": {
+        "start": "BẮT ĐẦU",
+        "settings": "CÀI ĐẶT",
+        "exit_game": "THOÁT",
+        "music": "Âm nhạc",
+        "sfx": "Âm thanh",
+        "language": "Ngôn ngữ",
+        "apply": "Áp dụng",
+        "back": "Trở lại"
+    }
+}

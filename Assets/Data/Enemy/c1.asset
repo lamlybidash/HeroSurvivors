@@ -16,7 +16,7 @@ MonoBehaviour:
   level: 1
   HP: 100
   dame: 10
-  areaActtack: 3
+  areaActtack: 0
   speedMove: 2
   speedAttack: 1
   expDrop: 5

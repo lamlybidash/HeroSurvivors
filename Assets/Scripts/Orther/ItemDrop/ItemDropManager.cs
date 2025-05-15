@@ -13,6 +13,7 @@ public class ItemDropManager : ItemDrop
 	private List<ItemDrop> _listItemDropInMap = new List<ItemDrop>();
 	private List<Chest> _listChestInMap = new List<Chest>();
 
+	//Tọa độ 2 góc chéo của bản đồ
 	private Vector2 Topleft = new Vector2(-39f, 27.5f);
 	private Vector2 BotRight = new Vector2(40f, -31.5f);
 	private Vector2 LocationDrop;
@@ -45,7 +46,7 @@ public class ItemDropManager : ItemDrop
 			LocationDrop = new Vector2 (x,y);
 
 			//Random thời điểm drop
-			_timeStepDrop = Random.Range(3, 5); // drop mỗi 10s ~ 20s
+			_timeStepDrop = Random.Range(10, 20); // drop mỗi 10s ~ 20s
 
 			DropChest(LocationDrop);
 			yield return new WaitForSeconds(_timeStepDrop);

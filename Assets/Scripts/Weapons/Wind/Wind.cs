@@ -4,21 +4,13 @@ using UnityEngine;
 
 public class Wind : Weapons
 {
-	[SerializeField] private List<ProjectileWind> projectileWinds;
-
-
+	private List<ProjectileWind> projectileWinds = new List<ProjectileWind>();
 	private bool _soundPlaying;
-
-
-
 	private void Start()
 	{
-		InitData();
-		AddProjectile(projectile);
-		SetUpDataProjectile();
+
 		_soundPlaying = false;
 	}
-
 	private void AddProjectile(int count)
 	{
 		int j;
@@ -33,7 +25,6 @@ public class Wind : Weapons
 	private void SetUpDataProjectile()
 	{
 		int j;
-		//Debug.Log("Char Active hiện tại: " + player.name);
 		for (j = 0; j < projectileWinds.Count; j++)
 		{
 			//Set goc cho 1 projectile
@@ -54,8 +45,9 @@ public class Wind : Weapons
 		AddProjectile(projectile);
 		SetUpDataProjectile();
 	}
+ 
 
-	public void PlaySound()
+    public void PlaySound()
 	{
 		if(_soundPlaying == false)
 		{
@@ -63,7 +55,6 @@ public class Wind : Weapons
 			SoundManager.instance.PlaySoundLoop(ac, duration);
 		}
 	}
-
 	public void StopSound()
 	{
 		if(_soundPlaying)
@@ -80,13 +71,12 @@ public class Wind : Weapons
 			Destroy(x.gameObject);
 		}
         projectileWinds.Clear();
-		AddProjectile(projectile);
-		SetUpDataProjectile();
 	}
 
-	public override void SetUpStartGame()
+	public override void SetUpStartGame(Character charx)
 	{
-		base.SetUpStartGame();
-		SetUpDataProjectile();
+        base.SetUpStartGame(charx);
+        AddProjectile(projectile);
+        SetUpDataProjectile();
 	}
 }

@@ -104,7 +104,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4782095133251348642
 Transform:
   m_ObjectHideFlags: 0
@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
+  _movePointer: {fileID: 1199085148567397160, guid: 1263423fef1c7f5478993e6e5360b552, type: 3}
 --- !u!114 &6167864505664742462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,6 +234,8 @@ MonoBehaviour:
   _playerLoot: {fileID: 8965944611268130636}
   _playerMovement: {fileID: 4537206023312809106}
   _wec: {fileID: 0}
+  _skillE: {fileID: 0}
+  _skillQ: {fileID: 0}
   data: {fileID: 11400000, guid: c316588113700d94fa99dd26e3b60259, type: 2}
 --- !u!114 &8869570425106982309
 MonoBehaviour:

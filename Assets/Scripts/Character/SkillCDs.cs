@@ -51,8 +51,13 @@ public class SkillCDs : MonoBehaviour
 		_timeCDs = timeCDsx;
 	}
 
+	public void SetupImageCDs(Image imgCDsx)
+	{
+        _imageCDs = imgCDsx;
+    }	
+
 	public bool CanUseSkill()
 	{
 		return _canUseSkill;
-	}	
+	}
 }

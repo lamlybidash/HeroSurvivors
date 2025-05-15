@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class BaseBallBat : Weapons
 {
-	[SerializeField] private List<ProjectileBaseBallBat> _projectileBaseBallBats;
+	private List<ProjectileBaseBallBat> _projectileBaseBallBats = new List<ProjectileBaseBallBat>();
 
 	void Start()
     {
-        InitData();
 		//StartCoroutine(AttackBonk());
 	}
 
@@ -60,9 +59,14 @@ public class BaseBallBat : Weapons
 		base.ResetWeapon();
 	}
 
-	public override void SetUpStartGame()
+    protected override void UpdateStat()
+    {
+        base.UpdateStat();
+		SetUpDataProjectile();
+    }
+	public override void SetUpStartGame(Character charx)
 	{
-		base.SetUpStartGame();
+		base.SetUpStartGame(charx);
 		AddProjectile(projectile);
 		SetUpDataProjectile();
 		StartCoroutine(AttackBonk());

@@ -41,13 +41,11 @@ public class SliderController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 	{
 		_isHold = true;
 		_handle.GetComponent<Animator>().SetBool("isHold", true);
-		Debug.Log("Giữ slider");
 	}
 
 	public void OnPointerUp(PointerEventData eventData)
 	{
 		_isHold = false;
 		_handle.GetComponent<Animator>().SetBool("isHold", false);
-		Debug.Log("Thả slider");
 	}
 }

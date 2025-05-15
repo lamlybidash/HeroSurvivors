@@ -10,12 +10,37 @@
         "apply": "申请",
         "back": "返回"
     },
-    "item":
+    "weapon":
     {
-        "gun": "Gun",
-        "sword": "Sword",
-        "high_range": "High Range",
-        "medium_range": "Medium Range",
-        "low_range": "Low Range"
+        "damage": "损坏",
+        "projectile": "射弹",
+        "countdown": "冷却",
+        "area": "范围",
+        "speed": "施法速度",
+        "duration": "持续时间",
+
+        "wind": "龙卷风",
+        "mushroom": "毒蘑菇",
+        "baseballbat": "棒球棒",
+        "boomerang": "回旋镖"
+    },
+    "skill":
+    {        
+        "CDs":"冷却",
+        "flash":"闪光",
+        "des_flash":"立即跳转到一定范围内的指定位置",
+        "exdes_flash":"",
+        "repulsion":"震退",
+        "des_repulsion":"击退你周围区域内的所有敌人",
+        "exdes_repulsion":""
+    },
+    "character":
+    {
+        "name": "姓名",
+        "hp":"健康",
+        "def":"防御",
+        "speed":"移动",
+        "weapon":"武器",
+        "special_ability":"特殊能力"
     }
 }

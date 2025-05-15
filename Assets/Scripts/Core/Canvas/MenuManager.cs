@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -11,12 +13,15 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] private GameObject _playButton;
 	[SerializeField] private GameObject _settingsButton;
 	[SerializeField] private GameObject _quitButton;
-	[SerializeField] private GameObject _selectCharPanel;
+    [SerializeField] private GameObject _buyButton;
+    [SerializeField] private GameObject _selectCharPanel;
+	[SerializeField] private GameObject _dailyQuestPanel;
 	[SerializeField] private GameObject _settingsPanel;
-	[SerializeField] private AudioClip _acSelectChar;
+    [SerializeField] private AudioClip _acSelectChar;
 
 	//Text
 	[SerializeField] private TextMeshProUGUI _titleGame;
+	[SerializeField] private TextMeshProUGUI _textCoin;
 	private TextMeshProUGUI _textPlayButton;
 	private TextMeshProUGUI _textSettingsButton;
 	private TextMeshProUGUI _textQuitButton;
@@ -35,16 +40,14 @@ public class MenuManager : MonoBehaviour
 		_textQuitButton = _quitButton.transform.Find("Title").GetComponent<TextMeshProUGUI>();
 	}	
 
-
-
-
-
 	//Public --------------------------------------------------------------------------
 	public void PlayButtonOnClick()
 	{
 		_selectCharPanel.SetActive(true);
 		_cc.SetUpSelectCharPanel();
-		SoundManager.instance.PlayMusic(_acSelectChar);
+        _textCoin.text = _GC.GetCoin().ToString();
+        _dailyQuestPanel.SetActive(true);
+        SoundManager.instance.PlayMusic(_acSelectChar);
 	}
 	public void SettingsButtonOnClick()
 	{
@@ -54,7 +57,12 @@ public class MenuManager : MonoBehaviour
 	{
 		Application.Quit();
 	}
-	public void UpdateLanguage()
+    public void BuyButtonOnClick()
+    {
+		_cc.BuyChar();
+        _textCoin.text = _GC.GetCoin().ToString();
+    }
+    public void UpdateLanguage()
 	{
 		UpdateFont();
         _textPlayButton.text = LanguageManager.instance.GetText("menu", "start");
@@ -68,5 +76,10 @@ public class MenuManager : MonoBehaviour
         _textPlayButton.font = _font;
         _textSettingsButton.font = _font;
         _textQuitButton.font = _font;
-    }	
+    }
+
+	public void CanBuy(bool x)
+	{
+		_buyButton.GetComponent<Button>().interactable = x;
+	}
 }

@@ -13,20 +13,19 @@ public class MagnetEffect : StatusEffect
 		{
 			_lootComponent = manager.GetComponentInChildren<Loot>();
 			isActive = true;
-
 		}
 	}
 
 	public override void RemoveEffect()
 	{
-		_lootComponent.IncreaseArea(-10);
+		_lootComponent.IncreaseArea(-20);
 	}
 
 	public override void UpdateEffect()
 	{
 		if (isActive == true)
 		{
-			_lootComponent.IncreaseArea(10);
+			_lootComponent.IncreaseArea(20);
 		}
 		base.UpdateEffect();
 	}

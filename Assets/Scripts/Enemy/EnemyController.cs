@@ -195,8 +195,22 @@ public class EnemyController : MonoBehaviour
 		_player = playerx;
 	}	
 
+	public List<GameObject> GetListEnemyActive()
+	{
+		List<GameObject> listE = new List<GameObject>();
+        int i;
+        for (i = 0; i < _enemies.Count; i++)
+        {
+            if (_enemies[i].gameObject.activeInHierarchy)
+            {
+                listE.Add( _enemies[i].gameObject);
+            }
+        }
+		return listE;
+    }	
 	public void IncreaseScore(int x)
 	{
 		_gc.IncreaseScore(x);
+		DailyQuestEvent.EnemyKilled();
 	}	
 }

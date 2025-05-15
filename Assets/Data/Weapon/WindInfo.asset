@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d7f8f5e5f4755144a2f58c3b4ac0201, type: 3}
   m_Name: WindInfo
   m_EditorClassIdentifier: 
-  nameW: Wind
+  nameW: wind
   damage: 30
   projectile: 3
   countdown: 5

@@ -35,7 +35,6 @@ public class Loot : MonoBehaviour
 
 	public void ResetArea()
 	{
-		Debug.Log("Reset Area");
 		multiplier = 1;
 		transform.localScale = new Vector3(1, 1, 1);
 	}	

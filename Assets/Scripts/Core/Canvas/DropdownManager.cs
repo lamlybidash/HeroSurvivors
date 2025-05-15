@@ -15,8 +15,6 @@ public class DropdownManager : MonoBehaviour
 	{
 		int indexSelect = _dropdown.value;
 		string nameSelect = _dropdown.options[indexSelect].text;
-		Debug.Log($"index select = {indexSelect}");
-		Debug.Log($"name select = {nameSelect}");
 	}
 
 	public void ClearOption()

@@ -31,8 +31,11 @@ public class EnemyAttack : MonoBehaviour
 		{
 			target.GetComponent<Health>().TakeDame(_dame);
 		}
-		StartCoroutine(CantGiveDame());
-	}
+		if (gameObject.activeInHierarchy)
+		{
+            StartCoroutine(CantGiveDame());
+        }
+    }
 
 	private IEnumerator CantGiveDame()
 	{

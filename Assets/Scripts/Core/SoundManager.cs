@@ -37,7 +37,12 @@ public class SoundManager : MonoBehaviour
 			_sourceEffect.PlayOneShot(ac);
 		}
 	}
-	public void PlaySoundLoop(AudioClip ac, float timex)
+    public void PlayOneSoundOnSystem(AudioClip ac)
+    {
+
+		_sourceEffect.PlayOneShot(ac);
+    }
+    public void PlaySoundLoop(AudioClip ac, float timex)
 	{
 		StartCoroutine(CountLoopSound(ac, timex));
 	}

@@ -15,7 +15,12 @@ MonoBehaviour:
   nameChar: bllm
   HP: 180
   def: 10
-  dame: 1
   speedMove: 4
   speedAttack: 1
-  startingWeapon: Mushroom
+  startingWeapon: mushroom
+  SA: projectile
+  SAType: Bonus
+  SAAmount: 1
+  skillE: 
+  skillQ: 
+  cost: 10

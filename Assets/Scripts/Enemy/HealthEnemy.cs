@@ -26,7 +26,7 @@ public class HealthEnemy : MonoBehaviour
 	public void TakeDame(float dame)
 	{
 		_healthCurrent = Mathf.Clamp(_healthCurrent - dame, 0, _healthTotal);
-		PopupController.instance.PopupDame(transform, dame);
+		PopupController.instance.PopupWorld(dame.ToString(), transform.position);
 		if (_healthCurrent == 0 )
 		{
 			_indexForRandom = Random.Range(0,100);

@@ -23,6 +23,4 @@ public class Exp : MonoBehaviour
 	{
 		return _maxExp;
 	}
-
-	
 }

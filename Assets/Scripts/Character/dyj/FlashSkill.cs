@@ -3,37 +3,24 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class FlashSkill : MonoBehaviour
+public class FlashSkill : Skill
 {
-	[SerializeField] private SkillCDs _skillCDs;
-	[SerializeField] private SpriteRenderer _imgArea;
-	private Transform _player;
 	private Vector3 _target;
 	private float _distanceMax = 2.5f;
 
 	private void Start()
 	{
-		_skillCDs.SetupDataSkill(10);
+		_id = "flash";
+		_CDs = 10;
+		_typeSkill = 'E';
 		_imgArea.transform.localScale = new Vector3(_distanceMax * 2 , _distanceMax * 2 , 1);
-	}
-	private void Update()
-	{
-		if(Input.GetKey(KeyCode.E))
-		{
-			if (_skillCDs.CanUseSkill() == true)
-			{
-				FlashS();
-			}
-		}	
+		InitData();
 	}
 
-	private void GetPlayer()
-	{
-		_player = transform.parent;
-		Debug.Log(_player);
-		Debug.Log(_player.gameObject.name);
-	}
-
+	//private void GetPlayer()
+	//{
+	//	_player = transform.parent;
+	//}
 	private void SetTarget()
 	{
 		Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -50,12 +37,20 @@ public class FlashSkill : MonoBehaviour
 	}
 	private void FlashS()
 	{
-		_imgArea.transform.localScale = new Vector3(_distanceMax * 2 , _distanceMax * 2 , 1);
-		GetPlayer();
+        _imgArea.transform.localScale = new Vector3(_distanceMax * 2 , _distanceMax * 2 , 1);
+		//GetPlayer();
 		SetTarget();
-
 		_player.position = _target;
-		_skillCDs.UseSkill();
 		_player.GetComponent<PlayerMovement>().DontMove();
-	}	
+	}
+
+    public override void UseSkill()
+    {
+        if (_skillCDs.CanUseSkill() == false)
+        {
+            return;
+        }
+        _skillCDs.UseSkill();
+        FlashS();
+    }
 }

@@ -10,12 +10,37 @@
         "apply": "Áp dụng",
         "back": "Thoát"
     },
-    "item":
+    "weapon":
     {
-        "gun": "Súng",
-        "sword": "Kiếm",
-        "high_range": "Tầm xa",
-        "medium_range": "Tầm trung bình",
-        "low_range": "Tầm gần"
+        "damage": "Sát thương",
+        "projectile": "Tia đạn",
+        "countdown": "Hồi chiêu",
+        "area": "Phạm vi",
+        "speed": "Tốc độ thi triển",
+        "duration": "Thời gian duy trì",
+
+        "wind": "Lốc xoáy",
+        "mushroom": "Nấm độc",
+        "baseballbat": "Gậy bóng chày",
+        "boomerang": "Bumerang"
+    },
+    "skill":
+    {
+        "CDs":"Hồi chiêu",
+        "flash":"Thuẫn di",
+        "des_flash":"Lập tức nhảy tới vị trí được chỉ định trong một phạm vi nhất định",
+        "exdes_flash":"",
+        "repulsion":"Chấn thoái",
+        "des_repulsion":"Đẩy lui tất cả kẻ địch trong phạm vi xung quanh bản thân",
+        "exdes_repulsion":""
+    },
+    "character":
+    {
+        "name": "Tên",
+        "hp":"Máu",
+        "def":"Thủ",
+        "speed":"Di chuyển",
+        "weapon":"Vũ khí",
+        "special_ability": "Nội tại"
     }
 }

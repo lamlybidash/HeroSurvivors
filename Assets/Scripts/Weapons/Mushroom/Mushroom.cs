@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Mushroom : Weapons
 {
-	[SerializeField] private List<ProjectileMushroom> projectileMushrooms;
+	private List<ProjectileMushroom> projectileMushrooms = new List<ProjectileMushroom>();
 	private Coroutine _pushMushRoomC = null;
 	private void Start()
 	{
-		InitData();
 		SetUpDataProjectile();
 		//_pushMushRoomC = StartCoroutine(PutMushroom());
 	}
@@ -84,7 +83,12 @@ public class Mushroom : Weapons
 		SetUpDataProjectile();
 
 	}
-	public override void ResetWeapon()
+    protected override void UpdateStat()
+    {
+        base.UpdateStat();
+		SetUpDataProjectile();
+    }
+    public override void ResetWeapon()
 	{
 		base.ResetWeapon();
 		foreach (Weapons x in projectileMushrooms)
@@ -94,8 +98,9 @@ public class Mushroom : Weapons
 		projectileMushrooms.Clear();
 		_pushMushRoomC = null;
 	}
-	public override void SetUpStartGame()
+	public override void SetUpStartGame(Character charx)
 	{
+		base.SetUpStartGame(charx);
 		if (_pushMushRoomC == null && gameObject.activeInHierarchy == true)
 		{
 			_pushMushRoomC = StartCoroutine(PutMushroom());

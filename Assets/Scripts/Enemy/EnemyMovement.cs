@@ -91,10 +91,16 @@ public class EnemyMovement : MonoBehaviour
 	{
 		if (collision.gameObject.tag == "Player")
 		{
-			_enemyAttack.GiveDame(collision.gameObject,false);
+			_enemyAttack.GiveDame(collision.gameObject, false);
 		}
 	}
-
+	//private void OnTriggerStay2D(Collider2D collision)
+	//{
+	//    if (collision.gameObject.tag == "Player")
+	//    {
+	//        _enemyAttack.GiveDame(collision.gameObject, false);
+	//    }
+	//}
 
 	private IEnumerator DelayMove(float t)
 	{

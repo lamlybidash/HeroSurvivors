@@ -15,7 +15,12 @@ MonoBehaviour:
   nameChar: xem
   HP: 200
   def: 15
-  dame: 1
   speedMove: 3.5
   speedAttack: 1
-  startingWeapon: BaseBallBat
+  startingWeapon: baseballbat
+  SA: 
+  SAType: 
+  SAAmount: 0
+  skillE: 
+  skillQ: 
+  cost: 1000

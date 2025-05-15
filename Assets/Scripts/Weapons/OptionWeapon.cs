@@ -32,7 +32,7 @@ public class OptionWeapon : MonoBehaviour, IPointerClickHandler
 		else
 		{
 			_title.text += (_weapon._level + 1).ToString();
-			_describle.text = " + " + _weapon.data.levelup[_weapon._level - 1].amount.ToString() + _des[_weapon.data.levelup[_weapon._level - 1].attribute - 1];
+			_describle.text = "+ " + _weapon.data.levelup[_weapon._level - 1].amount.ToString() + _des[_weapon.data.levelup[_weapon._level - 1].attribute - 1];
 
 
 			//Debug.Log("xxx" + _weapon.data.levelup[_weapon._level - 1].amount.ToString());
@@ -96,7 +96,8 @@ public class OptionWeapon : MonoBehaviour, IPointerClickHandler
 	{
 		if (eventData.button == PointerEventData.InputButton.Left)
 		{
-			switch(_typeOption)
+            _gc.PauseGame(false);
+            switch (_typeOption)
 			{
 				case 0:
 					{
@@ -115,7 +116,7 @@ public class OptionWeapon : MonoBehaviour, IPointerClickHandler
 					}
 			}
 			InActiveAllOption();
-			_gc.PauseGame(false);
 		}
 	}
 }
+//TODO Cập nhật text + font option choose weapon

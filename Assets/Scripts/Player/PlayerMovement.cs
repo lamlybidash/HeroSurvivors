@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	[SerializeField] private float _speed;
+	[SerializeField] private GameObject _movePointer;
 	//private int i = 0;
 	private CameraController _camera;
 	private Rigidbody2D _rg;
@@ -51,7 +52,10 @@ public class PlayerMovement : MonoBehaviour
 			_animator.SetBool("isRun", true);
 			_animator.SetFloat("directX", _direction.x);
 			_animator.SetFloat("directY", _direction.y);
-		}
+            _movePointer.SetActive(false);
+			_movePointer.transform.position = _target;
+            _movePointer.SetActive(true);
+        }
 	}
 	private void FixedUpdate()
 	{
@@ -61,8 +65,9 @@ public class PlayerMovement : MonoBehaviour
 		if (Mathf.Abs(transform.position.x - _target.x) < 0.01 && Mathf.Abs(transform.position.y - _target.y) < 0.01) // Người chơi chạy tới vị trí chuột click
 		{
 			_animator.SetBool("isRun", false);
-		}
-	}
+            _movePointer.SetActive(false);
+        }
+    }
 
 	private void checkInput()
 	{

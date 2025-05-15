@@ -1,7 +1,6 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-//using static UnityEditor.Progress;
 
 public class WeaponsController : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class WeaponsController : MonoBehaviour
 	[SerializeField] private List<Weapons> _listWeaponFull; // lay data
 	private List<Weapons> _listWeaponTemp; // list de chon nang cap
 	private List<Weapons> _weapons; // list wp hien tai
-	private int WeaponCountMax;
+	private int WeaponCountMax = 3;
 	private Transform _player;
 	private void Awake()
 	{
@@ -22,10 +21,11 @@ public class WeaponsController : MonoBehaviour
 
 	private void Start()
 	{
-		WeaponCountMax = 6;
+		WeaponCountMax = 3;
 		_listWeaponTemp = new List<Weapons>(_listWeaponFull); // sao chep != (list a = list b)
 		//SetPlayer(_player);
-		InitDataAllWeapons();
+		//test
+		//InitDataAllWeapons();
 	}
 
 	public void ChosseWeapons()
@@ -71,21 +71,34 @@ public class WeaponsController : MonoBehaviour
 	{
 		if(w._level == 0)
 		{
-			w.gameObject.SetActive(true);
-			w._level = 1;
+            w.gameObject.SetActive(true);
+            w._level = 1;
 			_weapons.Add(w);
-			w.SetUpStartGame();
-			return;
-		}
-
-		w.LevelUp(w.data.levelup[w._level - 1].attribute, w.data.levelup[w._level - 1].amount);
-
-		if (w._level >= w.data.levelup.Count + 1)
+			w.SetUpStartGame(_player.GetComponent<Character>());
+			//Loại bỏ các vũ khí khác khi số lượng vũ khí đạt tối đa
+			if (_weapons.Count == WeaponCountMax)
+            {
+                _listWeaponTemp.Clear();
+                foreach (Weapons wi in _weapons)
+                {
+                    if (wi._level <= wi.data.levelup.Count)
+                    {
+                        _listWeaponTemp.Add(wi);
+                    }
+                }
+            }
+        }
+		else
 		{
+            w.LevelUp(w.data.levelup[w._level - 1].attribute, w.data.levelup[w._level - 1].amount);
+        }
+        if (w._level >= w.data.levelup.Count + 1)
+		{
+			DailyQuestEvent.WeaponLvMax();
 			_listWeaponTemp.Remove(w);
 			return;
 		}
-	}
+    }
 
 	public void SetPlayer(Transform playerx)
 	{
@@ -101,24 +114,25 @@ public class WeaponsController : MonoBehaviour
 		foreach (Weapons w in _weapons)
 		{
 			w.ResetWeapon();
+			w.ResetBonusAndMulti();
 		}
 		_weapons.Clear();
 		_listWeaponTemp = new List<Weapons>(_listWeaponFull);
 	}
-
-	public void SetUpStartGame()
-	{
-		foreach (Weapons item in _listWeaponFull)
-		{
-			item.SetUpStartGame();
-		}
-	}	
+	//Test
+	//public void SetUpStartGame()
+	//{
+	//	foreach (Weapons item in _listWeaponFull)
+	//	{
+	//		item.SetUpStartGame(_player.GetComponent<Character>());
+	//	}
+	//}	
 	public void SetUpStartingWeapon(string x)
 	{
 		_listWeaponTemp = new List<Weapons>(_listWeaponFull);
 		foreach (Weapons w in _listWeaponFull)
 		{
-			if (w.nameW == x)
+			if (w.data.nameW == x)
 			{
 				LevelUpW(w);
 				break;
@@ -126,13 +140,14 @@ public class WeaponsController : MonoBehaviour
 		}	
 	}
 
-	private void InitDataAllWeapons()
-	{
-		foreach (Weapons w in _listWeaponFull)
-		{
-			w.InitData();
-		}
-	}
+	//test
+	//private void InitDataAllWeapons()
+	//{
+	//	foreach (Weapons w in _listWeaponFull)
+	//	{
+	//		w.InitData();
+	//	}
+	//}
 	private List<int> ChooseRandomNumber(int min, int max, int count) // 0 3 3
 	{
 		List<int> listInt = new List<int>();

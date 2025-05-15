@@ -14,22 +14,21 @@ public class DameP : MonoBehaviour
 	{
 		transform.position += new Vector3(0, _speed * Time.fixedDeltaTime, 0);
 	}
-	private void PopupF()
+	private void PopupF(string textx)
 	{
-		_tmp.SetText(_dame.ToString());
+		_tmp.SetText(textx);
 		transform.gameObject.SetActive(true);
 		StartCoroutine(InActivePopup());
 	}	
 	private IEnumerator InActivePopup()
 	{
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(1);	// duration 1s
 		transform.gameObject.SetActive(false);
 	}
-	public void SetUpPopup(Transform location, int dame)
+	public void SetUpPopup(Transform location, string textx)
 	{
 		transform.position = new Vector3(location.position.x, location.position.y, transform.position.z);
-		_dame = dame;
-		PopupF();
+		PopupF(textx);
 	}
 
 }

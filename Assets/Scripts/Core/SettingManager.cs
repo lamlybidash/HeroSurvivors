@@ -84,7 +84,6 @@ public class SettingManager : MonoBehaviour
 	private void UpdateFont()
 	{
 		_font = LanguageManager.instance.GetFontAssetCurrent();
-		Debug.Log(_textSfx);
 		_textMusic.font = _font;
 		_textSfx.font = _font;
 		_textLang.font = _font;
@@ -94,9 +93,12 @@ public class SettingManager : MonoBehaviour
 	}
 	private void SetupDataOld()
 	{
-		_musicValue = PlayerPrefs.GetFloat("MusicValue",1);
-		_SFXValue = PlayerPrefs.GetFloat("SFXValue",1);
-		_languageCodeCurrent = PlayerPrefs.GetString("Language","en");
+		_musicValue = PlayerPrefs.GetFloat("MusicValue", 1);
+		_SFXValue = PlayerPrefs.GetFloat("SFXValue", 1);
+		_languageCodeCurrent = PlayerPrefs.GetString("Language", "en");
+		_languageCodeCurrentTemp = _languageCodeCurrent;
+		_musicValueTemp = _musicValue;
+		_SFXValueTemp = _SFXValue;
 	}
 	public void BackButtonOnClick()
 	{
@@ -200,6 +202,7 @@ public class SettingManager : MonoBehaviour
 			{
                 if (_listFont.ContainsKey(_reverseLanguageCode[textItem.text]))
                 {
+					textItem.enableAutoSizing = true;
                     textItem.font = _listFont[_reverseLanguageCode[textItem.text]];
                 }
             }	

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d7f8f5e5f4755144a2f58c3b4ac0201, type: 3}
   m_Name: BaseBallBatInfo
   m_EditorClassIdentifier: 
-  nameW: BaseBallBat
+  nameW: baseballbat
   damage: 120
   projectile: 1
-  countdown: 1
+  countdown: 20
   area: 1
   speed: 1
   duration: 0.25

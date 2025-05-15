@@ -10,12 +10,37 @@
         "apply": "Apply",
         "back": "Back"
     },
-    "item":
+    "weapon":
     {
-        "gun": "Gun",
-        "sword": "Sword",
-        "high_range": "High Range",
-        "medium_range": "Medium Range",
-        "low_range": "Low Range"
+        "damage": "Damage",
+        "projectile": "Projectile",
+        "countdown": "Countdown",
+        "area": "Area",
+        "speed": "Speed Weapon",
+        "duration": "Duration",
+
+        "wind": "Wind",
+        "mushroom": "Mushroom",
+        "baseballbat": "Baseball Bat",
+        "boomerang": "Boomerang"
+    },
+    "skill":
+    {
+        "CDs":"Countdown",
+        "flash":"Flash",
+        "des_flash":"Instantly jump to the specified location within a certain range",
+        "exdes_flash":"",
+        "repulsion":"Repulsion",
+        "des_repulsion":"Push back all enemies in an area around you",
+        "exdes_repulsion":""
+    },
+    "character":
+    {
+        "name":"Name",
+        "hp":"Health",
+        "def":"Defense",
+        "speed":"Speed Move",
+        "weapon":"Weapon",
+        "special_ability": "Special Ability"
     }
 }

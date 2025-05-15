@@ -18,6 +18,8 @@ public class Character : MonoBehaviour
 	[SerializeField] private Loot _playerLoot;
 	[SerializeField] private PlayerMovement _playerMovement;
 	[SerializeField] private WeaponsController _wec;
+	[SerializeField] private Skill _skillE;
+	[SerializeField] private Skill _skillQ;
 	[SerializeField] public CharacterData data;
 
 
@@ -32,7 +34,6 @@ public class Character : MonoBehaviour
 		_nameChar = data.nameChar;
 		_HP = data.HP;
 		_def = data.def;
-		_dame = data.dame;
 		_speedMove = data.speedMove;
 		_speedAttack = data.speedAttack;
 		_startingWeapon = data.startingWeapon;
@@ -52,5 +53,20 @@ public class Character : MonoBehaviour
 	{
 		GetComponent<PlayerExp>().ResetLevelChar();
 		GetComponentInChildren<Loot>().ResetArea();
-	}	
+	}
+
+	public Skill GetSkill(char typeSkillx)
+	{
+		if(typeSkillx == 'E')
+		{
+			return _skillE;
+		}
+
+        if (typeSkillx == 'Q')
+        {
+            return _skillQ;
+        }
+
+		return null;
+    }
 }

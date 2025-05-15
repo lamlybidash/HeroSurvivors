@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 [System.Serializable]
@@ -15,13 +14,11 @@ public class LanguageData
 public class LanguageManager : MonoBehaviour
 {
 	public static LanguageManager instance;
-
-	[SerializeField] private TMP_FontAsset _font;
-	[SerializeField] private TMP_FontAsset _fontCn;
-
 	//List Controller need update language
 	[SerializeField] private SettingManager _SM;
+	[SerializeField] private SkillController _SC;
 	[SerializeField] private MenuManager _MM;
+	[SerializeField] private CharacterController _CC;
 
 
 
@@ -45,6 +42,10 @@ public class LanguageManager : MonoBehaviour
 		//Load full data language
 		//PlayerPrefs.SetString("Language","en"); //sử dụng để Debug
 		_CurrentLangCode = PlayerPrefs.GetString("Language", "en");
+		if(_CurrentLangCode == "")
+		{
+			_CurrentLangCode = "en";
+        }
 		LoadLangData();
 		ReadLangCode();
 		ReadAndConvertAllFont();
@@ -55,7 +56,6 @@ public class LanguageManager : MonoBehaviour
     private void Start()
 	{
 		//SetLang("vi");
-		//Debug.Log(_LangData.languages);
 		UpdateLanguage();
 	}
 
@@ -68,11 +68,10 @@ public class LanguageManager : MonoBehaviour
 	}
 
 
-	//Hàm chưa hoàn thiện, viết vớ vẩn (đối phó)
 	private void SetupFont()
 	{
 		_fontCurrent = _listFont[_CurrentLangCode];
-	}
+    }
 
 	public void SetLang(string lang)
 	{
@@ -128,10 +127,18 @@ public class LanguageManager : MonoBehaviour
 	{
 		_CurrentLangCode = PlayerPrefs.GetString("Language", "en");
         SetupFont();
-		// Update text mọi nơi
-		_SM.UpdateLanguage();
+		UpdateFont();
+        // Update text mọi nơi
+        _SM.UpdateLanguage();
 		_MM.UpdateLanguage();
-	}
+        _SC.UpdateLanguage();
+        _CC.UpdateLanguage();
+    }
+
+	private void UpdateFont()
+	{
+		InforWindow.Instance.SetupFont(_fontCurrent);
+    }	
 
 	public Dictionary<string, TMP_FontAsset> GetListFont()
 	{

@@ -8,6 +8,9 @@ TagManager:
   - Exp
   - WeaponDame
   - ItemDrop
+  - CharacterController
+  - EnemyController
+  - WeaponsController
   layers:
   - Default
   - TransparentFX
@@ -47,6 +50,9 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 1796337421
+    locked: 0
+  - name: Obstacles
+    uniqueID: 459487943
     locked: 0
   - name: Player
     uniqueID: 596659427

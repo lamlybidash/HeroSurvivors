@@ -106,6 +106,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -1097,7 +1110,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: overworld_tileset_grass_47
+      name: lake1
       rect:
         serializedVersion: 2
         x: 0
@@ -1108,7 +1121,14 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -4, y: -8}
+        - {x: -4, y: 0}
+        - {x: 0, y: 4}
+        - {x: 8, y: 4}
+        - {x: 8, y: 8}
+        - {x: -8, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: fce1a49b2a15c08439bdfdc8e776bad9
@@ -1118,7 +1138,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: overworld_tileset_grass_48
+      name: lake2
       rect:
         serializedVersion: 2
         x: 16
@@ -1129,7 +1149,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: 4}
+        - {x: -8, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: 4}
       tessellationDetail: 0
       bones: []
       spriteID: 0315c7fb78dada74e8d23332bef83b31
@@ -1139,7 +1163,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: overworld_tileset_grass_49
+      name: lake3
       rect:
         serializedVersion: 2
         x: 32
@@ -1150,7 +1174,14 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 4, y: -8}
+        - {x: 4, y: 0}
+        - {x: 0, y: 4}
+        - {x: -8, y: 4}
+        - {x: -8, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: a7814adccf004844890c0fa5b6698611
@@ -1366,7 +1397,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: overworld_tileset_grass_59
+      name: lake4
       rect:
         serializedVersion: 2
         x: 0
@@ -1377,7 +1408,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 8}
+        - {x: -4, y: 8}
+        - {x: -4, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 4cb410e5446ff5048b0d69e29055f759
@@ -1387,7 +1422,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: overworld_tileset_grass_60
+      name: lake5
       rect:
         serializedVersion: 2
         x: 16
@@ -1398,7 +1433,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 34b628b294a166a4d9ff3d9488646147
@@ -1408,7 +1447,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: overworld_tileset_grass_61
+      name: lake6
       rect:
         serializedVersion: 2
         x: 32
@@ -1419,7 +1458,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 4, y: -8}
+        - {x: 4, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 803a856b751bf0b41ad2da7f4acf2b5a
@@ -1605,7 +1648,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: overworld_tileset_grass_70
+      name: lake7
       rect:
         serializedVersion: 2
         x: 0
@@ -1616,7 +1659,14 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: 8}
+        - {x: -4, y: 8}
+        - {x: -4, y: 0}
+        - {x: 1, y: -4}
+        - {x: 8, y: -4}
+        - {x: 8, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: e4957d2e025e5b5478d8b99d83c9c6b8
@@ -1626,7 +1676,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: overworld_tileset_grass_71
+      name: lake8
       rect:
         serializedVersion: 2
         x: 16
@@ -1637,7 +1687,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: -4}
+        - {x: 8, y: -4}
+        - {x: 8, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 44c336596d36df345a8c8b4af6235c92
@@ -1647,7 +1701,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: overworld_tileset_grass_72
+      name: lake9
       rect:
         serializedVersion: 2
         x: 32
@@ -1658,7 +1712,14 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: -4}
+        - {x: 0, y: -4}
+        - {x: 4, y: 0}
+        - {x: 4, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 33694a7d5cb03a141b590901b32f7e1b
@@ -1875,7 +1936,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: overworld_tileset_grass_82
+      name: lake10
       rect:
         serializedVersion: 2
         x: 0
@@ -1886,7 +1947,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 4, y: -8}
+        - {x: 4, y: -4}
+        - {x: 8, y: -4}
+        - {x: 8, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: 1bd01d3835c11f0469b1f737432ccd21
@@ -1896,7 +1961,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: overworld_tileset_grass_83
+      name: lake11
       rect:
         serializedVersion: 2
         x: 16
@@ -1907,7 +1972,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: -4}
+        - {x: -4, y: -4}
+        - {x: -4, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: d0565ca8339c2e44fabfca247876999c
@@ -2012,7 +2081,12 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 2, y: -8}
+        - {x: 2, y: -6}
+        - {x: 4, y: -4}
+        - {x: 8, y: -4}
+        - {x: 8, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: cbd39dd77cfd90b4180b03e85a8bc537
@@ -2033,7 +2107,12 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: -8}
+        - {x: -8, y: -4}
+        - {x: -5, y: -4}
+        - {x: -2, y: -6}
+        - {x: -2, y: -8}
       tessellationDetail: 0
       bones: []
       spriteID: fbd3ac50af0e4cf418d0d32ec2c7fbb0
@@ -2106,7 +2185,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: overworld_tileset_grass_93
+      name: lake12
       rect:
         serializedVersion: 2
         x: 0
@@ -2117,7 +2196,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 4, y: 4}
+        - {x: 4, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: 4}
       tessellationDetail: 0
       bones: []
       spriteID: 61e76af73b1c4154d84a05d4f7a92296
@@ -2127,7 +2210,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: overworld_tileset_grass_94
+      name: lake13
       rect:
         serializedVersion: 2
         x: 16
@@ -2138,7 +2221,11 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: 4}
+        - {x: -8, y: 8}
+        - {x: -4, y: 8}
+        - {x: -4, y: 4}
       tessellationDetail: 0
       bones: []
       spriteID: a8ec1a4bf0ad11b4ba5a0d17e87afd4d
@@ -2243,7 +2330,12 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 4, y: -4}
+        - {x: 2, y: 0}
+        - {x: 2, y: 8}
+        - {x: 8, y: 8}
+        - {x: 8, y: -4}
       tessellationDetail: 0
       bones: []
       spriteID: 84648984cfdf2914d8057ba0cd83594b
@@ -2264,7 +2356,12 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: -4}
+        - {x: -8, y: 8}
+        - {x: -2, y: 8}
+        - {x: -2, y: 0}
+        - {x: -4, y: -4}
       tessellationDetail: 0
       bones: []
       spriteID: fe75c529102c5644a87bb8b9261304ae
@@ -4574,6 +4671,19 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       groundbasic: 865487689
+      lake1: 1581538136
+      lake10: 1050766580
+      lake11: -1796526882
+      lake12: -1985361269
+      lake13: -454569196
+      lake2: 487900586
+      lake3: -1358219395
+      lake4: 1332683425
+      lake5: -1896098617
+      lake6: 1708909902
+      lake7: 494296125
+      lake8: 2039489020
+      lake9: 1845601764
       overworld_tileset_grass_1: -888953644
       overworld_tileset_grass_10: -1963968822
       overworld_tileset_grass_100: 640435346
@@ -4725,9 +4835,6 @@ TextureImporter:
       overworld_tileset_grass_44: -1371216686
       overworld_tileset_grass_45: -687202934
       overworld_tileset_grass_46: -710920997
-      overworld_tileset_grass_47: 1581538136
-      overworld_tileset_grass_48: 487900586
-      overworld_tileset_grass_49: -1358219395
       overworld_tileset_grass_5: -1107525269
       overworld_tileset_grass_50: 1576463040
       overworld_tileset_grass_51: 75716588
@@ -4738,10 +4845,7 @@ TextureImporter:
       overworld_tileset_grass_56: 1822084047
       overworld_tileset_grass_57: -2009555779
       overworld_tileset_grass_58: -1916241411
-      overworld_tileset_grass_59: 1332683425
       overworld_tileset_grass_6: -1452309199
-      overworld_tileset_grass_60: -1896098617
-      overworld_tileset_grass_61: 1708909902
       overworld_tileset_grass_62: 872116881
       overworld_tileset_grass_63: -1406666173
       overworld_tileset_grass_64: 1151668124
@@ -4751,9 +4855,6 @@ TextureImporter:
       overworld_tileset_grass_68: -1149774080
       overworld_tileset_grass_69: 174177415
       overworld_tileset_grass_7: 851917265
-      overworld_tileset_grass_70: 494296125
-      overworld_tileset_grass_71: 2039489020
-      overworld_tileset_grass_72: 1845601764
       overworld_tileset_grass_73: 156184868
       overworld_tileset_grass_74: 203881779
       overworld_tileset_grass_75: 1767614158
@@ -4764,8 +4865,6 @@ TextureImporter:
       overworld_tileset_grass_8: 1767658408
       overworld_tileset_grass_80: 1526958777
       overworld_tileset_grass_81: 727329386
-      overworld_tileset_grass_82: 1050766580
-      overworld_tileset_grass_83: -1796526882
       overworld_tileset_grass_84: 1222174631
       overworld_tileset_grass_85: 59393402
       overworld_tileset_grass_86: 1755081087
@@ -4776,8 +4875,6 @@ TextureImporter:
       overworld_tileset_grass_90: -786813643
       overworld_tileset_grass_91: -1691252503
       overworld_tileset_grass_92: -1852603484
-      overworld_tileset_grass_93: -1985361269
-      overworld_tileset_grass_94: -454569196
       overworld_tileset_grass_95: -738019415
       overworld_tileset_grass_96: 1214841693
       overworld_tileset_grass_97: 441348017

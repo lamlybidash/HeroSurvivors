@@ -28,6 +28,8 @@ public class Health : MonoBehaviour
 	{
 		_HPCurrent = Mathf.Clamp(_HPCurrent + valueHeal, 0, _HPTotal);
 		_imgHealthBar.fillAmount = _HPCurrent / _HPTotal;
+		PopupController.instance.PopupWorld(((int)valueHeal).ToString(), transform.position, Color.green);
+		Debug.Log("Healing");
 		// sound healing
 		SoundManager.instance.PlayOneSound(_acHealing);
 	}
@@ -41,5 +43,16 @@ public class Health : MonoBehaviour
 	{
 		_HPTotal = x;
 		_HPCurrent = _HPTotal;
-	}	
+	}
+
+	public float GetHealthCurrent()
+	{
+		return _HPCurrent;
+	}
+
+    public float GetHealthTotal()
+    {
+        return _HPTotal;
+    }
+
 }

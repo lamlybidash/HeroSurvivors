@@ -11,7 +11,7 @@ public class PopupWorld : MonoBehaviour
     {
         transform.position += new Vector3(0, _speed * Time.unscaledDeltaTime, 0);
     }
-    public void PopupF(string textx, Vector3? location = null)
+    public void PopupF(string textx, Vector3? location = null, Color? color = null)
     {
         if (location.HasValue)
         {
@@ -21,6 +21,16 @@ public class PopupWorld : MonoBehaviour
         {
             transform.position = new Vector3(0, 0, transform.position.z);
         }
+
+        if(color.HasValue) 
+        {
+            _tmp.color = color.Value;
+        }
+        else
+        {
+            _tmp.color = Color.white;
+        }
+
         _tmp.SetText(textx);
         transform.gameObject.SetActive(true);
         StartCoroutine(InActivePopup());

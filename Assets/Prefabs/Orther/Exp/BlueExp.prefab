@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8a368dd6b55e345beafec90e909827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxExp: 5
+  _maxExp: 15
   _expAmount: 2
 --- !u!114 &1086673928125793439
 MonoBehaviour:

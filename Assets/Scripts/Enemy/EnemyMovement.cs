@@ -1,12 +1,14 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 public class EnemyMovement : MonoBehaviour
 {
 	[SerializeField] private Camera _cam;
-	private Transform _player;
+    [SerializeField] private NavMeshAgent _agent;
+    private Transform _player;
 	private Rigidbody2D _rg;
 	private EnemyAttack _enemyAttack;
 	private Vector2 _direction;
@@ -17,12 +19,15 @@ public class EnemyMovement : MonoBehaviour
 	private Vector3 _camBL;
 	private Vector3 _camTR;
 	//private bool isMove = true;
-	private int i = 0; // test
 	private void Awake()
 	{
 		_rg = GetComponent<Rigidbody2D>();
 		_enemyAttack = GetComponent<EnemyAttack>();
-	}
+		_agent.updateRotation = false;
+		_agent.updateUpAxis = false;
+		_agent.speed = _speed;
+		_agent.stoppingDistance = Mathf.Clamp(_areaAttack - 0.01f, 0, 99);
+    }
 
 	private void Start()
 	{
@@ -40,25 +45,36 @@ public class EnemyMovement : MonoBehaviour
 	}
 	private void MoveF()
 	{
+		//--------------------------- Non AI --------------------------------
+		//_distance = Mathf.Sqrt(Mathf.Pow(_player.position.x - transform.position.x, 2) + Mathf.Pow(_player.position.y - transform.position.y, 2));
+
+		//if (_distance > _areaAttack)
+		//{
+		//	//Vector2 newPosition = new Vector2(transform.position.x, transform.position.y) + _direction * _speed * Time.deltaTime;
+		//	//transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
+		//	transform.Translate(_direction * _speed * Time.deltaTime);
+		//	//_rg.MovePosition((Vector2)transform.position + _direction * _speed * Time.fixedDeltaTime);
+		//}
+		//else // trong pham vi -> tan cong player
+		//{
+		//	//Debug.Log("tan cong " + i);
+		//	_enemyAttack.GiveDame(_player.gameObject, true);
+		//}
+		//FlipF();
+
+		//-------------------------- AI ------------------------------
 		_distance = Mathf.Sqrt(Mathf.Pow(_player.position.x - transform.position.x, 2) + Mathf.Pow(_player.position.y - transform.position.y, 2));
 
-		i++;
 		if (_distance > _areaAttack)
 		{
-			//Debug.Log("di chuyen " + i);
-			_direction = (_player.position - transform.position).normalized;
-			//Vector2 newPosition = new Vector2(transform.position.x, transform.position.y) + _direction * _speed * Time.deltaTime;
-			//transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
-			transform.Translate(_direction * _speed * Time.deltaTime);
-			//_rg.MovePosition((Vector2)transform.position + _direction * _speed * Time.fixedDeltaTime);
-		}
-		else // trong pham vi -> tan cong player
+            _agent.SetDestination(_player.position);
+        }
+        else // trong pham vi -> tan cong player
 		{
-			//Debug.Log("tan cong " + i);
 			_enemyAttack.GiveDame(_player.gameObject, true);
 		}
-		FlipF();
-	}
+        FlipF();
+    }
 
 	private void CamCalc()
 	{
@@ -74,11 +90,13 @@ public class EnemyMovement : MonoBehaviour
 			return;
 		}
 		gameObject.SetActive(false);
+		transform.parent.GetComponent<EnemyController>()?.OutCamera(gameObject);
 	}	
 
 	private void FlipF()
 	{
-		if(_direction.x <0)
+        _direction = (_player.position - transform.position).normalized;
+        if (_direction.x <0)
 		{
 			transform.localScale = Vector3.one;
 		}
@@ -134,3 +152,4 @@ public class EnemyMovement : MonoBehaviour
 		_rg.AddForce(directionx * fx, ForceMode2D.Impulse);
 	}	
 }
+//TODO: Quái bay bỏ AI

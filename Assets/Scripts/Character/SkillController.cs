@@ -15,18 +15,24 @@ public class SkillController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        CheckInput();
+    }
+
+    private void CheckInput()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && Time.timeScale != 0)
         {
             _skillE.UseSkill();
         }
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && Time.timeScale != 0)
         {
             _skillQ.UseSkill();
         }
-    }
+    }    
 
     private void SetupInfor(Skill x)
     {
+        Debug.Log(x.GetTypeSkill());
         if(x.GetTypeSkill() == 'E')
         {
             _skillE = x;
@@ -38,7 +44,7 @@ public class SkillController : MonoBehaviour
         {
             _skillQ = x;
             _imgSkillQ.sprite = x.GetImageSkill();
-            _skillE.SetImageCDs(_imgCDsE);
+            _skillQ.SetImageCDs(_imgCDsQ);
         }
     }
     public void SetupSkill()

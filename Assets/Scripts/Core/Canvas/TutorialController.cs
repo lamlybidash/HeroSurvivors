@@ -64,7 +64,4 @@ public class TutorialController : MonoBehaviour
         _itemCurrent--;
         _listItem[_itemCurrent].ShowPanel();
     }
-
-    //TODO Thêm background làm mờ xung quanh
-    //TODO Edit video thêm các panel khác. Hoàn thành(Move)
 }

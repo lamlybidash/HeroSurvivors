@@ -33,6 +33,9 @@ public class GameController : MonoBehaviour
 	[SerializeField] private CharacterController _cc;
 	[SerializeField] private WeaponsController _wec;
 	[SerializeField] private SkillController _sc;
+    
+	private int _minutes;
+    private int _seconds;
 
     private int _coinTotal = 0;	//Tương tác với 2n + 3 (Tránh cheat engine)
 	private int _coinInGame = 0;
@@ -106,7 +109,7 @@ public class GameController : MonoBehaviour
 	{
 		if(_cc.CanPlay() == false)
 		{
-			PopupController.instance.PopupCanvas("Đéo sở hữu tướng, không thể chơi");
+			PopupController.instance.PopupCanvas("Không sở hữu tướng, không thể chơi");
 			return;
 		}	
 
@@ -115,8 +118,9 @@ public class GameController : MonoBehaviour
 		_SelectCharPanel.SetActive(false);
 		_menuGame.SetActive(false);
 		_dailyQuestPanel.SetActive(false);
-		IsOverGame(false);
-		SetUpCharacter();
+		_PausePanel.SetActive(false);
+        SetUpCharacter(); // dưới
+        IsOverGame(false);
 		ItemDropManager.instance.StartCoroutineDropF();
 		DailyQuestController.Instance.StartQuest();
 		_CountTimeC = StartCoroutine(CountTime());
@@ -138,24 +142,27 @@ public class GameController : MonoBehaviour
     public void TakeTotalCoin(int x)
     {
         _coinTotal = EncryptCoin(DecryptCoin(_coinTotal) + x);
-		Debug.Log($"Gain{x} total: {DecryptCoin(_coinTotal)}");
     }
     public void IsOverGame(bool x)
 	{
 		_isOverGame = x;
-		//Clear Enemy
-		_enc.PlayGameStatus(!x);
-		//Clear Exp
-		ExpController.instance.DestroyAllExp(x);
-		//Reset Weapon
-		_wec.ResetWeapon();
-		// InActive Character Current
-		//CharacterActive.GetComponent<Health>().Revive();
-		//CharacterActive.gameObject.SetActive(!x);
-		_cc.CharActive().GetComponent<Health>().Revive();
-		_cc.CharActive().gameObject.SetActive(!x);
-		//Stop Count Time
-		if (_CountTimeC != null && x == true)
+		if(x)
+		{
+            //Clear Enemy Gọi ở dưới
+
+            //Clear Exp
+            ExpController.instance.DestroyAllExp(x);
+            //Reset Weapon
+            _wec.ResetWeapon();
+            // InActive Character Current
+            _cc.CharActive().GetComponent<Health>().Revive();
+            _cc.CharActive().gameObject.SetActive(!x);
+        }
+        _enc.PlayGameStatus(!x);
+
+
+        //Stop Count Time
+        if (_CountTimeC != null && x == true)
 		{
 			StopCoroutine(_CountTimeC);
 			_CountTimeC = null;
@@ -164,8 +171,6 @@ public class GameController : MonoBehaviour
 		{
 			ItemDropManager.instance.StopCoroutieDropF();
 			ItemDropManager.instance.ClearAllItemInMap();
-
-
         }
         //Lưu data
         if (x == true)
@@ -208,30 +213,29 @@ public class GameController : MonoBehaviour
 	private IEnumerator CountTime()
 	{
 		string timeString = "";
-		int seconds;
-		int minutes;
-		seconds = 0;
-		minutes = 0;
+		_seconds = 0;
+		_minutes = 0;
 		while(_isOverGame == false)
 		{
-			seconds++;
-			if(seconds == 60)
+			_seconds++;
+			if(_seconds == 60)
 			{
-				minutes++;
-				seconds = 0;
+				_minutes++;
+				_seconds = 0;
+				_enc.GenarateMoreEnemy();
 			}
 			timeString = "";
-			if (minutes < 10)
+			if (_minutes < 10)
 			{
 				timeString += "0";
 			}
-			timeString += minutes.ToString() + ":";
+			timeString += _minutes.ToString() + ":";
 
-			if (seconds < 10)
+			if (_seconds < 10)
 			{
 				timeString += "0";
 			}
-			timeString += seconds.ToString();
+			timeString += _seconds.ToString();
 			_textTime.text = timeString;
 			DailyQuestEvent.TimePassed(1);
 			yield return new WaitForSeconds(1);
@@ -240,14 +244,14 @@ public class GameController : MonoBehaviour
 	}
 
 	// Check game mất focus
-	private void OnApplicationFocus(bool focus)
-	{
-		if (focus == false && _isPause == false)
-		{
-			PauseGame(!focus);
-			_PausePanel.SetActive(true);
-		}
-	}
+	//private void OnApplicationFocus(bool focus)
+	//{
+	//	if (focus == false && _isPause == false)
+	//	{
+	//		PauseGame(!focus);
+	//		_PausePanel.SetActive(true);
+	//	}
+	//}
 
 
 	public void IncreaseScore(int x)
@@ -302,7 +306,7 @@ public class GameController : MonoBehaviour
 	{
 		if (x > DecryptCoin(_coinTotal))
 		{
-			PopupController.instance.PopupCanvas("Đéo đủ tiền để dùng");
+			PopupController.instance.PopupCanvas("Không đủ tiền để mua");
 			return false;
 		}
 		else
@@ -313,6 +317,14 @@ public class GameController : MonoBehaviour
             return true;
 		}
 	}
+	public int GetMinute()
+	{
+		return _minutes;
+	}
+	public int GetSecond()
+	{
+		return _seconds;
+	}	
     #endregion
 }
 //TODO chơi lại chưa reset vị trí đứng của player

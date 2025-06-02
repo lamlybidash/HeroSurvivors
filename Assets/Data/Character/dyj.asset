@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: dyj
   m_EditorClassIdentifier: 
   nameChar: dyj
-  HP: 100
+  HP: 300
   def: 7
   speedMove: 5
   speedAttack: 1
   startingWeapon: wind
   SA: damage
   SAType: Multi
-  SAAmount: 1.5
+  SAAmount: 1.25
   skillE: FlashSkill
   skillQ: Repulsion
   cost: 0

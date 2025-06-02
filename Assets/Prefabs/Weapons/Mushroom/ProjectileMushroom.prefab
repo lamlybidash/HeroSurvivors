@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c789fa9dfc4f4da42b857443830d68db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameW: 
   data: {fileID: 11400000, guid: be0ce6ceaa9588b468ff677cf4bcec6f, type: 2}
+  nameW: 
   areaDame: {fileID: 8665192662525070994}
   _cld: {fileID: 5082888951593402316}
   _sprite: {fileID: 2126879515075849160}

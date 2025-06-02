@@ -61,7 +61,6 @@ public abstract class Skill : MonoBehaviour
         _des = LanguageManager.instance.GetText("skill", $"des_{_id}");
         _exDes = LanguageManager.instance.GetText("skill", $"exdes_{_id}");
     }    
-
     public void ResetCDs()
     {
         _skillCDs.ResetSkillI();
@@ -83,5 +82,4 @@ public abstract class Skill : MonoBehaviour
         _skillCDs.SetupImageCDs(imgCDsx);
     }    
     #endregion
-
 }

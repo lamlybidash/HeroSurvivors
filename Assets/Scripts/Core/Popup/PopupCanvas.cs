@@ -19,7 +19,7 @@ public class PopupCanvas : MonoBehaviour
     {
         _rect.anchoredPosition += new Vector2(0, 1080 * _speed * Time.unscaledDeltaTime);
     }
-    public void PopupF(string textx, Vector2? locationx = null)
+    public void PopupF(string textx, Vector2? locationx = null, Color? color = null)
     {
         if(locationx.HasValue)
         {
@@ -28,6 +28,14 @@ public class PopupCanvas : MonoBehaviour
         else
         {
             _rect.anchoredPosition = new Vector2(0, 0);
+        }
+        if (color.HasValue)
+        {
+            _tmp.color = color.Value;
+        }
+        else 
+        {
+            _tmp.color = Color.white;
         }
         _tmp.SetText(textx);
         transform.gameObject.SetActive(true);

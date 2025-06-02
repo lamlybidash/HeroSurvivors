@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,7 +29,7 @@ public class WeaponsController : MonoBehaviour
 		//InitDataAllWeapons();
 	}
 
-	public void ChosseWeapons()
+	public void SetupOptionWeapon()
 	{
 		_gc.PauseGame(true);
 		int OptionWeaponCount = 1;
@@ -66,7 +67,6 @@ public class WeaponsController : MonoBehaviour
 			optionWeapons[i].SetUpData(_listWeaponTemp[rdl[i]]);
 		}
 	}
-
 	public void LevelUpW(Weapons w)
 	{
 		if(w._level == 0)
@@ -160,7 +160,7 @@ public class WeaponsController : MonoBehaviour
 			do
 			{
 				check = true;
-				x = Random.Range(min, max);
+				x = UnityEngine.Random.Range(min, max);
 				foreach (int k in listInt)
 				{
 					if (k == x)
@@ -180,4 +180,32 @@ public class WeaponsController : MonoBehaviour
 
 		return listInt;
 	}
+
+
+    public void AddStartAllWeapon(float? bonusx = null , float? multix = null)
+    {
+        foreach (Weapons w in _listWeaponFull)
+        {
+			if(bonusx.HasValue) w.AddBonus(bonusx);
+			if(multix.HasValue) w.AddMulti(multix);
+        }
+    }
+
+
+    public void AddEventWeapon(Action<float> action)
+	{
+		foreach (Weapons w in _listWeaponFull)
+		{
+			w.OnDealDamage += action;
+		}
+	}
+
+    public void RemoveEventWeapon(Action<float> action)
+    {
+        foreach (Weapons w in _listWeaponFull)
+        {
+            w.OnDealDamage -= action;
+        }
+    }
 }
+//TODO: Lỗi Boomerang có vệt kéo dài

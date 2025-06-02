@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: xem
   m_EditorClassIdentifier: 
   nameChar: xem
-  HP: 200
+  HP: 150
   def: 15
   speedMove: 3.5
   speedAttack: 1

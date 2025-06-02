@@ -58,6 +58,7 @@ public abstract class Weapons : MonoBehaviour
     //public int bonusDame;
     //public int bonusDameMultiple;
     //public float Damage => data.damage * bonusDameMultiple + bonusDame;
+    public event Action<float> OnDealDamage;
 
     public virtual void LevelUp(int attributef, float amountf)
 	{
@@ -328,4 +329,8 @@ public abstract class Weapons : MonoBehaviour
                 }
         }
     }    
+    public void DealDame(float damex)
+    {
+        OnDealDamage?.Invoke(damex);
+    }
 }

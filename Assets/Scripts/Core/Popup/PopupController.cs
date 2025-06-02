@@ -22,48 +22,26 @@ public class PopupController : MonoBehaviour
 		instance = this;
 	}
 
-	public void PopupWorld(string textx, Vector3? locationx = null )
+	public void PopupWorld(string textx, Vector3? locationx = null, Color? colorx = null)
 	{
         if (FindPIA("World") !=-1)
 		{
-			if(locationx.HasValue)
-			{
-                _listPopupWorld[FindPIA("World")].PopupF(textx, locationx.Value);
-            }
-			else
-			{
-                _listPopupWorld[FindPIA("World")].PopupF(textx);
-            }
+            _listPopupWorld[FindPIA("World")].PopupF(textx, locationx, colorx);
         }
-		else
+        else
 		{
             //Add vào list để quản lý
 			GameObject PWnew = Instantiate(_fPW);
             PWnew.transform.SetParent(_parentW);
             _listPopupWorld.Add(PWnew.GetComponent<PopupWorld>());
-
-            if (locationx.HasValue)
-            {
-                _listPopupWorld[_listPopupWorld.Count-1].PopupF(textx, locationx.Value);
-            }
-            else
-            {
-                _listPopupWorld[_listPopupWorld.Count-1].PopupF(textx);
-            }
+            _listPopupWorld[_listPopupWorld.Count - 1].PopupF(textx, locationx, colorx);
         }
-	}
-    public void PopupCanvas(string textx, Vector2? locationx = null)
+    }
+    public void PopupCanvas(string textx, Vector2? locationx = null, Color? colorx = null)
     {
         if (FindPIA("Canvas") != -1)
         {
-            if (locationx.HasValue)
-            {
-                _listPopupCanvas[FindPIA("Canvas")].PopupF(textx, locationx.Value);
-            }
-            else
-            {
-                _listPopupCanvas[FindPIA("Canvas")].PopupF(textx);
-            }
+            _listPopupCanvas[FindPIA("Canvas")].PopupF(textx, locationx, colorx);
         }
         else
         {
@@ -71,15 +49,7 @@ public class PopupController : MonoBehaviour
             GameObject PCnew = Instantiate(_fPC);
             PCnew.GetComponent<RectTransform>().SetParent(_parentC, false);
             _listPopupCanvas.Add(PCnew.GetComponent<PopupCanvas>());
-
-            if (locationx.HasValue)
-            {
-                _listPopupCanvas[_listPopupCanvas.Count - 1].PopupF(textx, locationx.Value);
-            }
-            else
-            {
-                _listPopupCanvas[_listPopupCanvas.Count - 1].PopupF(textx);
-            }
+            _listPopupCanvas[_listPopupCanvas.Count - 1].PopupF(textx, locationx, colorx);
         }
     }
 

@@ -163,7 +163,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8237539665335546284
 Transform:
   m_ObjectHideFlags: 0
@@ -245,8 +245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f9af22091762f49b8efa0b06caa4fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameW: bmp
   data: {fileID: 0}
+  nameW: bmp
   _trail1: {fileID: 3079502166235582202}
   _trail2: {fileID: 605883315568615349}
 --- !u!58 &4436512158199623459

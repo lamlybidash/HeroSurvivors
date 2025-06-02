@@ -1,7 +1,13 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TypeGenEnemy
+{
+	NewTurnEnemy,	// Tạo turn quái mới mỗi phút 
+    EnsureEnemy,	// Đảm bảo quái >= Min
+    SuicideEnemy,	// Tạo quái cảm tử (Chụm lại 1 chỗ)
+}
 public class EnemyController : MonoBehaviour
 {
 	private bool _isPlay;
@@ -10,80 +16,93 @@ public class EnemyController : MonoBehaviour
 	[SerializeField] private GameController _gc;
 	private Vector3 _camBL;
 	private Vector3 _camTR;
-	//-----------------------------ENEMY-----------------------
-	[SerializeField] private GameObject _enemyPf;
+    //For gen enemy
+    float x = 0, y = 0;
+
+    //-----------------------------ENEMY-----------------------
+    [SerializeField] private List<GameObject> _enemyPf;
 	[SerializeField] private List<Enemy> _enemies;
 	private int _enemyCountMax;
+	private int _enemyCountMin;
+	private int _enemyCountCurrent;
+	private int _eGenCount = 10;
+
 	//-----------------------------BULLET----------------------
 	[SerializeField] private GameObject _ListBulletsObject;
 	[SerializeField] private GameObject _bulletPf;
 	private List<Bullet> _bullets = new List<Bullet>();
 	//-----------------------------PLAYER----------------------
 	private Transform _player;
+	private PlayerExp _playerExp;
 	private void Start()
 	{
-		_enemyCountMax = 10;
+		_enemyCountMax = 300;
+		_enemyCountMin = 10;
 		_isPlay = false;
 		DestroyAllEnemy();
 		CamCalc();
 	}
 
-	private void Update()
-	{
-		CamCalc();
-		EnemyManager();
-	}
-
-	private void CreateEnemy(int indexx)
-	{
-		int t = Random.Range(1, 5);
-		float x=0, y=0;
-		switch (t)
+    private void Update()
+    {
+		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			case 1:
-				{
-					x = _camBL.x;
-					y = Random.Range(_camBL.y, _camTR.y);
-					break;
-				}
-			case 2:
-				{
-					x = _camTR.x;
-					y = Random.Range(_camBL.y, _camTR.y);
-					break;
-				}
-			case 3:
-				{
-					x = Random.Range(_camBL.x, _camTR.x);
-					y = _camBL.y;
-					break;
-				}
-			case 4:
-				{
-					x = Random.Range(_camBL.x, _camTR.x);
-					y = _camTR.y;
-					break;
-				}
-			default:
-				break;
-		}
+			EnemyManager(TypeGenEnemy.NewTurnEnemy);
+		}	
+    }
 
-		if(indexx != -1)
+    private void RandomPos()
+	{
+        int t = Random.Range(1, 5); // 1 2 3 4 là 4 hướng xung quanh màn hình
+        switch (t)
+        {
+            case 1:
+                {
+                    x = _camBL.x;
+                    y = Random.Range(_camBL.y, _camTR.y);
+                    break;
+                }
+            case 2:
+                {
+                    x = _camTR.x;
+                    y = Random.Range(_camBL.y, _camTR.y);
+                    break;
+                }
+            case 3:
+                {
+                    x = Random.Range(_camBL.x, _camTR.x);
+                    y = _camBL.y;
+                    break;
+                }
+            case 4:
+                {
+                    x = Random.Range(_camBL.x, _camTR.x);
+                    y = _camTR.y;
+                    break;
+                }
+            default:
+                break;
+        }
+
+    }
+    private void CreateEnemy(int indexx, int typeEnemyx)
+	{
+		RandomPos();
+        if (indexx != -1)
 		{
-			_enemies[indexx].SetupData(_cam, _player);
+			_enemies[indexx].SetupData(_cam, _player, _playerExp.GetLevelChar());
 			_enemies[indexx].ActiveEnemy(new Vector3(x, y, 0));
 		}
 		else
 		{
-			// tam thoi co 1 loai quai
-			GameObject _enemyx = Instantiate(_enemyPf);
+			GameObject _enemyx = Instantiate(_enemyPf[typeEnemyx]);
 			_enemyx.transform.SetParent(transform);
-			_enemyx.GetComponent<Enemy>().SetupData(_cam, _player);
+			_enemyx.GetComponent<Enemy>().SetupData(_cam, _player, _playerExp.GetLevelChar());
 			_enemyx.GetComponent<Enemy>().ActiveEnemy(new Vector3(x, y, 0));
-			_enemies.Add(_enemyx.GetComponent<Enemy>());
-		}	
-
-	}
+            _enemies.Add(_enemyx.GetComponent<Enemy>());
+        }
+        _enemyCountCurrent++;
+    }
 
 	public void CreateBullet(Transform startPoint, Transform target, float dame)
 	{
@@ -103,30 +122,53 @@ public class EnemyController : MonoBehaviour
 		}
 	}	
 
-	private void EnemyManager()
+	private void EnemyManager(TypeGenEnemy typeGen)
 	{
-		int indexx;
-		indexx = FindEnemyInactive();
+        CamCalc();
+		int typeEnemy, i, indexx;
+		string idE;
 
-		if(indexx == -1 && !(_enemies.Count < _enemyCountMax))
+        if (typeGen == TypeGenEnemy.NewTurnEnemy)
 		{
-			return;
+			for (i = 0; i < _eGenCount; i++)
+			{
+				if(_enemyCountCurrent > _enemyCountMax)
+				{
+					break;
+				}
+                typeEnemy = Random.Range(0, _enemyPf.Count);    // Random loại quái
+                idE = _enemyPf[typeEnemy].GetComponent<Enemy>().idEnemy;
+				indexx = FindEnemyInactive(idE);
+                CreateEnemy(indexx, typeEnemy);
+            }
+			_eGenCount += 10;
+        }
+
+		if(typeGen == TypeGenEnemy.EnsureEnemy)
+		{
+			if(_enemyCountCurrent < _enemyCountMin)
+			{
+				int counGent = _enemyCountMin - _enemyCountCurrent;
+
+                for (i = 0; i < counGent; i++)
+				{
+                    if (_enemyCountCurrent > _enemyCountMax)
+                    {
+                        break;
+                    }
+                    typeEnemy = Random.Range(0, _enemyPf.Count);    // Random loại quái
+                    idE = _enemyPf[typeEnemy].GetComponent<Enemy>().idEnemy;
+                    indexx = FindEnemyInactive(idE);
+                    CreateEnemy(indexx, typeEnemy);
+                }
+			}	
 		}
 
-		CreateEnemy(indexx);
-
-		//if (indexx != -1)
-		//{
-		//	CreateEnemy(indexx);
-		//}
-  //      else
-  //      {
-		//	if (enemies.Count < _enemyCountMax)
-		//	{
-		//		// them quai vao list
-		//		CreateEnemy(indexx);
-		//	}
-		//}
+		if(typeGen == TypeGenEnemy.SuicideEnemy)
+		{
+			//TODO: Code tiếp
+			PopupController.instance.PopupCanvas("Quái cảm tử is coming");
+		}	
 
     }
 	private void CamCalc()
@@ -134,15 +176,18 @@ public class EnemyController : MonoBehaviour
 		_camBL = _cam.ViewportToWorldPoint(new Vector3(0, 0, _cam.nearClipPlane));
 		_camTR = _cam.ViewportToWorldPoint(new Vector3(1, 1, _cam.nearClipPlane));
 	}
-	private int FindEnemyInactive()
+	private int FindEnemyInactive(string idEx)
 	{
 		int i;
 		for (i = 0; i < _enemies.Count; i++)
 		{
 			if(!_enemies[i].gameObject.activeInHierarchy)
 			{
-				return i;
-			}	
+				if (_enemies[i].idEnemy == idEx)
+				{
+                    return i;
+                }
+            }	
 		}
 		return -1;
 	}
@@ -181,20 +226,26 @@ public class EnemyController : MonoBehaviour
 		_isPlay	= status;
 		if (_isPlay)
 		{
-
-		}
-		else
+            _enemyCountMax = 300;
+            _enemyCountMin = 10;
+			_eGenCount = 10;
+			_enemyCountCurrent = 0;
+            EnemyManager(TypeGenEnemy.EnsureEnemy);
+        }
+        else
 		{
 			DestroyAllEnemy();
 			DestroyAllBullet();
 		}
-		gameObject.SetActive(status);
 	}
 	public void SetPlayer(Transform playerx)
 	{
-		_player = playerx;
-	}	
-
+        if (playerx != _player)
+        {
+            _player = playerx;
+            _playerExp = _player.GetComponent<PlayerExp>();
+        }
+    }	
 	public List<GameObject> GetListEnemyActive()
 	{
 		List<GameObject> listE = new List<GameObject>();
@@ -212,5 +263,20 @@ public class EnemyController : MonoBehaviour
 	{
 		_gc.IncreaseScore(x);
 		DailyQuestEvent.EnemyKilled();
-	}	
+		_enemyCountCurrent--;
+		EnemyManager(TypeGenEnemy.EnsureEnemy);
+    }
+
+    public void GenarateMoreEnemy()
+	{
+		EnemyManager(TypeGenEnemy.NewTurnEnemy);
+		_enemyCountMin += 5;
+    }
+
+	public void OutCamera(GameObject enemyOutCamx)
+	{
+        CamCalc();
+        RandomPos();
+        enemyOutCamx.GetComponent<Enemy>().ActiveEnemy(new Vector3(x, y, 0));
+    }
 }

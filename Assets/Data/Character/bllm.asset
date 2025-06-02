@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: bllm
   m_EditorClassIdentifier: 
   nameChar: bllm
-  HP: 180
+  HP: 200
   def: 10
   speedMove: 4
   speedAttack: 1

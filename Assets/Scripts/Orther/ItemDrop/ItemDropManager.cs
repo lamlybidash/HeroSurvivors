@@ -25,6 +25,13 @@ public class ItemDropManager : ItemDrop
 	private TypeItem _typeItemR;
 	private Rarity _qualityItemR;
 	private int _indexForRandom;
+	private int rateCommon = 80;
+	private int rateRate = 15;
+	private int rateEpic = 4;
+	private int rateLegend = 1;
+	private int rateHealth = 48;
+	private int rateMoney = 48;
+	private int rateOther = 4;
 
 	private void Awake()
 	{
@@ -276,29 +283,29 @@ public class ItemDropManager : ItemDrop
 		//Random vật phẩm drop
 		#region
 		_indexForRandom = Random.Range(0, 100);
-		if (0 <= _indexForRandom && _indexForRandom < 45)
+		if (0 <= _indexForRandom && _indexForRandom < rateHealth)
 		{
 			_typeItemR = TypeItem.HealItem;
 		}
-		if (45 <= _indexForRandom && _indexForRandom < 90)
+		if (rateHealth <= _indexForRandom && _indexForRandom < rateHealth + rateMoney)
 		{
 			_typeItemR = TypeItem.MoneyItem;
 		}
-		if (90 <= _indexForRandom && _indexForRandom < 100)
+		if (rateHealth + rateMoney <= _indexForRandom && _indexForRandom < 100)
 		{
 			_typeItemR = TypeItem.OrtherItem;
 		}
 
 		_indexForRandom = Random.Range(0, 100);
-		if (0 <= _indexForRandom && _indexForRandom < 60)
+		if (0 <= _indexForRandom && _indexForRandom < rateCommon)
 		{
 			_qualityItemR = Rarity.Common;
 		}
-		if (60 <= _indexForRandom && _indexForRandom < 90)
+		if (rateCommon <= _indexForRandom && _indexForRandom < rateCommon + rateRate)
 		{
 			_qualityItemR = Rarity.Rare;
 		}
-		if (90 <= _indexForRandom && _indexForRandom < 99)
+		if (95 <= _indexForRandom && _indexForRandom < 99)
 		{
 			_qualityItemR = Rarity.Epic;
 		}

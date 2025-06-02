@@ -25,22 +25,22 @@ public class HealthEnemy : MonoBehaviour
 	}	
 	public void TakeDame(float dame)
 	{
-		_healthCurrent = Mathf.Clamp(_healthCurrent - dame, 0, _healthTotal);
-		PopupController.instance.PopupWorld(dame.ToString(), transform.position);
+        _healthCurrent = Mathf.Clamp(_healthCurrent - dame, 0, _healthTotal);
+		PopupController.instance.PopupWorld(((int)dame).ToString(), transform.position);
 		if (_healthCurrent == 0 )
 		{
-			_indexForRandom = Random.Range(0,100);
-			if(_indexForRandom < 75) //75% rơi ra viên exp
+            gameObject.SetActive(false);
+            _indexForRandom = Random.Range(0,100);
+			if(_indexForRandom < 50) //50% rơi ra viên exp
 			{
 				ExpController.instance.DropExp(transform, _expDrop);
 			}
-			if(_indexForRandom < 10) //10% rơi ra vật phẩm ngẫu nhiên
+			if(_indexForRandom < 2) //2% rơi ra vật phẩm ngẫu nhiên
 			{
 				ItemDropManager.instance.DropItem(transform);
 			}	
 			_isDie = true;
-			enemyComponent.IncreaseScore(1);
-			gameObject.SetActive(false);
+            enemyComponent.IncreaseScore(1);
 		}
 	}
 

@@ -32,7 +32,13 @@
         "exdes_flash":"",
         "repulsion":"Chấn thoái",
         "des_repulsion":"Đẩy lui tất cả kẻ địch trong phạm vi xung quanh bản thân",
-        "exdes_repulsion":""
+        "exdes_repulsion":"",
+        "blood_pact":"Giao ước máu",
+        "des_blood_pact":"Hiến tế 30% HP hiện tại của bản thân để tăng 30% sát thương gây ra trong 3 giây",
+        "exdes_blood_pact":"Hiến tế: Từ bỏ một phần lượng máu",
+        "life_rebirth":"Tái tạo sinh mệnh",
+        "des_life_rebirth":"Tăng mạnh khả năng hồi phục của bản thân. Hồi máu liên tục trong 5s, lượng máu hồi phục bằng 50% lượng máu đã mất",
+        "exdes_life_rebirth":""
     },
     "character":
     {

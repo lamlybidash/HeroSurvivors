@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
+
+	public string idEnemy;
 	protected string nameEnemy;
 	protected float HP;
 	protected int level;
@@ -11,7 +13,7 @@ public abstract class Enemy : MonoBehaviour
 	protected float areaActtack;
 	protected float speedMove;
 	protected float speedAttack;
-	protected double expDrop;
+	protected float expDrop;
 	public EnemyData data;
 	protected Transform player;
 	protected EnemyController ec;
@@ -29,12 +31,12 @@ public abstract class Enemy : MonoBehaviour
 	{
 		transform.position = pos;
 		gameObject.SetActive(true);
-		healthComponent.setupEnemy();
 	}
 
 	protected void InitData()
 	{
-		nameEnemy = data.nameEnemy;
+        idEnemy = data.idEnemy;
+        nameEnemy = data.nameEnemy;
 		HP = data.HP;
 		level = data.level;
 		dame = data.dame;
@@ -48,17 +50,21 @@ public abstract class Enemy : MonoBehaviour
 		ec = transform.parent.GetComponent<EnemyController>();
 	}
 
-	public virtual void BalanceParameter()		// Cân bằng thông số quái
+	private void BalanceParameter(int levelCharacter)		// Cân bằng thông số quái
 	{
+		HP = data.HP * (1 + (levelCharacter - 1) * 0.1f);
+		expDrop = data.expDrop * (1 + (levelCharacter - 1) * 0.25f);
+        healthComponent.SetUpData(HP, expDrop);
+        healthComponent.setupEnemy();
+    }
 
-	}
-
-	public void SetupData(Camera camx, Transform playerx)
+    public void SetupData(Camera camx, Transform playerx, int levelCharacter)
 	{
 		cam = camx;
 		player = playerx;
 		attackComponent.ResetCanGiveDame(); // Sử lý bug khi quái chết CanGiveDame chưa kịp trở lại thành true
-	}
+		BalanceParameter(levelCharacter);
+    }
 
 	public void IncreaseScore(int x)
 	{

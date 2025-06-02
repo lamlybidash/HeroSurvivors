@@ -27,17 +27,16 @@ public class PlayerExp : MonoBehaviour
 			_level++;
 			_levelText.text = "Level : " + _level.ToString();
 			_ExpCurrent = 0;
-			_ExpNext += CheckExpNext();
+			_ExpNext += CheckExpNextBonus();
 
 			//choose weapon
-			_wc.ChosseWeapons();
+			_wc.SetupOptionWeapon();
 
 			//Debug.Log($"Level up : {_level} / Exp next: {_ExpNext} ");
 			GainExp(remainder);
 		}
 	}
-
-	private double CheckExpNext()
+	private double CheckExpNextBonus()
 	{
 		if(_level == 1)
 		{
@@ -53,7 +52,6 @@ public class PlayerExp : MonoBehaviour
 		}
 		return 14;
 	}
-
 	public void ResetLevelChar()
 	{
 		expBar.fillAmount = 0;
@@ -62,4 +60,13 @@ public class PlayerExp : MonoBehaviour
 		_ExpNext = 5;
 		_levelText.text = "Level : " + _level.ToString();
 	}
+
+    #region GetSet
+
+    public int GetLevelChar()
+	{
+		return _level;
+	}
+
+    #endregion
 }

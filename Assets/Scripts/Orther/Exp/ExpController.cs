@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,7 +26,7 @@ public class ExpController : MonoBehaviour
 	public void DropExp(Transform location, double expAmount)
 	{
 		int i = 0;
-		if (expAmount <= _expGf.GetComponent<Exp>().GetExpMax())
+		if (expAmount <= _expGf.GetComponent<Exp>().GetExpMax() + 0.0001)
 		{
 			i = FindExpIA(1);
 			if(i == -1)
@@ -46,7 +46,7 @@ public class ExpController : MonoBehaviour
 			}
 			return;
 		}
-		if (expAmount <= _expBf.GetComponent<Exp>().GetExpMax())
+		if (expAmount <= _expBf.GetComponent<Exp>().GetExpMax() + 0.0001)
 		{
 			i = FindExpIA(2);
 			if (i == -1)
@@ -67,7 +67,7 @@ public class ExpController : MonoBehaviour
 			}
 			return;
 		}
-		if (expAmount <= _expRf.GetComponent<Exp>().GetExpMax())
+		if (expAmount <= _expRf.GetComponent<Exp>().GetExpMax() + 0.0001)
 		{
 			i = FindExpIA(3);
 			if (i == -1)
@@ -77,7 +77,7 @@ public class ExpController : MonoBehaviour
 				expsR.Add(expNew.GetComponent<Exp>());
 				expsR[expsR.Count - 1].SetUpExp(expAmount);
 				expsR[expsR.Count - 1].SetUpLocation(location);
-				expsR[expsB.Count - 1].gameObject.SetActive(true);
+				expsR[expsR.Count - 1].gameObject.SetActive(true);
 			}
 			else
 			{

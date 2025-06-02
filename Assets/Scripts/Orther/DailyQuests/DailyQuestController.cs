@@ -50,7 +50,6 @@ public class DailyQuestController : MonoBehaviour
                 countTemp = UnityEngine.Random.Range(1, 3);    //Random 1-3 weapons
                 questData.required = countTemp;
                 questData.goldReward = 200 * countTemp;
-                Debug.Log("countTemp = " + countTemp);
                 des = string.Format(questData.description, countTemp);
             }
             data = questData;
@@ -112,7 +111,6 @@ public class DailyQuestController : MonoBehaviour
         if (_isCreateNewQuest)
         {
             //Tạo 1 quest cho ngày hôm nay
-            Debug.Log("Ngày hôm nay");
             todayQuest = new Quest(_listAllQuest[(dateNow.Day + 1) % _listAllQuest.Count]);
             quests.Add(todayQuest);
             _saveData.questToday.questType = todayQuest.data.questType.ToString();
@@ -125,7 +123,6 @@ public class DailyQuestController : MonoBehaviour
         } 
         else
         {
-            Debug.Log("Đéo sinh quest");
             QuestType typeQ = (QuestType)Enum.Parse(typeof(QuestType), _saveData.questToday.questType);
             foreach (DailyQuestData questi in _listAllQuest)
             {
@@ -222,4 +219,3 @@ public class DailyQuestController : MonoBehaviour
         }    
     }    
 }
-//TODO show quest ngoài trận

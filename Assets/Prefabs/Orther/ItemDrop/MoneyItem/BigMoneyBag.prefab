@@ -102,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeItem: 1
   quality: 2
+  inChest: 0
   valueItem: 30
   gc: {fileID: 0}
 --- !u!114 &6482839701053887350

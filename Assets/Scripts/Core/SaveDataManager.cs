@@ -113,7 +113,6 @@ public class SaveDataManager : MonoBehaviour
             _saveData.list_character.Clear();
             _saveData.list_character.AddRange(saveDTemp.list_character);
         }
-        Debug.Log(saveString);
     }
     public SaveData GetSave()
     {

@@ -21,6 +21,6 @@ MonoBehaviour:
   SA: projectile
   SAType: Bonus
   SAAmount: 1
-  skillE: 
-  skillQ: 
-  cost: 10
+  skillE: BloodPact
+  skillQ: LifeRebirth
+  cost: 500

@@ -21,7 +21,7 @@ MonoBehaviour:
   duration: 2
   imgSprite: {fileID: 21300000, guid: 8327cfdbf6d37224694c209c03f3be2e, type: 3}
   projectilePf: {fileID: 4197306792380567468, guid: 4790583afd97c0f4784aa554ee499b28, type: 3}
-  ac: {fileID: 8300000, guid: 9e761daea7e8517419f2b0c7a429acb7, type: 3}
+  ac: {fileID: 8300000, guid: 4e929280e76f97543bb44a96fa85c878, type: 3}
   levelup:
   - level: 2
     attribute: 2

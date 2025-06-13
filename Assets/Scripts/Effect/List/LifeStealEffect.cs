@@ -31,11 +31,8 @@ public class LifeStealEffect : StatusEffect
 
     public override void RemoveEffect()
     {
-        if (isActive == true)
-        {
-            _wc?.RemoveEventWeapon(LifeSteal);
-            isActive = false;
-        }
+        _wc?.RemoveEventWeapon(LifeSteal);
+        base.RemoveEffect();
     }
 
     public override void UpdateEffect()

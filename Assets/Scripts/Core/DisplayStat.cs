@@ -12,23 +12,36 @@ public class DisplayStat : MonoBehaviour
     private float ramUsageMB = 0.0f;
     private float updateInterval = 0.5f;
     private float timeSinceUpdate = 0.0f;
-
+    private bool isShowStat;
+    private void Start()
+    {
+        isShowStat = false;   
+    }
     void Update()
     {
-        deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
-        timeSinceUpdate += Time.unscaledDeltaTime;
-
-        if (timeSinceUpdate >= updateInterval)
+        if(Input.GetKeyDown(KeyCode.P))
         {
-            float fps = 1.0f / deltaTime;
-
-            //Ram
-            //long ramUsageBytes = Profiler.GetTotalAllocatedMemoryLong();
-            //ramUsageMB = ramUsageBytes / (1024f * 1024f);
-
-            //fpsText.text = "FPS: " + Mathf.Ceil(fps).ToString() + "\nRAM: " + ramUsageMB.ToString("F2") + " MB";
-            fpsText.text = "FPS: " + Mathf.Ceil(fps).ToString();
-            timeSinceUpdate = 0.0f;
+            fpsText.text = "";
+            isShowStat = !isShowStat;
         }
+
+        if(isShowStat)
+        {
+            deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
+            timeSinceUpdate += Time.unscaledDeltaTime;
+
+            if (timeSinceUpdate >= updateInterval)
+            {
+                float fps = 1.0f / deltaTime;
+
+                //Ram
+                //long ramUsageBytes = Profiler.GetTotalAllocatedMemoryLong();
+                //ramUsageMB = ramUsageBytes / (1024f * 1024f);
+
+                //fpsText.text = "FPS: " + Mathf.Ceil(fps).ToString() + "\nRAM: " + ramUsageMB.ToString("F2") + " MB";
+                fpsText.text = "FPS: " + Mathf.Ceil(fps).ToString();
+                timeSinceUpdate = 0.0f;
+            }
+        }    
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class HealthEnemy : MonoBehaviour
 {
 	[SerializeField] private Enemy enemyComponent;
+	[SerializeField] private EffectManager _EF;
 	private float _healthTotal;
 	private float _healthCurrent;
 	private double _expDrop;
@@ -29,6 +30,7 @@ public class HealthEnemy : MonoBehaviour
 		PopupController.instance.PopupWorld(((int)dame).ToString(), transform.position);
 		if (_healthCurrent == 0 )
 		{
+
             gameObject.SetActive(false);
             _indexForRandom = Random.Range(0,100);
 			if(_indexForRandom < 50) //50% rơi ra viên exp
@@ -40,6 +42,7 @@ public class HealthEnemy : MonoBehaviour
 				ItemDropManager.instance.DropItem(transform);
 			}	
 			_isDie = true;
+            _EF.ClearAllEffect();
             enemyComponent.IncreaseScore(1);
 		}
 	}
@@ -53,5 +56,9 @@ public class HealthEnemy : MonoBehaviour
 	public bool isDieF()
 	{
 		return _isDie;
-	}	
+	}
+	public float GetHealthTotal()
+	{
+		return _healthTotal;
+	}
 }

@@ -39,7 +39,6 @@ public abstract class Weapons : MonoBehaviour
 	protected GameObject projectilePf;
 	protected AudioClip ac;
 	protected Transform player;
-	private float _CDCount;
 	// -------------------------- Bonus Stat --------------------
     protected float bonusDamage = 0;
     protected int bonusProjectile = 0;
@@ -60,47 +59,85 @@ public abstract class Weapons : MonoBehaviour
     //public float Damage => data.damage * bonusDameMultiple + bonusDame;
     public event Action<float> OnDealDamage;
 
-    public virtual void LevelUp(int attributef, float amountf)
-	{
-		_level++;
-		switch (attributef)
-		{
-			case 1:
-				{
-					damage += amountf;
-					break;
-				}
-			case 2:
-				{
-					projectile += (int)amountf;
-					break;
-				}
-			case 3:
-				{
-					countdown = data.countdown;
-					_CDCount += amountf;
-					countdown = countdown * (1 - _CDCount / 100);
-					break;
-				}
-			case 4:
-				{
-					area += amountf;
-					break;
-				}
-			case 5:
-				{
-					speed += amountf;
-					break;
-				}
-			case 6:
-				{
-					duration += amountf;
-					break;
-				}
-		}
-	}
+ //   public virtual void LevelUp(int attributef, float amountf)
+	//{
+	//	_level++;
+	//	switch (attributef)
+	//	{
+	//		case 1:
+	//			{
+	//				damage += amountf;
+	//				break;
+	//			}
+	//		case 2:
+	//			{
+	//				projectile += (int)amountf;
+	//				break;
+	//			}
+	//		case 3:
+	//			{
+	//				countdown = data.countdown;
+	//				_CDCount += amountf;
+	//				countdown = countdown * (1 - _CDCount / 100);
+	//				break;
+	//			}
+	//		case 4:
+	//			{
+	//				area += amountf;
+	//				break;
+	//			}
+	//		case 5:
+	//			{
+	//				speed += amountf;
+	//				break;
+	//			}
+	//		case 6:
+	//			{
+	//				duration += amountf;
+	//				break;
+	//			}
+	//	}
+	//}
 
-	private void InitData()
+    public virtual void LevelUp(int attributef, float amountf)
+    {
+        _level++;
+        switch (attributef)
+        {
+            case 1:
+                {
+                    bonusDamage += amountf;
+                    break;
+                }
+            case 2:
+                {
+                    bonusProjectile += (int)amountf;
+                    break;
+                }
+            case 3:
+                {
+                    multiCountdown += amountf;
+                    break;
+                }
+            case 4:
+                {
+                    bonusArea += amountf;
+                    break;
+                }
+            case 5:
+                {
+                    bonusSpeed += amountf;
+                    break;
+                }
+            case 6:
+                {
+                    bonusDuration += amountf;
+                    break;
+                }
+        }
+        UpdateStat();
+    }
+    private void InitData()
 	{
 		nameW = data.nameW;
 		damage = data.damage;
@@ -113,7 +150,6 @@ public abstract class Weapons : MonoBehaviour
 		projectilePf = data.projectilePf;
 		ac = data.ac;
 	}
-
 	public virtual void SetUpData(Weapons x)
 	{
 		nameW = x.nameW;
@@ -128,12 +164,10 @@ public abstract class Weapons : MonoBehaviour
 		ac = x.ac;
 		player = x.player;
 	}
-
 	public virtual void ResetWeapon()
 	{
 		InitData();
 		_level = 0;
-		_CDCount = 0;
 		gameObject.SetActive(false);
 	}
 	public void SetBonus(float? bonusDamagex = null, int? bonusProjectilex = null, float? bonusCountdownx = null, float? bonusAreax = null, float? bonusSpeedx = null, float? bonusDurationx = null)
@@ -268,7 +302,7 @@ public abstract class Weapons : MonoBehaviour
     {
         damage = data.damage * multiDamage + bonusDamage;
         projectile = (int)(data.projectile * multiProjectile + bonusProjectile);
-        countdown = data.countdown * multiCountdown + bonusCountdown;
+        countdown = data.countdown * (1 - multiCountdown / 100);
         area = data.area * multiArea + bonusArea;
         speed = data.speed * multiSpeed + bonusSpeed;
         duration = data.duration * multiDuration + bonusDuration;

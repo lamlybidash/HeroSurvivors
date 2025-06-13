@@ -1,10 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EffectManager : MonoBehaviour
 {
-	private List<StatusEffect> listEffectAcive = new List<StatusEffect>();
+	public List<StatusEffect> listEffectAcive = new List<StatusEffect>();
 	public void ExcuteEffect(StatusEffect effectx)
 	{
 		listEffectAcive.Add(effectx);
@@ -25,6 +25,23 @@ public class EffectManager : MonoBehaviour
 			yield return new WaitForSeconds(effectx.stepTime);
 		}
 		effectx.RemoveEffect();
-		listEffectAcive.Remove(effectx); // tam thoi chua co tac dung
-	}	
+		try
+		{
+            listEffectAcive.Remove(effectx); // tam thoi chua co tac dung
+        }
+		catch
+		{
+			Debug.Log("Gỡ Effect thất bại. Effect đã bị gỡ trước đó rồi");
+		}
+
+    }
+	public void ClearAllEffect()
+	{ 
+		StopAllCoroutines();
+		foreach (var effect in listEffectAcive)
+		{
+			effect.RemoveEffect();
+		}
+		listEffectAcive.Clear();
+	}
 }

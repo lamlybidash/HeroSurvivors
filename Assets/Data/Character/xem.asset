@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: xem
   m_EditorClassIdentifier: 
   nameChar: xem
-  HP: 150
+  HP: 300
   def: 15
   speedMove: 3.5
   speedAttack: 1
   startingWeapon: baseballbat
-  SA: 
-  SAType: 
-  SAAmount: 0
-  skillE: 
-  skillQ: 
+  SA: area
+  SAType: Multi
+  SAAmount: 1.75
+  skillE: VolcanoWrath
+  skillQ: InfernoSentinel
   cost: 1000

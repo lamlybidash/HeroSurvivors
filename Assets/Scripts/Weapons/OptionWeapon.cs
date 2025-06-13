@@ -116,6 +116,7 @@ public class OptionWeapon : MonoBehaviour, IPointerClickHandler
 					}
 			}
 			InActiveAllOption();
+			_wc.ChooseOptionComplete();
 		}
 	}
 }

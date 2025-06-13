@@ -25,8 +25,6 @@ public class Boomerang : Weapons
     private int i;
     private void Start()
     {
-        AddProjectile(projectile);
-        SetUpDataProjectile();
     }
 
 
@@ -79,6 +77,8 @@ public class Boomerang : Weapons
     public override void SetUpStartGame(Character charx)
     {
         base.SetUpStartGame(charx);
+        AddProjectile(projectile);
+        SetUpDataProjectile();
         if (_BoomerangC == null && gameObject.activeInHierarchy == true)
         {
             _BoomerangC = StartCoroutine(ThrowBoomerang());
@@ -132,12 +132,14 @@ public class Boomerang : Weapons
             Destroy(x.gameObject);
         }
         _projectileBoomerangs.Clear();
+        _listBMReady.Clear();
+        _BoomerangC = null;
     }
     protected override void UpdateStat()
     {
         base.UpdateStat();
         SetUpDataProjectile();
-    }    
+    }
     //Giải thuật tìm n enemy xa nhất
     private void FindNTargetFarthest(int n)
     {

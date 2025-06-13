@@ -14,7 +14,10 @@ public class WeaponsController : MonoBehaviour
 	private List<Weapons> _weapons; // list wp hien tai
 	private int WeaponCountMax = 3;
 	private Transform _player;
-	private void Awake()
+
+    private int StackUpgrade = 0; // Dùng để khi lên nhiều cấp trong 1 lần
+	private bool isUpgrading = false;
+    private void Awake()
 	{
 		_readerW = GetComponent<WeaponsReadData>();
 		_weapons = new List<Weapons>();
@@ -31,7 +34,14 @@ public class WeaponsController : MonoBehaviour
 
 	public void SetupOptionWeapon()
 	{
-		_gc.PauseGame(true);
+        if(isUpgrading)
+		{
+			StackUpgrade++;
+			return;
+		}
+        isUpgrading = true;
+
+        _gc.PauseGame(true);
 		int OptionWeaponCount = 1;
 		UIChooseW.SetActive(true);
 
@@ -67,6 +77,16 @@ public class WeaponsController : MonoBehaviour
 			optionWeapons[i].SetUpData(_listWeaponTemp[rdl[i]]);
 		}
 	}
+
+	public void ChooseOptionComplete()
+	{
+		isUpgrading = false;
+        if (StackUpgrade > 0)
+		{
+			SetupOptionWeapon();
+            StackUpgrade--;
+        }
+    }
 	public void LevelUpW(Weapons w)
 	{
 		if(w._level == 0)
@@ -96,7 +116,6 @@ public class WeaponsController : MonoBehaviour
 		{
 			DailyQuestEvent.WeaponLvMax();
 			_listWeaponTemp.Remove(w);
-			return;
 		}
     }
 
@@ -208,4 +227,3 @@ public class WeaponsController : MonoBehaviour
         }
     }
 }
-//TODO: Lỗi Boomerang có vệt kéo dài

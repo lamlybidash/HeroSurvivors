@@ -65,6 +65,10 @@ public abstract class Skill : MonoBehaviour
     {
         _skillCDs.ResetSkillI();
     }
+    public Sprite GetSprite()
+    {
+        return _imgSkill;
+    }
     #region GetSet
 
     public Sprite GetImageSkill()

@@ -13,7 +13,7 @@ public class LifeRebirthSkill : Skill
         _id = "life_rebirth";
         _CDs = 20;
         _typeSkill = 'Q';
-        _healingPercent = 0.5f;
+        _healingPercent = 0.7f;
         _duration = 5f;
         _imgArea.transform.localScale = new Vector3(0, 0, 0);
         InitData();
@@ -21,8 +21,6 @@ public class LifeRebirthSkill : Skill
 
     private void LifeRebirth()
     {
-        PopupController.instance.PopupCanvas("LifeRebirth");
-        Debug.Log("LifeRebirth");
         _healthPlayer = _player.GetComponent<Health>();
         float healCount = (_healthPlayer.GetHealthTotal() - _healthPlayer.GetHealthCurrent()) * _healingPercent;
         HealingDurationEffect healDurE = new HealingDurationEffect(healCount, _duration, 0.2f);

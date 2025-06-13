@@ -22,10 +22,7 @@ public class HealingDurationEffect : StatusEffect
 
     public override void RemoveEffect()
     {
-        if (isActive)
-        {
-            isActive = false;
-        }
+        base.RemoveEffect();
     }
 
     public override void UpdateEffect()

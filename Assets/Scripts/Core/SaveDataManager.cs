@@ -20,6 +20,12 @@ public class SaveData
     public int best_score;
     public List<string> list_character;
     public quest questToday;
+    public SaveData()
+    {
+        coin = 3;
+        best_score = 0;
+        list_character = new List<string>();
+    }
 }
 
 public class SaveDataManager : MonoBehaviour
@@ -43,11 +49,6 @@ public class SaveDataManager : MonoBehaviour
 
         _savePath = Path.Combine(Application.persistentDataPath, "save.json");
         _savePathTest = Path.Combine(Application.persistentDataPath, "saveTest.json");
-        SaveData saveData = new SaveData();
-        saveData.coin = 203;
-        saveData.best_score = 0;
-        saveData.list_character = new List<string>();
-        SaveGame(saveData);
         LoadGame();
     }
 
@@ -99,20 +100,31 @@ public class SaveDataManager : MonoBehaviour
     {
         string saveString;
         string saveStringEncrypted;
-        saveStringEncrypted = File.ReadAllText(_savePath);
-        saveString = Decrypt(saveStringEncrypted);
-        if(_saveData == null)
+        
+        if (File.Exists(_savePath))
         {
-            _saveData = JsonUtility.FromJson<SaveData>(saveString);
+            saveStringEncrypted = File.ReadAllText(_savePath);
+            saveString = Decrypt(saveStringEncrypted);
+            if (_saveData == null)
+            {
+                _saveData = JsonUtility.FromJson<SaveData>(saveString);
+            }
+            else
+            {
+                SaveData saveDTemp = JsonUtility.FromJson<SaveData>(saveString);
+                _saveData.best_score = saveDTemp.best_score;
+                _saveData.coin = saveDTemp.coin;
+                _saveData.list_character.Clear();
+                _saveData.list_character.AddRange(saveDTemp.list_character);
+            }
         }
         else
         {
-            SaveData saveDTemp = JsonUtility.FromJson<SaveData>(saveString);
-            _saveData.best_score = saveDTemp.best_score;
-            _saveData.coin = saveDTemp.coin;
-            _saveData.list_character.Clear();
-            _saveData.list_character.AddRange(saveDTemp.list_character);
+            // Chơi lần đầu, tạo save mới
+            _saveData = new SaveData(); // Dữ liệu mặc định
+            SaveGame(_saveData); // Lưu file mới
         }
+
     }
     public SaveData GetSave()
     {

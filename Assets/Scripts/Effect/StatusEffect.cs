@@ -20,13 +20,20 @@ public abstract class StatusEffect
 	public virtual void UpdateEffect()
 	{
 		duration -= stepTime;
-		if(duration <= 0)
+		Debug.Log("duration còn : " + duration);
+		if (duration <= 0)
 		{
 			isActive = false;
-		}	
+		}
 	}
 
-	public abstract void RemoveEffect();
+	public virtual void RemoveEffect()
+	{
+        if (isActive)
+        {
+            isActive = false;
+        }
+    }
 
 	//public void SetCoroutine(Coroutine coroutinex)
 	//{

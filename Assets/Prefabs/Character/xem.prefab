@@ -240,8 +240,8 @@ MonoBehaviour:
   _playerLoot: {fileID: 8619652348856205837}
   _playerMovement: {fileID: 1797120862891002184}
   _wec: {fileID: 0}
-  _skillE: {fileID: 0}
-  _skillQ: {fileID: 0}
+  _skillE: {fileID: 1854887075296659936}
+  _skillQ: {fileID: 6985102779441825135}
   data: {fileID: 11400000, guid: 424b1a6eaaeaac54e8b59b063b345557, type: 2}
 --- !u!114 &7091999457360112480
 MonoBehaviour:
@@ -302,7 +302,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &5503408813207149940
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -348,6 +348,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.18803024, y: 0.18756105}
   m_EdgeRadius: 0
+--- !u!1 &3426938468569501162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8500776350649593515}
+  m_Layer: 0
+  m_Name: ListFireBall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8500776350649593515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3426938468569501162}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3505898989172414550}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3683862100201715561
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,11 +632,12 @@ Transform:
   m_GameObject: {fileID: 8007056276109641513}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.99, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 516537014089508931}
+  - {fileID: 8500776350649593515}
   m_Father: {fileID: 3583555022787752192}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2681942245196074306
@@ -636,3 +668,9 @@ MonoBehaviour:
   _skillCDs: {fileID: 2681942245196074306}
   _imgArea: {fileID: 1214260970114002879}
   _imgSkill: {fileID: 21300000, guid: 4a3d9d6e8e64ee74885f91e422117b9b, type: 3}
+  _listFireBall: []
+  _fireBallPf: {fileID: 0}
+  _listBallGO: {fileID: 3426938468569501162}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64

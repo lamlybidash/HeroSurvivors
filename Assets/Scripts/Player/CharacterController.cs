@@ -72,6 +72,8 @@ public class CharacterController : MonoBehaviour
         _textDef.text = LanguageManager.instance.GetText("character", "def") + ":" + xx.data.def;
         _textSpeed.text = LanguageManager.instance.GetText("character", "speed") + ":" + xx.data.speedMove;
         _textWeapon.text = LanguageManager.instance.GetText("character", "weapon") + ":" + LanguageManager.instance.GetText("weapon", xx.data.startingWeapon);
+		_imgSkillE.sprite = xx.GetSkill('E').GetImageSkill();
+		_imgSkillQ.sprite = xx.GetSkill('Q').GetImageSkill();
 
     }
     public void ChooseCharacter(int i)

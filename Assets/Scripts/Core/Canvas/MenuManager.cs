@@ -60,7 +60,7 @@ public class MenuManager : MonoBehaviour
     public void BuyButtonOnClick()
     {
 		_cc.BuyChar();
-        _textCoin.text = _GC.GetCoin().ToString();
+		UpdateTextCoin();
     }
     public void UpdateLanguage()
 	{
@@ -82,4 +82,8 @@ public class MenuManager : MonoBehaviour
 	{
 		_buyButton.GetComponent<Button>().interactable = x;
 	}
+	public void UpdateTextCoin()
+	{
+        _textCoin.text = _GC.GetCoin().ToString();
+    }
 }

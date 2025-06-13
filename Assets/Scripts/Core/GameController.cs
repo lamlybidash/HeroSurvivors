@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
 	[SerializeField] private AudioClip _acInGame;
 	[SerializeField] private AudioClip _acMoney;
 	[SerializeField] private AudioClip _acSpendMoney;
+	[SerializeField] private Button _quitBt;
 	[SerializeField] private Button _resumeBt;
 	[SerializeField] private Button _titleBt;
 
@@ -142,6 +143,7 @@ public class GameController : MonoBehaviour
     public void TakeTotalCoin(int x)
     {
         _coinTotal = EncryptCoin(DecryptCoin(_coinTotal) + x);
+		_menuGame.GetComponent<MenuManager>().UpdateTextCoin();
     }
     public void IsOverGame(bool x)
 	{
@@ -155,7 +157,6 @@ public class GameController : MonoBehaviour
             //Reset Weapon
             _wec.ResetWeapon();
             // InActive Character Current
-            _cc.CharActive().GetComponent<Health>().Revive();
             _cc.CharActive().gameObject.SetActive(!x);
         }
         _enc.PlayGameStatus(!x);
@@ -198,7 +199,8 @@ public class GameController : MonoBehaviour
 		{
 			_cc.CharActive().SetActive(true);
 		}
-		_cc.ResetAllCharacter();
+        _cc.CharActive().GetComponent<Health>().SetupStartGame();
+        _cc.ResetAllCharacter();
 		_cc.SetFollowerForCamera();
 		_enc.SetPlayer(_cc.CharActive().transform);
 		_wec.SetPlayer(_cc.CharActive().transform);
@@ -244,14 +246,14 @@ public class GameController : MonoBehaviour
 	}
 
 	// Check game mất focus
-	//private void OnApplicationFocus(bool focus)
-	//{
-	//	if (focus == false && _isPause == false)
-	//	{
-	//		PauseGame(!focus);
-	//		_PausePanel.SetActive(true);
-	//	}
-	//}
+	private void OnApplicationFocus(bool focus)
+	{
+		if (focus == false && Time.timeScale != 0)
+		{
+			PauseGame(!focus);
+			_PausePanel.SetActive(true);
+		}
+	}
 
 
 	public void IncreaseScore(int x)
@@ -266,6 +268,7 @@ public class GameController : MonoBehaviour
 	}
 	public void SetUpButton()
 	{
+		_quitBt.onClick.AddListener(() => { Application.Quit(); });
 		_resumeBt.onClick.AddListener(() => 
 			{
 				PauseGame(false);

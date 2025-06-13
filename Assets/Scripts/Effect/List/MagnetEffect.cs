@@ -19,7 +19,8 @@ public class MagnetEffect : StatusEffect
 	public override void RemoveEffect()
 	{
 		_lootComponent.IncreaseArea(-20);
-	}
+        base.RemoveEffect();
+    }
 
 	public override void UpdateEffect()
 	{

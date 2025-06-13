@@ -43,13 +43,13 @@ public class EnemyController : MonoBehaviour
 		CamCalc();
 	}
 
-    private void Update()
-    {
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			EnemyManager(TypeGenEnemy.NewTurnEnemy);
-		}	
-    }
+  //  private void Update()
+  //  {
+		//if (Input.GetKeyDown(KeyCode.Space))
+		//{
+		//	EnemyManager(TypeGenEnemy.NewTurnEnemy);
+		//}	
+  //  }
 
     private void RandomPos()
 	{

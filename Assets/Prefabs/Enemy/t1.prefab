@@ -194,6 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyComponent: {fileID: 3273617340114567822}
+  _EF: {fileID: 3972545934278697425}
 --- !u!114 &3972545934278697425
 MonoBehaviour:
   m_ObjectHideFlags: 0

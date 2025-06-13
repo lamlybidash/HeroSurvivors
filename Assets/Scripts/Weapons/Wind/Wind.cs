@@ -8,7 +8,6 @@ public class Wind : Weapons
 	private bool _soundPlaying;
 	private void Start()
 	{
-
 		_soundPlaying = false;
 	}
 	private void AddProjectile(int count)
@@ -45,14 +44,16 @@ public class Wind : Weapons
 		AddProjectile(projectile);
 		SetUpDataProjectile();
 	}
- 
-
     public void PlaySound()
 	{
 		if(_soundPlaying == false)
 		{
 			_soundPlaying = true;
-			SoundManager.instance.PlaySoundLoop(ac, duration);
+			//Sound cũ loop
+			//SoundManager.instance.PlaySoundLoop(ac, duration);
+
+			//Sound mới one shot
+			SoundManager.instance.PlayOneSound(ac);
 		}
 	}
 	public void StopSound()
@@ -62,7 +63,6 @@ public class Wind : Weapons
 			_soundPlaying = false;
 		}	
 	}
-
 	public override void ResetWeapon()
 	{
 		base.ResetWeapon();
@@ -72,11 +72,15 @@ public class Wind : Weapons
 		}
         projectileWinds.Clear();
 	}
-
 	public override void SetUpStartGame(Character charx)
 	{
         base.SetUpStartGame(charx);
         AddProjectile(projectile);
         SetUpDataProjectile();
 	}
+    protected override void UpdateStat()
+    {
+        base.UpdateStat();
+        SetUpDataProjectile();
+    }
 }

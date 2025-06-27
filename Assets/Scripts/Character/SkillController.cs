@@ -53,8 +53,8 @@ public class SkillController : MonoBehaviour
         SetupInfor(_cc.CharActive().GetComponent<Character>().GetSkill('Q'));
         _skillE.SetPlayer(_cc.CharActive().transform);
         _skillQ.SetPlayer(_cc.CharActive().transform);
-        _skillE.ResetCDs();
-        _skillQ.ResetCDs();
+        _skillE.ResetSkill();
+        _skillQ.ResetSkill();
         UpdateLanguage();
     }
 

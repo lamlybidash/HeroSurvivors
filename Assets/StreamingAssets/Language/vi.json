@@ -38,7 +38,19 @@
         "exdes_blood_pact":"Hiến tế: Từ bỏ một phần lượng máu",
         "life_rebirth":"Tái tạo sinh mệnh",
         "des_life_rebirth":"Tăng mạnh khả năng hồi phục của bản thân. Hồi máu liên tục trong 5s, lượng máu hồi phục bằng 50% lượng máu đã mất",
-        "exdes_life_rebirth":""
+        "exdes_life_rebirth":"",
+        "volcano_wrath":"Núi lửa thịnh nộ",
+        "des_volcano_wrath":"Tạo ra các cầu dung nham bay tới tất cả kẻ địch xung quanh bản thân và đặt một cộng dồn THIÊU. Gây sát thương = (7% x số cộng dồn THIÊU x HP tối đa của kẻ địch)",
+        "exdes_volcano_wrath":"THIÊU: cộng dồn khi trước đó kẻ địch đã bị ảnh hưởng bởi kỹ năng này, tối đa 10 tầng cộng dồn.",
+        "inferno_sentinel":"Hỏa linh hộ thể",
+        "des_inferno_sentinel":"Người chơi nhận được bảo hộ của hỏa tinh linh rơi vào trạng thái bất tử trong 5 giây.",
+        "exdes_inferno_sentinel":"Bất tử: Máu không thể tụt xuống 0",
+        "blades_to_the_one":"Vạn kiếm quy tông",
+        "des_blades_to_the_one":"Tạo ra một tâm trận tại vị trí hiện tại. Phát động 15 cây kiếm từ mắt trận tỏa ra và tạo ra cơn bão kiếm xung quanh tâm trận. Khi kết thúc bão kiếm, tất cả kiếm sẽ cùng bay tới kẻ địch xa tâm trận nhất. Mỗi thanh kiếm sẽ gây 100 sát thương cho kẻ địch chạm phải",
+        "exdes_blades_to_the_one":"Tâm trận: Trung tâm của cơn bão kiếm",
+        "body_snatch":"Thần hồn đoạt xá",
+        "des_body_snatch":"Kích hoạt tạo ra một bù nhìn thế thân tại vị trí hiện tại (tối đa 3 bù nhìn thế thân tồn tại cùng lúc). Khi người chơi tử vong thì thần hồn sẽ nhập vào bù nhìn thế thân và trở lại trận chiến sau một khoảng thời gian với 100% HP.",
+        "exdes_body_snatch":""
     },
     "character":
     {

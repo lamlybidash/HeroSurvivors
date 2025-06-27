@@ -23,7 +23,6 @@ public class VolcanoWrathSkill : Skill
         _imgArea.transform.localScale = new Vector3(_distanceMax * 2, _distanceMax * 2, 1);
         InitData();
     }
-
     private void VolcanoWrath()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _distanceMax, enemyLayer);
@@ -59,7 +58,6 @@ public class VolcanoWrathSkill : Skill
             }
         }
     }
-
     private void Dame(GameObject enemy)
     {
         int stack = 0;
@@ -71,7 +69,6 @@ public class VolcanoWrathSkill : Skill
         dame = enemy.GetComponent<HealthEnemy>().GetHealthTotal() * _scaleMultiDame * stack / 100;
         enemy.GetComponent<HealthEnemy>().TakeDame(dame);
     }
-
     public override void UseSkill()
     {
         if (_skillCDs.CanUseSkill() == false)

@@ -46,9 +46,13 @@ public class SaveDataManager : MonoBehaviour
             return;
         }
         instance = this;
-
         _savePath = Path.Combine(Application.persistentDataPath, "save.json");
         _savePathTest = Path.Combine(Application.persistentDataPath, "saveTest.json");
+        
+        // --------------- Sử dụng để fix lỗi -----------------------------------
+        //_saveData = new SaveData();
+        //SaveGame();
+
         LoadGame();
     }
 

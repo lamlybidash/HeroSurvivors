@@ -53,7 +53,10 @@ public abstract class Skill : MonoBehaviour
         }
         InforWindow.Instance.HideInfor();
     }
-
+    public virtual void ResetSkill()
+    {
+        ResetCDs();
+    }
     public void LoadInfor()
     {
         _cdstext = LanguageManager.instance.GetText("skill", "CDs");

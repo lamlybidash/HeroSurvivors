@@ -17,14 +17,17 @@ public class PlayerMovement : MonoBehaviour
 	private float _yRunVt;
 	private float _xIdleVt;
 	private float _yIdleVt;
+	private bool _canMove = true;
+	public bool hasTarget;
 
 
 
 
 	private void Awake()
 	{
-		//Debug.Log("Awake : " + name);
-		_animator = GetComponent<Animator>();
+        //Debug.Log("Awake : " + name);
+        hasTarget = true;
+        _animator = GetComponent<Animator>();
 		_camera = Camera.main.GetComponent<CameraController>();
 		_rg = GetComponent<Rigidbody2D>();
 	}
@@ -44,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetMouseButton(1) && Time.timeScale != 0)
+		if (Input.GetMouseButton(1) && Time.timeScale != 0 && _canMove)
 		{
 			_target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			_target.z = transform.position.z;
@@ -78,11 +81,6 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}	
 
-	public void SetUpSpeed(float x)
-	{
-		_speed = x;
-	}
-
 	public void DontMove()
 	{
 		_target = transform.position;
@@ -91,5 +89,19 @@ public class PlayerMovement : MonoBehaviour
 	public Vector2 GetDirectionPlayer()
 	{
 		return _direction;
-	}	
+	}
+	public void SetHasTarget(bool x)
+	{
+		hasTarget = x;
+	}
+
+    public void SetCanMove(bool x)
+    {
+        _canMove = x;
+    }
+	public void SetupStartGame(float speed)
+	{
+        _speed = speed;
+        SetCanMove(true);
+	}
 }

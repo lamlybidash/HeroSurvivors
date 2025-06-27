@@ -42,7 +42,7 @@ public class Character : MonoBehaviour
 	private void SetUpData()
 	{
 		_playerHealth.SetUpTotalHealth(_HP);
-		_playerMovement.SetUpSpeed(_speedMove);
+		_playerMovement.SetupStartGame(_speedMove);
 	}
 
 	public string GetStartingWeapon()

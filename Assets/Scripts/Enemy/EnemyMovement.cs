@@ -9,6 +9,7 @@ public class EnemyMovement : MonoBehaviour
 	[SerializeField] private Camera _cam;
     [SerializeField] private NavMeshAgent _agent;
     private Transform _player;
+    private PlayerMovement _playerMvC;	//_player Movement Component
 	private Rigidbody2D _rg;
 	private EnemyAttack _enemyAttack;
 	private Vector2 _direction;
@@ -45,27 +46,32 @@ public class EnemyMovement : MonoBehaviour
 	}
 	private void MoveF()
 	{
+		if(!_playerMvC.hasTarget)
+		{
+			return;
+		}
 		//--------------------------- Non AI --------------------------------
-		//_distance = Mathf.Sqrt(Mathf.Pow(_player.position.x - transform.position.x, 2) + Mathf.Pow(_player.position.y - transform.position.y, 2));
+		{
+			//_distance = Mathf.Sqrt(Mathf.Pow(_player.position.x - transform.position.x, 2) + Mathf.Pow(_player.position.y - transform.position.y, 2));
 
-		//if (_distance > _areaAttack)
-		//{
-		//	//Vector2 newPosition = new Vector2(transform.position.x, transform.position.y) + _direction * _speed * Time.deltaTime;
-		//	//transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
-		//	transform.Translate(_direction * _speed * Time.deltaTime);
-		//	//_rg.MovePosition((Vector2)transform.position + _direction * _speed * Time.fixedDeltaTime);
-		//}
-		//else // trong pham vi -> tan cong player
-		//{
-		//	//Debug.Log("tan cong " + i);
-		//	_enemyAttack.GiveDame(_player.gameObject, true);
-		//}
-		//FlipF();
-
+			//if (_distance > _areaAttack)
+			//{
+			//	//Vector2 newPosition = new Vector2(transform.position.x, transform.position.y) + _direction * _speed * Time.deltaTime;
+			//	//transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
+			//	transform.Translate(_direction * _speed * Time.deltaTime);
+			//	//_rg.MovePosition((Vector2)transform.position + _direction * _speed * Time.fixedDeltaTime);
+			//}
+			//else // trong pham vi -> tan cong player
+			//{
+			//	//Debug.Log("tan cong " + i);
+			//	_enemyAttack.GiveDame(_player.gameObject, true);
+			//}
+			//FlipF();
+		}
 		//-------------------------- AI ------------------------------
 		_distance = Mathf.Sqrt(Mathf.Pow(_player.position.x - transform.position.x, 2) + Mathf.Pow(_player.position.y - transform.position.y, 2));
 
-		if (_distance > _areaAttack)
+		if (_distance > _areaAttack )
 		{
             _agent.SetDestination(_player.position);
         }
@@ -132,7 +138,9 @@ public class EnemyMovement : MonoBehaviour
 		_speed = speedMove;
 		_BaseSpeed = speedMove;
 		_areaAttack = areaAttack;
-	}
+		_playerMvC = _player.GetComponent<PlayerMovement>();
+
+    }
 	public void AddSpeed(float x)
 	{
 		_speed += x;

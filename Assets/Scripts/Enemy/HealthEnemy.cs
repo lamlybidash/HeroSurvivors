@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class HealthEnemy : MonoBehaviour
 	private double _expDrop;
 	private bool _isDie;
 	private int _indexForRandom;
+	public event Action OnEnemyDie;
 
 	private void Start()
 	{
@@ -30,9 +32,9 @@ public class HealthEnemy : MonoBehaviour
 		PopupController.instance.PopupWorld(((int)dame).ToString(), transform.position);
 		if (_healthCurrent == 0 )
 		{
-
+            OnEnemyDie?.Invoke();
             gameObject.SetActive(false);
-            _indexForRandom = Random.Range(0,100);
+            _indexForRandom = UnityEngine.Random.Range(0,100);
 			if(_indexForRandom < 50) //50% rơi ra viên exp
 			{
 				ExpController.instance.DropExp(transform, _expDrop);

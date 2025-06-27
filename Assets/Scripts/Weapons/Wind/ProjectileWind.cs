@@ -12,6 +12,7 @@ public class ProjectileWind : Weapons
 	private float x;
 	private float y;
 	private bool isActive;
+	private Vector2 directV;
 
 	private void Awake()
 	{

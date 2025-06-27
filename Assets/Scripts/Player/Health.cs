@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ public class Health : MonoBehaviour
 	[SerializeField] private Image _imgHealthBar;
 	[SerializeField] private GameController _gc;
 	[SerializeField] private AudioClip _acHealing;
+	public event Action OnPlayerDeath;
 	private float _HPTotal = 100;
 	private float _HPCurrent = 100;
 	private bool _canDie;
@@ -28,7 +30,8 @@ public class Health : MonoBehaviour
 		{
 			if(_canDie)
 			{
-				if (_reviveCount > 0)
+                OnPlayerDeath?.Invoke();
+                if (_reviveCount > 0)
 				{
 					_reviveCount--;
 					Revive();
@@ -66,7 +69,8 @@ public class Health : MonoBehaviour
 		_canDie = true;
 		_canTakeDame = true;
 		_reviveCount = 0;
-		Revive();
+		OnPlayerDeath = null;
+        Revive();
     }
 	public void SetUpTotalHealth(float x)
 	{
@@ -96,4 +100,8 @@ public class Health : MonoBehaviour
 	{
 		_reviveCount = x;
 	}
+	public void IncreaseRevive(int n)
+	{
+		_reviveCount += n;
+	}	
 }

@@ -33,8 +33,10 @@ public class Boomerang : Weapons
     {
         while (true)
         {
-            while(_listBMReady.Count == 0)
+            FindNTargetFarthest(_listBMReady.Count);
+            while (_listBMReady.Count == 0 || _enemiesFarthest.Count == 0)
             {
+                FindNTargetFarthest(_listBMReady.Count);
                 yield return null;
             }
             SoundManager.instance.PlayOneSound(ac);

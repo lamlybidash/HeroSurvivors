@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BaseBallBatInfo
   m_EditorClassIdentifier: 
   nameW: baseballbat
-  damage: 120
+  damage: 800
   projectile: 1
-  countdown: 20
+  countdown: 15
   area: 1
   speed: 1
   duration: 0.25

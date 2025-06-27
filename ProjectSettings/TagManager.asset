@@ -54,14 +54,14 @@ TagManager:
   - name: Obstacles
     uniqueID: 459487943
     locked: 0
-  - name: Player
-    uniqueID: 596659427
-    locked: 0
   - name: Exp
     uniqueID: 151819725
     locked: 0
   - name: Item
     uniqueID: 3816218367
+    locked: 0
+  - name: Player
+    uniqueID: 596659427
     locked: 0
   - name: Effect
     uniqueID: 191150341
